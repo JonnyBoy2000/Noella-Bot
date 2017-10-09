@@ -1,6 +1,7 @@
 import discord
 import datetime
 import time
+import asyncio
 from discord.ext import commands
 from extra.config import *
 
@@ -79,7 +80,12 @@ async def on_ready():
 
     @bot.command(no_pm = True, aliases = ['ping'])
     async def latency(ctx):
-        await ctx.send("My latency is {}ms".format(int(bot.latency * 1000)))
+        pingms = "{}".format(int(bot.latency * 1000))
+        pings = "{}".format(int(bot.latency * 1))
+        message = await ctx.send("Calculating some shit in the background... beep beep...")
+        await asyncio.sleep(3)
+        await message.edit(content = f"Pong! - My latency is **{pings}**s | **{pingms}**ms")
+        await message.edit(delete_after = 15)
         await ctx.message.delete()
 
 if __name__ == "__main__":
