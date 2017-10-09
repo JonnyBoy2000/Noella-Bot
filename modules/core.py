@@ -127,7 +127,7 @@ class Core:
     @commands.command()
     async def about(self, ctx):
         """Tells you information about the bot itself."""
-        cmd = r'git show -s HEAD~3..HEAD --format="[{}](https://github.com/exunious/Kyoto-Bot/commit/%H) %s (%cr)"'
+        cmd = r'git show -s HEAD~3..HEAD --format="[{}](https://github.com/exunious/Noella-Bot/commit/%H) %s (%cr)"'
         if os.name == 'posix':
             cmd = cmd.format(r'\`%h\`')
         else:
