@@ -1,12 +1,13 @@
 import discord
 import datetime
-from time import time
+import time
 from discord.ext import commands
 from extra.config import *
 
 # this specifies what extensions to load when the bot starts up
 bot = commands.Bot(command_prefix=bot_prefix)
 bot.remove_command("help")
+bot.remove_command("ping")
 
 @bot.event
 async def on_ready():
@@ -75,6 +76,11 @@ async def on_ready():
             
 
 #################################################
+
+    @bot.command(no_pm = True, aliases = ['ping'])
+    async def latency(ctx):
+        await ctx.send("My latency is {}ms".format(int(bot.latency * 1000)))
+        await ctx.message.delete()
 
 if __name__ == "__main__":
     for extension in startup_extensions:
