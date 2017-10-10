@@ -15,8 +15,9 @@ class Owner:
 	@commands.command(name = 'shutdown', hidden = True, no_pm = True, aliases = ['sd'])
 	async def shutdown(self, ctx):
 		if ctx.author.id == bot_owner:
-			embed = discord.Embed(description = "**"+ ctx.author.name +"** Bye bye, cry cry! ", color = embed_color_succes)
+			embed = discord.Embed(description = "**"+ ctx.author.name +"** byebye!", color = embed_color_succes)
 			await ctx.send(embed = embed)
+			await ctx.message.delete()
 			await self.bot.logout()
 		else:
 			raise commands.NotOwner()
@@ -24,8 +25,9 @@ class Owner:
 	@commands.command(name = 'restart', hidden = True, no_pm = True, aliases = ['rs'])		
 	async def restart(self, ctx):
 		if ctx.author.id == bot_owner:
-			embed = discord.Embed(description = "**"+ ctx.author.name +"** Bye bye, cry cry! ", color = embed_color_succes)
+			embed = discord.Embed(description = "**"+ ctx.author.name +"**, see you soon!", color = embed_color_succes)
 			await ctx.send(embed = embed)
+			await ctx.message.delete()
 			os.execve(sys.executable, ['python'] + sys.argv, os.environ)
 		else:
 			raise commands.NotOwner()
@@ -38,17 +40,20 @@ class Owner:
 			try:
 				self.bot.load_extension(extension_name)
 				embed = discord.Embed(description = "**"+ ctx.author.name +" **the module** {} **was successfully loaded.".format(extension_name), color = embed_color_succes)
-				await ctx.send(embed = embed)
+				message = await ctx.send(embed = embed)
 				await ctx.message.delete()
+				await message.edit(delete_after = message_delete_time)
 			except (AttributeError, ImportError) as e:
 				embed = discord.Embed(description = "**"+ ctx.author.name +" {}:** *{}*".format(type(e).__name__, str(e)), color = embed_color_error)
-				await ctx.send(embed = embed)
+				message = await ctx.send(embed = embed)
 				await ctx.message.delete()
+				await message.edit(delete_after = message_delete_time)
 
 		elif extension_name == None:
 			embed = discord.Embed(description = "**"+ ctx.author.name +"** you need to tell me what to load!", color = embed_color_attention)
-			await ctx.send(embed = embed)
+			message = await ctx.send(embed = embed)
 			await ctx.message.delete()
+			await message.edit(delete_after = message_delete_time)
 
 		elif ctx.author.id is not bot_owner:		
 			raise commands.NotOwner()
@@ -63,17 +68,20 @@ class Owner:
 			try:
 				self.bot.unload_extension(extension_name)
 				embed = discord.Embed(description = "**"+ ctx.author.name +" **the module** {} **was successfully unloaded.".format(extension_name), color = embed_color_succes)
-				await ctx.send(embed = embed)
+				message = await ctx.send(embed = embed)
 				await ctx.message.delete()
+				await message.edit(delete_after = message_delete_time)
 			except (AttributeError, ImportError) as e:
 				embed = discord.Embed(description = "**"+ ctx.author.name +" {}:** *{}*".format(type(e).__name__, str(e)), color = embed_color_error)
-				await ctx.send(embed = embed)
+				message = await ctx.send(embed = embed)
 				await ctx.message.delete()
+				await message.edit(delete_after = message_delete_time)
 
 		elif extension_name == None:
 			embed = discord.Embed(description = "**"+ ctx.author.name +"** you need to tell me what to unload!", color = embed_color_attention)
-			await ctx.send(embed = embed)
+			message = await ctx.send(embed = embed)
 			await ctx.message.delete()
+			await message.edit(delete_after = message_delete_time)
 
 		elif ctx.author.id is not bot_owner:		
 			raise commands.NotOwner()
@@ -89,17 +97,20 @@ class Owner:
 				self.bot.unload_extension(extension_name)
 				self.bot.load_extension(extension_name)
 				embed = discord.Embed(description = "**"+ ctx.author.name +" **the module** {} **was successfully reloaded.".format(extension_name), color = embed_color_succes)
-				await ctx.send(embed = embed)
+				message = await ctx.send(embed = embed)
 				await ctx.message.delete()
+				await message.edit(delete_after = message_delete_time)
 			except (AttributeError, ImportError) as e:
 				embed = discord.Embed(description = "**"+ ctx.author.name +" {}:** *{}*".format(type(e).__name__, str(e)), color = embed_color_error)
-				await ctx.send(embed = embed)
+				message = await ctx.send(embed = embed)
 				await ctx.message.delete()
+				await message.edit(delete_after = message_delete_time)
 
 		elif extension_name == None:
 			embed = discord.Embed(description = "**"+ ctx.author.name +"** you need to tell me what to reload!", color = embed_color_attention)
-			await ctx.send(embed = embed)
+			message = await ctx.send(embed = embed)
 			await ctx.message.delete()
+			await message.edit(delete_after = message_delete_time)
 
 		elif ctx.author.id is not bot_owner:		
 			raise commands.NotOwner()
@@ -117,8 +128,9 @@ class Owner:
 		if ctx.message.author.id == bot_owner:
 			await self.bot.change_presence(game=discord.Game(name=game),status=current_status)
 			embed = discord.Embed(description = "**"+ctx.author.name +"** my **Now Playing** was succesfully changed!", color = embed_color)
-			await ctx.send(embed = embed)
+			message = await ctx.send(embed = embed)
 			await ctx.message.delete()
+			await message.edit(delete_after = message_delete_time)
 		
 		else:
 			raise commands.NotOwner()
