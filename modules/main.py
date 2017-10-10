@@ -39,14 +39,14 @@ async def on_ready():
         embed.add_field(name="⠀", value="Give/set a role to someone!\nRemove a role from someone!\n", inline=True)
         await ctx.author.send(embed = embed),
 
-        embed = discord.Embed(description = "**"+ctx.author.name +" a personal message with all my commands is on the way!** :heart:", color = embed_color)
+        embed = discord.Embed(description = "**"+ctx.author.name +"**, a personal message with all my commands is on the way! :heart:", color = embed_color)
         await ctx.send(embed = embed)
         await ctx.message.delete()
 
     @bot.command(pass_context = True, no_pm = True, aliases = ['p'])
     async def prefix(ctx):
 
-        embed = discord.Embed(description = "**"+ ctx.author.name +f"** the prefix to use **{bot.user.name}** is: `{bot_prefix}`", color = embed_color)
+        embed = discord.Embed(description = "**"+ ctx.author.name +f"**, the prefix to use **{bot.user.name}** is: `{bot_prefix}`", color = embed_color)
         await ctx.send(embed = embed)
         await ctx.message.delete()
 
