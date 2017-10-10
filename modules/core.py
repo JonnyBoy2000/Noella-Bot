@@ -16,18 +16,51 @@ import utils.db
 import logging
 import discord
 import asyncio
-import datetime
 import traceback
 import copy
 import unicodedata
 import inspect
 import psutil
-import os
+import os, datetime
+
+#########################################
 
 class Core:
     def __init__(self, bot):
         self.bot = bot
         self.process = psutil.Process()
+
+    @commands.command(rest_is_raw = True, hidden = True, aliases = ['say'])
+    @commands.is_owner()
+    async def echo(self, ctx, *, content):
+        await ctx.send(content)
+        await ctx.message.delete()
+
+    async def say_permissions(self, ctx, member, channel):
+        permissions = channel.permissions_for(member)
+        e = discord.Embed(colour=member.colour)
+        allowed, denied = [], []
+        for name, value in permissions:
+            name = name.replace('_', ' ').replace('guild', 'server').title()
+            if value:
+                allowed.append(name)
+            else:
+                denied.append(name)
+
+        e.add_field(name='Allowed', value='\n'.join(allowed))
+        e.add_field(name='Denied', value='\n'.join(denied))
+        message = await ctx.send(embed=e)
+        await ctx.message.delete()
+        await message.edit(delete_after = message_delete_time + 15)
+
+    @commands.command()
+    @commands.guild_only()
+    async def permissions(self, ctx, member: discord.Member = None, channel: discord.TextChannel = None):
+        channel = channel or ctx.channel
+        if member is None:
+            member = ctx.author
+
+        await self.say_permissions(ctx, member, channel)
 
 #invite command (-invite)
     @commands.command(pass_context = True, no_pm = True)
@@ -35,10 +68,8 @@ class Core:
         embed = discord.Embed(title = "**Invite Noëlla to your server!**", description = "You want to invite **Noëlla** to your server?\nThen you can use this link to invite him!\n\n[Click here to invite **Noëlla**](https://discordapp.com/oauth2/authorize?client_id=357852849029513216&scope=bot&permissions=527952983)", color = embed_color)
         embed.set_thumbnail(url = self.bot.user.avatar_url)
         await ctx.send(embed = embed)
-
-#        embed = discord.Embed(description = "**"+ctx.author.name +" a personal message with the bot invite is on the way!** :heart:", color = embed_color)
-#        await ctx.send(embed = embed)
-#        await ctx.message.delete()
+        await ctx.message.delete()
+        await message.edit(delete_after = message_delete_time)
 
 ### List Servers Command ###
     @commands.command(aliases = ['ls'])
@@ -60,8 +91,9 @@ class Core:
             omembers = sum(m.status is discord.Status.online for m in guild.members)
             e.add_field(name = guild.name, value = f"Server Owner: **{guild.owner.name}#{guild.owner.discriminator}**\nOnline Members: **{omembers}** - Total Members: **{tmembers}**\nText Channels: **"+ str(len(tchannels)) +"** - Voice Channels: **"+ str(len(vchannels)) +"**", inline = False)
             i += 1
-        await ctx.channel.send(embed = e)
+        message = await ctx.channel.send(embed = e)
         await ctx.message.delete()
+        await message.edit(delete_after = message_delete_time + 15)
 
 ### Server Information Command ###
     @commands.command(pass_context = True, no_pm = True, aliases=['si'])
@@ -89,41 +121,11 @@ class Core:
         embed.add_field(name="Server Roles:", value = '%s'%str(role_length), inline=True)
         embed.set_footer(text ='Server Created: %s'%time);
 
-        await ctx.send(embed = embed)
+        message = await ctx.send(embed = embed)
         await ctx.message.delete()
+        await message.edit(delete_after = message_delete_time + 15)
 
-    """@commands.command(hidden=True)
-    async def socketstats(self, ctx):
-        delta = datetime.datetime.utcnow() - self.bot.uptime
-        minutes = delta.total_seconds() / 60
-        total = sum(self.bot.socket_stats.values())
-        cpm = total / minutes
-        await ctx.send(f'{total} socket events observed ({cpm:.2f}/minute):\n{self.bot.socket_stats}')
-
-    def get_bot_uptime(self, *, brief=False):
-        now = datetime.datetime.utcnow()
-        delta = now - self.bot.uptime
-        hours, remainder = divmod(int(delta.total_seconds()), 3600)
-        minutes, seconds = divmod(remainder, 60)
-        days, hours = divmod(hours, 24)
-
-        if not brief:
-            if days:
-                fmt = '{d} days, {h} hours, {m} minutes, and {s} seconds'
-            else:
-                fmt = '{h} hours, {m} minutes, and {s} seconds'
-        else:
-            fmt = '{h}h {m}m {s}s'
-            if days:
-                fmt = '{d}d ' + fmt
-
-        return fmt.format(d=days, h=hours, m=minutes, s=seconds)
-
-    @commands.command()
-    async def uptime(self, ctx):
-
-        await ctx.send(f'Uptime: **{self.get_bot_uptime()}**')"""
-
+### About This Bot Command ###
     @commands.command()
     async def about(self, ctx):
         """Tells you information about the bot itself."""
@@ -166,11 +168,14 @@ class Core:
 
 
         embed.add_field(name='Active in Guilds', value = len(self.bot.guilds))
-#        embed.add_field(name='Commands Run', value=sum(self.bot.command_stats.values()))
-#        embed.add_field(name='Uptime', value=self.get_bot_uptime(brief=True))
+        #embed.add_field(name='Commands Run', value=sum(self.bot.command_stats.values()))
+        #embed.add_field(name='Uptime', value=self.get_bot_uptime(brief=True))
         embed.set_footer(text='writen in discord.py', icon_url='http://i.imgur.com/5BFecvA.png')
-        await ctx.send(embed=embed)
+        message = await ctx.send(embed=embed)
         await ctx.message.delete()
+        await message.edit(delete_after = message_delete_time + 15)
+
+#########################################
 
 def setup(bot):
     bot.add_cog(Core(bot))
