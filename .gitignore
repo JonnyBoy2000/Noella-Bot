@@ -2,3 +2,4 @@
 modules/config.py
 modules/extra/config.py
 *.pyc
+requirements.txt
