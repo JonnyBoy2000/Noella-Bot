@@ -40,15 +40,9 @@ async def on_ready():
         await ctx.author.send(embed = embed),
 
         embed = discord.Embed(description = "**"+ctx.author.name +"**, a personal message with all my commands is on the way! :heart:", color = embed_color)
-        await ctx.send(embed = embed)
+        message = await ctx.send(embed = embed)
         await ctx.message.delete()
-
-    @bot.command(pass_context = True, no_pm = True, aliases = ['p'])
-    async def prefix(ctx):
-
-        embed = discord.Embed(description = "**"+ ctx.author.name +f"**, the prefix to use **{bot.user.name}** is: `{bot_prefix}`", color = embed_color)
-        await ctx.send(embed = embed)
-        await ctx.message.delete()
+        await message.edit(delete_after = message_delete_time)
 
 #################################################
 ############## Contact Dev Command ##############
@@ -61,8 +55,9 @@ async def on_ready():
 
         if pmessage == None:
             embed = discord.Embed(description = "**"+ ctx.author.name +"** my developers need to know something right? Type a feedback!", color = embed_color_error)
-            await ctx.send(embed = embed)
+            message = await ctx.send(embed = embed)
             await ctx.message.delete()
+            await message.edit(delete_after = 15)
         else:
 #            msg = "User: {}\nServer: {}\nFeedBack: {}\nServer Invite: {}".format(ctx.author, ctx.guild, pmessage, invite.url)
             embed = discord.Embed(title = "Invite to {} discord server!".format(ctx.guild), colour = embed_color, url = "{}".format(invite.url), description = "**Feedback:** {}".format(pmessage))
@@ -71,22 +66,32 @@ async def on_ready():
             await dev.send(embed = embed)
 #            await dev.send(msg)
             embed = discord.Embed(description = "I have PMed **{}#{}** with your feedback! Thank you for your help!".format(dev.name, dev.discriminator), color = embed_color_succes)
-            await ctx.send(embed = embed)
+            message = await ctx.send(embed = embed)
             await ctx.message.delete()
+            await message.edit(delete_after = message_delete_time)
 #            return await ctx.send(ctx.author.mention + " I have PMed my creator your feedback! Thank you for the help!")
             
 
 #################################################
 
+    @bot.command(no_pm = True, aliases = ['p'])
+    async def prefix(ctx):
+
+        embed = discord.Embed(description = "**"+ ctx.author.name +f"**, the prefix to use **{bot.user.name}** is: `{bot_prefix}`", color = embed_color)
+        message = await ctx.send(embed = embed)
+        await ctx.message.delete()
+        await message.edit(delete_after = message_delete_time)
+
     @bot.command(no_pm = True, aliases = ['ping'])
     async def latency(ctx):
         pingms = "{}".format(int(bot.latency * 1000))
         pings = "{}".format(int(bot.latency * 1))
+        await ctx.message.delete()
         message = await ctx.send("Calculating some shit in the background... beep beep...")
         await asyncio.sleep(3)
         await message.edit(content = f"Pong! - My latency is **{pings}**s | **{pingms}**ms")
-        await message.edit(delete_after = 15)
-        await ctx.message.delete()
+        await message.edit(delete_after = message_delete_time)
+        
 
 if __name__ == "__main__":
     for extension in startup_extensions:
