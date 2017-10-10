@@ -22,7 +22,6 @@ async def on_ready():
 ############## Help Command ##############
 ##########################################
 
-#help command (-help)
     @bot.command(pass_context = True, aliases=['h'])
     async def help(ctx):
         embed = discord.Embed(title=f"Command List for {bot.user.name}!", colour = embed_color, description=f"Prefix for {ctx.guild}: **{bot_prefix}**\nIf a command is not working, or something goes wrong?\nUse the this command `{bot_prefix}ctdev [question/feedback]`!\n**Don't include the example brackets when using the commands!**⠀\n⠀")
@@ -59,21 +58,18 @@ async def on_ready():
             await ctx.message.delete()
             await message.edit(delete_after = 15)
         else:
-#            msg = "User: {}\nServer: {}\nFeedBack: {}\nServer Invite: {}".format(ctx.author, ctx.guild, pmessage, invite.url)
             embed = discord.Embed(title = "Invite to {} discord server!".format(ctx.guild), colour = embed_color, url = "{}".format(invite.url), description = "**Feedback:** {}".format(pmessage))
             embed.set_thumbnail(url = "{}".format(ctx.author.avatar_url))
             embed.set_author(name = "{} sent:".format(ctx.author), icon_url = "{}".format(ctx.author.avatar_url))
             await dev.send(embed = embed)
-#            await dev.send(msg)
             embed = discord.Embed(description = "I have PMed **{}#{}** with your feedback! Thank you for your help!".format(dev.name, dev.discriminator), color = embed_color_succes)
             message = await ctx.send(embed = embed)
             await ctx.message.delete()
             await message.edit(delete_after = message_delete_time)
-#            return await ctx.send(ctx.author.mention + " I have PMed my creator your feedback! Thank you for the help!")
-            
 
 #################################################
 
+### Prefix Command ###
     @bot.command(no_pm = True, aliases = ['p'])
     async def prefix(ctx):
 
@@ -82,6 +78,7 @@ async def on_ready():
         await ctx.message.delete()
         await message.edit(delete_after = message_delete_time)
 
+### Ping/Latency Command ###
     @bot.command(no_pm = True, aliases = ['ping'])
     async def latency(ctx):
         pingms = "{}".format(int(bot.latency * 1000))

@@ -5,7 +5,7 @@
 from extra.config import *
 from discord.ext import commands
 from collections import Counter
-from utils import checks, formats
+from utils import checks, formats, db
 from utils.paginator import HelpPaginator, CannotPaginate
 from collections import OrderedDict, deque, Counter
 
@@ -16,12 +16,15 @@ import utils.db
 import logging
 import discord
 import asyncio
+import datetime
 import traceback
 import copy
 import unicodedata
 import inspect
 import psutil
 import os, datetime
+
+log = logging.getLogger(__name__)
 
 #########################################
 
@@ -53,16 +56,16 @@ class Core:
         await ctx.message.delete()
         await message.edit(delete_after = message_delete_time + 15)
 
+### Permissions Command ###
     @commands.command()
     @commands.guild_only()
     async def permissions(self, ctx, member: discord.Member = None, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
         if member is None:
             member = ctx.author
-
         await self.say_permissions(ctx, member, channel)
 
-#invite command (-invite)
+### Invite Bot Link Command ###
     @commands.command(pass_context = True, no_pm = True)
     async def invite(self, ctx):
         embed = discord.Embed(title = "**Invite Noëlla to your server!**", description = "You want to invite **Noëlla** to your server?\nThen you can use this link to invite him!\n\n[Click here to invite **Noëlla**](https://discordapp.com/oauth2/authorize?client_id=357852849029513216&scope=bot&permissions=527952983)", color = embed_color)
@@ -94,6 +97,51 @@ class Core:
         message = await ctx.channel.send(embed = e)
         await ctx.message.delete()
         await message.edit(delete_after = message_delete_time + 15)
+
+### User information Command ###
+    @commands.group(invoke_without_command=True)
+    @commands.guild_only()
+    async def info(self, ctx, *, member: discord.Member = None):
+        if member is None:
+            member = ctx.author
+
+        e = discord.Embed()
+        roles = [role.name.replace('@', '@\u200b') for role in member.roles]
+        shared = sum(1 for m in self.bot.get_all_members() if m.id == member.id)
+        voice = member.voice
+        if voice is not None:
+            vc = voice.channel
+            other_people = len(vc.members) - 1
+            voice = f'{vc.name} with {other_people} others' if other_people else f'{vc.name} by themselves'
+        else:
+            voice = 'Not connected.'
+
+        e.set_author(name=str(member))
+        e.set_footer(text='Member since').timestamp = member.joined_at
+        e.add_field(name='ID', value=member.id)
+        e.add_field(name='Servers', value=f'{shared} shared')
+        e.add_field(name='Created', value=member.created_at)
+        e.add_field(name='Voice', value=voice)
+        e.add_field(name='Roles', value=', '.join(roles) if len(roles) < 10 else f'{len(roles)} roles')
+        e.colour = member.colour
+
+        if member.avatar:
+            e.set_thumbnail(url=member.avatar_url)
+
+        await ctx.send(embed=e)
+
+### Character Information Checker ###
+    @commands.command()
+    async def charinfo(self, ctx, *, characters: str):
+        if len(characters) > 25:
+            return await ctx.send(f'Too many characters ({len(characters)}/25)')
+
+        def to_string(c):
+            digit = f'{ord(c):x}'
+            name = unicodedata.name(c, 'Name not found.')
+            return f'`\\U{digit:>08}`: {name} - {c} \N{EM DASH} <http://www.fileformat.info/info/unicode/char/{digit}>'
+
+        await ctx.send('\n'.join(map(to_string, characters)))
 
 ### Server Information Command ###
     @commands.command(pass_context = True, no_pm = True, aliases=['si'])
