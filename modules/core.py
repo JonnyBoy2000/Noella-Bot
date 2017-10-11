@@ -68,9 +68,9 @@ class Core:
 ### Invite Bot Link Command ###
     @commands.command(pass_context = True, no_pm = True)
     async def invite(self, ctx):
-        embed = discord.Embed(title = "**Invite Noëlla to your server!**", description = "You want to invite **Noëlla** to your server?\nThen you can use this link to invite him!\n\n[Click here to invite **Noëlla**](https://discordapp.com/oauth2/authorize?client_id=357852849029513216&scope=bot&permissions=527952983)", color = embed_color)
+        embed = discord.Embed(title = f"**Invite {self.bot.user.name} to your server!**", description = f"You want to invite **Noëlla** to your server?\nThen you can use this link to invite him!\n\n[Click here to invite **{self.bot.user.name}**](https://discordapp.com/oauth2/authorize?client_id=357852849029513216&scope=bot&permissions=527952983)\n[Click here to join **{self.bot.user.name}'s** Dev Discord]({dev_discord})", color = embed_color)
         embed.set_thumbnail(url = self.bot.user.avatar_url)
-        await ctx.send(embed = embed)
+        message = await ctx.send(embed = embed)
         await ctx.message.delete()
         await message.edit(delete_after = message_delete_time)
 
@@ -187,7 +187,7 @@ class Core:
         embed = discord.Embed(description='⠀\n**Latest Changes**\n' + revision + '\n⠀')
         embed.set_thumbnail(url = self.bot.user.avatar_url)
         embed.title = 'Official Bot Server Invite'
-        embed.url = 'https://discord.gg/FaqVEMy'
+        embed.url = dev_discord
         embed.colour = embed_color
 
         owner = self.bot.get_user(bot_owner)
