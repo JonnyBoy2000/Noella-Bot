@@ -87,21 +87,5 @@ class Core:
 
         await ctx.send('\n'.join(map(to_string, characters)))
 
-#########################################
-
-    @commands.command(pass_context=True)
-    async def avatar(self, ctx, *, member : discord.Member = None):
-        if not member:
-            embed = discord.Embed(description = f"**{ctx.author.name}'s** avatar!\n[Click to open {ctx.author.name}'s avatar!]({ctx.author.avatar_url})", color = embed_color)
-            embed.set_image(url = f"{ctx.author.avatar_url}")
-            await ctx.send(embed = embed)
-            await ctx.message.delete()
-
-        else:
-            embed = discord.Embed(description = f"**{member.name}'s** avatar!\n[Click to open {member.name}'s avatar!]({member.avatar_url})", color = embed_color)
-            embed.set_image(url = f"{member.avatar_url}")
-            await ctx.send(embed = embed)
-            await ctx.message.delete()
-
 def setup(bot):
     bot.add_cog(Core(bot))

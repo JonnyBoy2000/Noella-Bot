@@ -29,11 +29,12 @@ class Fun():
 			await ctx.send(embed=embed)
 			await ctx.message.delete()
 
+#########################################
+
 	@commands.command(pass_context = True, no_pm = True, aliases = ['hub'])
 	async def discordhub(self, ctx, *, member : discord.Member = None):
 
 		author = ctx.author
-
 		if not member:
 			member = author
 		
@@ -42,6 +43,22 @@ class Fun():
 		embed.set_author(name="%s Profile!"%member.name, icon_url="https://cdn.discordapp.com/embed/avatars/4.png")
 		await ctx.send(embed=embed)
 		await ctx.message.delete()
+
+#########################################
+
+	@commands.command(pass_context=True)
+	async def avatar(self, ctx, *, member : discord.Member = None):
+        
+		author = ctx.author
+		if not member:
+			member = author
+
+		embed = discord.Embed(description = f"**{member.name}'s** avatar!\n[Click to open {member.name}'s avatar!]({member.avatar_url})", color = embed_color)
+		embed.set_image(url = f"{member.avatar_url}")
+		await ctx.send(embed = embed)
+		await ctx.message.delete()
+
+#########################################
 
 	@commands.command(no_pm = True, aliases=['osu'])
 	async def osustats(self, ctx, *, osuplayer : str = None):
