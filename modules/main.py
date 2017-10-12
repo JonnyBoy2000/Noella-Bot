@@ -38,7 +38,7 @@ async def on_ready():
         embed.add_field(name="⠀", value="Give/set a role to someone!\nRemove a role from someone!\n", inline=True)
         await ctx.author.send(embed = embed),
 
-        embed = discord.Embed(description = "**"+ctx.author.name +"**, a personal message with all my commands is on the way! :heart:", color = embed_color)
+        embed = discord.Embed(description = f"**{ctx.author.name}**, a personal message with all my commands is on the way!", color = embed_color_succes)
         message = await ctx.send(embed = embed)
         await ctx.message.delete()
         await message.edit(delete_after = message_delete_time)
@@ -53,16 +53,17 @@ async def on_ready():
         dev = bot.get_user(bot_owner)
 
         if pmessage == None:
-            embed = discord.Embed(description = "**"+ ctx.author.name +"** my developers need to know something right? Type a feedback!", color = embed_color_error)
+            embed = discord.Embed(description = f"**{ctx.author.name}**, my developers need to know something right? Type a feedback!", color = embed_color_attention)
             message = await ctx.send(embed = embed)
             await ctx.message.delete()
             await message.edit(delete_after = 15)
+
         else:
-            embed = discord.Embed(title = "Invite to {} discord server!".format(ctx.guild), colour = embed_color, url = "{}".format(invite.url), description = "**Feedback:** {}".format(pmessage))
-            embed.set_thumbnail(url = "{}".format(ctx.author.avatar_url))
-            embed.set_author(name = "{} sent:".format(ctx.author), icon_url = "{}".format(ctx.author.avatar_url))
+            embed = discord.Embed(title = f"Invite to {ctx.guild} discord server!", colour = embed_color, url = f"{invite.url}", description = f"**Feedback:** {pmessage}")
+            embed.set_thumbnail(url = f"{ctx.author.avatar_url}")
+            embed.set_author(name = f"{ctx.author.name} sent:", icon_url = f"{ctx.author.avatar_url}")
             await dev.send(embed = embed)
-            embed = discord.Embed(description = "I have PMed **{}#{}** with your feedback! Thank you for your help!".format(dev.name, dev.discriminator), color = embed_color_succes)
+            embed = discord.Embed(description = f"I have PMed **{dev.name}#{dev.discriminator}** with your feedback! Thank you for your help!", color = embed_color_succes)
             message = await ctx.send(embed = embed)
             await ctx.message.delete()
             await message.edit(delete_after = message_delete_time)
