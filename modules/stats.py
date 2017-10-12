@@ -110,7 +110,7 @@ class Stats:
         await message.edit(delete_after = message_delete_time + 15)
 
 ### Server Information Command ###
-    @commands.command(pass_context = True, no_pm = True, aliases=['si'])
+    @commands.command(no_pm = True, aliases=['si'])
     async def serverinfo(self, ctx):
         vchannels = ctx.guild.voice_channels
         tchannels = ctx.guild.text_channels
@@ -122,9 +122,11 @@ class Stats:
         roles = ', '.join(roles);    
 
         embed = discord.Embed(colour = embed_color)
-        embed.set_thumbnail(url = ctx.guild.icon_url);
+        if ctx.guild.icon_url:
+            embed.set_thumbnail(url = ctx.guild.icon_url)
+        else:
+            embed.set_thumbnail(url = "https://cdn.discordapp.com/embed/avatars/0.png")
         embed.set_author(name = "Server Information", icon_url = "http://icons.iconarchive.com/icons/graphicloads/100-flat/128/information-icon.png")
-
         embed.add_field(name="Server Name:", value = str(ctx.guild), inline=True)
         embed.add_field(name="Server ID:", value = str(ctx.guild.id), inline=True)
         embed.add_field(name="Server Owner:", value = str(ctx.guild.owner), inline=True)
