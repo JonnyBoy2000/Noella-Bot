@@ -57,7 +57,7 @@ class Core:
         await message.edit(delete_after = message_delete_time + 15)
 
 ### Permissions Command ###
-    @commands.command()
+    @commands.command(no_pm = True, hidden = True, aliases = ['perm'])
     @commands.guild_only()
     async def permissions(self, ctx, member: discord.Member = None, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
@@ -66,7 +66,7 @@ class Core:
         await self.say_permissions(ctx, member, channel)
 
 ### Invite Bot Link Command ###
-    @commands.command(pass_context = True, no_pm = True)
+    @commands.command(no_pm = True, hidden = True, aliases = ['inv'])
     async def invite(self, ctx):
         embed = discord.Embed(title = f"**Invite {self.bot.user.name} to your server!**", description = f"You want to invite **Noëlla** to your server?\nThen you can use this link to invite him!\n\n[Click here to invite **{self.bot.user.name}**](https://discordapp.com/oauth2/authorize?client_id=357852849029513216&scope=bot&permissions=527952983)\n[Click here to join **{self.bot.user.name}'s** Dev Discord]({dev_discord})", color = embed_color)
         embed.set_thumbnail(url = self.bot.user.avatar_url)
@@ -75,7 +75,7 @@ class Core:
         await message.edit(delete_after = message_delete_time)
 
 ### Character Information Checker ###
-    @commands.command()
+    @commands.command(no_pm = True, hidden = True, aliases = ['char'])
     async def charinfo(self, ctx, *, characters: str):
         if len(characters) > 25:
             return await ctx.send(f'Too many characters ({len(characters)}/25)')
