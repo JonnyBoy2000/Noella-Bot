@@ -5,7 +5,7 @@
 import discord
 import random
 from discord.ext import commands
-from extra.config import embed_color
+from extra.config import *
 
 class Fun():
 	def __init__(self, bot):
@@ -15,7 +15,12 @@ class Fun():
 	async def eightball(self, ctx, *, question : str = None):
 
 		if question == None:
-			embed = discord.Embed(description = "**"+ ctx.author.name +"** you first need to ask me something! Duhh", color = embed_color)
+			embed = discord.Embed(description = f"**{ctx.author.name}** you first need to ask me something! Duhh", color = embed_color_attention)
+			await ctx.send(embed=embed)
+			await ctx.message.delete()
+
+		elif not question.endswith("?"):
+			embed = discord.Embed(description = f"**{ctx.author.name}**, that doesn't look like a question!", color = embed_color_attention)
 			await ctx.send(embed=embed)
 			await ctx.message.delete()
 
@@ -24,8 +29,8 @@ class Fun():
 			choice = random.choice(result)
 			embed = discord.Embed(colour = embed_color)
 			embed.set_thumbnail(url = ctx.author.avatar_url)
-			embed.add_field(name="**"+ctx.author.name +"** asks:", inline=False, value="{}".format(question))
-			embed.add_field(name="**Holy 8ball** answers:", inline=False, value="{}".format(choice))
+			embed.add_field(name=f"**{ctx.author.name}** asks:", inline=False, value=f"{question}")
+			embed.add_field(name="**Holy 8ball** answers:", inline=False, value=f"{choice}")
 			await ctx.send(embed=embed)
 			await ctx.message.delete()
 
