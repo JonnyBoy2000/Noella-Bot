@@ -20,7 +20,7 @@ class Kawaii():
         if not member:
             member = self.bot.user
 
-        choice = random.choice(hugs) 
+        choice = random.choice(hugs)
         embed = discord.Embed(description = f"**{member.name}** you got hugged by **{author.name}**", color = embed_color)
         embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
@@ -33,13 +33,13 @@ class Kawaii():
         author = ctx.author
         if not member:
             member = self.bot.user
-        
-        choice = random.choice(pokes) 
+
+        choice = random.choice(pokes)
         embed = discord.Embed(description = f"**{member.name}** you got poked by **{author.name}**", color = embed_color)
         embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
         await ctx.message.delete()
-  
+
 #wave command (-wave [@mention])
     @commands.command(pass_context = True, no_pm = True)
     async def wave(self, ctx, *, member : discord.Member = None):
@@ -74,7 +74,7 @@ class Kawaii():
         embed.set_image(url = "https://i.imgur.com/DGhgJ1R.gif")
         await ctx.send(embed = embed)
         await ctx.message.delete()
-        
+
 #shine command (-shine)
     @commands.command(pass_context = True, no_pm = True)
     async def shine(self, ctx):
@@ -90,6 +90,17 @@ class Kawaii():
 
         embed = discord.Embed(description = f"**{ctx.author.name}** is super happy!", color = embed_color)
         embed.set_image(url = "https://i.imgur.com/4xSrwsj.gif")
+        await ctx.send(embed = embed)
+        await ctx.message.delete()
+
+#Not Kawaii but still really needed!
+#dab command (-dab)
+    @commands.command(pass_context = True, no_pm = True)
+    async def dab(self, ctx):
+
+        choice = random.choice(dabs)
+        embed = discord.Embed(description = f"**{ctx.author.name}** is dabbing!", color = embed_color)
+        embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
         await ctx.message.delete()
 

@@ -53,8 +53,8 @@ class Fun():
 
 	@commands.command(pass_context=True)
 	async def avatar(self, ctx, *, member : discord.Member = None):
-
 		author = ctx.author
+
 		if not member:
 			member = author
 
@@ -83,6 +83,49 @@ class Fun():
 			await ctx.message.delete()
 
 #########################################
+
+	@commands.command(no_pm = True)
+	async def virus(self, ctx, *, member : discord.Member = None):
+
+		author = ctx.author
+		if not member:
+			member = ctx.guild
+
+		message = await ctx.send(f"[⠀▓▓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀] / discord-virus.exe Packing files..")
+		await asyncio.sleep(1)
+		await message.edit(content = f"[⠀▓▓▓▓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀] / discord-virus.exe Packing files..")
+		await asyncio.sleep(1)
+		await message.edit(content = f"[⠀▓▓▓▓▓▓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀] / discord-virus.exe Packing files..")
+		await asyncio.sleep(2)
+		await message.edit(content = f"[⠀▓▓▓▓▓▓▓▓▓▓▓▓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀] / discord-virus.exe Packing files..")
+		await asyncio.sleep(1)
+		await message.edit(content = f"[⠀▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓⠀⠀⠀⠀] / discord-virus.exe Packing files..")
+		await asyncio.sleep(1)
+		await message.edit(content = f"[⠀▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓⠀] / discord-virus.exe Packing files..")
+		await asyncio.sleep(0.50)
+		await message.edit(content = f"Injecting virus.")
+		await asyncio.sleep(0.50)
+		await message.edit(content = f"Injecting virus..")
+		await asyncio.sleep(0.50)
+		await message.edit(content = f"Injecting virus...")
+		await asyncio.sleep(0.50)
+		await message.edit(content = f"Injecting virus....")
+		await asyncio.sleep(0.50)
+		await message.edit(content = f"Injecting virus.")
+		await asyncio.sleep(0.50)
+		await message.edit(content = f"Injecting virus..")
+		await asyncio.sleep(0.50)
+		await message.edit(content = f"Injecting virus...")
+		await asyncio.sleep(0.50)
+		await message.edit(content = f"Injecting virus....")
+		await asyncio.sleep(0.50)
+		await message.edit(content = f"Injecting virus.")
+		await asyncio.sleep(0.50)
+		await message.edit(content = f"Injecting virus..")
+		await asyncio.sleep(2)
+		await message.edit(content = f"**Successfully** Injected __discord-virus.exe__ into **{member.name}**")
+		await message.edit(delete_after = message_delete_time)
+		await ctx.message.delete()
 
 def setup(bot):
     bot.add_cog(Fun(bot))

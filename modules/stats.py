@@ -119,7 +119,7 @@ class Stats:
         time = str(ctx.guild.created_at); time = time.split(' '); time= time[0];
         roles = [x.name for x in ctx.guild.role_hierarchy]
         role_length = len(roles)
-        roles = ', '.join(roles);    
+        roles = ', '.join(roles);
 
         embed = discord.Embed(colour = embed_color)
         if ctx.guild.icon_url:
@@ -166,36 +166,41 @@ class Stats:
         await message.edit(delete_after = message_delete_time + 15)
 
 ### User information Command ###
-    @commands.group(invoke_without_command=True)
-    @commands.guild_only()
-    async def info(self, ctx, *, member: discord.Member = None):
+    @commands.group(invoke_without_command=True, aliases =  ['info', 'uinfo', 'user'])
+    async def userinfo(self, ctx, *, member: discord.Member = None):
+
         if member is None:
             member = ctx.author
 
-        e = discord.Embed()
+        e = discord.Embed(description = f"**Nickname**: {member.nick}")
         roles = [role.name.replace('@', '@\u200b') for role in member.roles]
         shared = sum(1 for m in self.bot.get_all_members() if m.id == member.id)
         voice = member.voice
-        if voice is not None:
-            vc = voice.channel
-            other_people = len(vc.members) - 1
-            voice = f'{vc.name} with {other_people} others' if other_people else f'{vc.name} by themselves'
-        else:
-            voice = 'Not connected.'
 
-        e.set_author(name=str(member))
-        e.set_footer(text='Member since').timestamp = member.joined_at
-        e.add_field(name='ID', value=member.id)
-        e.add_field(name='Servers', value=f'{shared} shared')
-        e.add_field(name='Created', value=member.created_at)
-        e.add_field(name='Voice', value=voice)
-        e.add_field(name='Roles', value=', '.join(roles) if len(roles) < 10 else f'{len(roles)} roles')
-        e.colour = member.colour
+        highrole = member.top_role.name
+        if highrole == "@everyone":
+            role = "N/A"
 
         if member.avatar:
-            e.set_thumbnail(url=member.avatar_url)
+            e.set_thumbnail(url = member.avatar_url)
+            e.set_author(name = str(member), icon_url = member.avatar_url)
+        else:
+            e.set_thumbnail(url = member.default_avatar_url)
+            e.set_author(name = str(member), icon_url = member.default_avatar_url)
+
+        e.set_footer(text = 'Member since').timestamp = member.joined_at
+        e.add_field(name = 'User ID', value = member.id)
+        e.add_field(name = 'Servers', value = f'{shared} shared')
+        #e.add_field(name = 'Voice', value = voice)
+        e.add_field(name = 'Client Status', value = member.status)
+        e.add_field(name = 'Game/Stream', value = member.game)
+        e.add_field(name = 'Created at', value = member.created_at.__format__('%d. %B %Y\n%H:%M:%S'))
+        e.add_field(name='Highest Role', value = highrole)
+        e.add_field(name = 'Roles', value = ' **|** '.join(roles) if len(roles) < 15 else f'{len(roles)} roles')
+        e.colour = member.colour
 
         await ctx.send(embed=e)
+        await ctx.message.delete()
 
 def setup(bot):
     bot.add_cog(Stats(bot))

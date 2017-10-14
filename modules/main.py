@@ -14,6 +14,7 @@ bot.remove_command("ping")
 async def on_ready():
     print('Logged in as')
     print("Name: {}".format(bot.user.name))
+    print("Servers: {}".format(len(bot.guilds)))
     print("Prefix: {}".format(bot_prefix))
     print("ID: {}".format(bot.user.id))
     print('------')
@@ -74,22 +75,29 @@ async def on_ready():
     @bot.command(no_pm = True, aliases = ['p'])
     async def prefix(ctx):
 
-        embed = discord.Embed(description = "**"+ ctx.author.name +f"**, the prefix to use **{bot.user.name}** is: `{bot_prefix}`", color = embed_color)
+        embed = discord.Embed(description = f"**{ctx.author.name}**, the prefix to use **{bot.user.name}** is: `{bot_prefix}`", color = embed_color)
         message = await ctx.send(embed = embed)
         await ctx.message.delete()
         await message.edit(delete_after = message_delete_time)
+
+    @bot.event
+    async def on_message(message):
+        if message.content.startswith('prefix'):
+            embed = discord.Embed(description = f"**{message.author.name}**, the prefix to use **{bot.user.name}** is: `{bot_prefix}`", color = embed_color)
+            await message.channel.send(embed = embed)
+            await message.delete()
+        await bot.process_commands(message)
 
 ### Ping/Latency Command ###
     @bot.command(no_pm = True, aliases = ['ping'])
     async def latency(ctx):
         pingms = "{}".format(int(bot.latency * 1000))
         pings = "{}".format(int(bot.latency * 1))
-        await ctx.message.delete()
-        message = await ctx.send("Calculating some shit in the background... beep beep...")
+        message = await ctx.send("Ping - Calculating some shit in the background... beep beep...")
         await asyncio.sleep(3)
         await message.edit(content = f"Pong! - My latency is **{pings}**s | **{pingms}**ms")
         await message.edit(delete_after = message_delete_time)
-        
+        await ctx.message.delete()
 
 if __name__ == "__main__":
     for extension in startup_extensions:

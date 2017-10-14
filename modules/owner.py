@@ -22,7 +22,7 @@ class Owner:
 		else:
 			raise commands.NotOwner()
 
-	@commands.command(name = 'restart', hidden = True, no_pm = True, aliases = ['rs'])		
+	@commands.command(name = 'restart', hidden = True, no_pm = True, aliases = ['rs'])
 	async def restart(self, ctx):
 		if ctx.author.id == bot_owner:
 			embed = discord.Embed(description = "**"+ ctx.author.name +"**, see you soon!", color = embed_color_succes)
@@ -35,7 +35,7 @@ class Owner:
 ### Load Module Command ###
 	@commands.command(name = 'modload', hidden=True, no_pm = True, aliases = ['ml'])
 	async def modload(self, ctx, *, extension_name : str = None):
-		
+
 		if ctx.author.id == bot_owner and extension_name is not None:
 			try:
 				self.bot.load_extension(extension_name)
@@ -55,15 +55,15 @@ class Owner:
 			await ctx.message.delete()
 			await message.edit(delete_after = message_delete_time)
 
-		elif ctx.author.id is not bot_owner:		
+		elif ctx.author.id is not bot_owner:
 			raise commands.NotOwner()
 		else:
 			pass
-            
+
 ### Unload Module Command ###
 	@commands.command(name = 'modunload', hidden=True, no_pm = True, aliases = ['mu'])
 	async def modunload(self, ctx, *, extension_name : str = None):
-		
+
 		if ctx.author.id == bot_owner and extension_name is not None:
 			try:
 				self.bot.unload_extension(extension_name)
@@ -83,7 +83,7 @@ class Owner:
 			await ctx.message.delete()
 			await message.edit(delete_after = message_delete_time)
 
-		elif ctx.author.id is not bot_owner:		
+		elif ctx.author.id is not bot_owner:
 			raise commands.NotOwner()
 		else:
 			pass
@@ -91,7 +91,7 @@ class Owner:
 ### Reload Module Command ###
 	@commands.command(name = 'modreload', hidden=True, no_pm = True, aliases = ['mr'])
 	async def modreload(self, ctx, *, extension_name : str = None):
-		
+
 		if ctx.author.id == bot_owner and extension_name is not None:
 			try:
 				self.bot.unload_extension(extension_name)
@@ -112,7 +112,7 @@ class Owner:
 			await ctx.message.delete()
 			await message.edit(delete_after = message_delete_time)
 
-		elif ctx.author.id is not bot_owner:		
+		elif ctx.author.id is not bot_owner:
 			raise commands.NotOwner()
 		else:
 			pass
@@ -131,7 +131,31 @@ class Owner:
 			message = await ctx.send(embed = embed)
 			await ctx.message.delete()
 			await message.edit(delete_after = message_delete_time)
-		
+
+		else:
+			raise commands.NotOwner()
+
+	@commands.command(name = 'setstream', no_pm = True, aliases = ['ss'])
+	async def setstream(self, ctx, *, game = None):
+
+		server = ctx.guild
+		current_status = ctx.me.status if server is not None else None
+
+		if ctx.message.author.id == bot_owner:
+			if game == "default":
+				await self.bot.change_presence(game=discord.Game(name = "-help | {} servers!".format(len(self.bot.guilds)), url = "https://twitch.tv/MikamiTenshii", type = 1), status = current_status)
+				embed = discord.Embed(description = f"**{ctx.author.name}** my **Now Streaming** was succesfully changed! [default]", color = embed_color)
+				message = await ctx.send(embed = embed)
+				await ctx.message.delete()
+				await message.edit(delete_after = message_delete_time)
+
+			else:
+				await self.bot.change_presence(game=discord.Game(name = game, url = "https://twitch.tv/MikamiTenshii", type = 1), status = current_status)
+				embed = discord.Embed(description = f"**{ctx.author.name}** my **Now Streaming** was succesfully changed!", color = embed_color)
+				message = await ctx.send(embed = embed)
+				await ctx.message.delete()
+				await message.edit(delete_after = message_delete_time)
+
 		else:
 			raise commands.NotOwner()
 
