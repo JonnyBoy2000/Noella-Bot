@@ -58,8 +58,13 @@ class Fun():
 		if not member:
 			member = author
 
+		if member.avatar_url[54:].startswith('a_'):
+			avi = 'https://cdn.discordapp.com/avatars/' + member.avatar_url[35:-10]
+		else:
+			avi = member.avatar_url
+
 		embed = discord.Embed(description = f"**{member.name}'s** avatar!\n[Click to open {member.name}'s avatar!]({member.avatar_url})", color = embed_color)
-		embed.set_image(url = f"{member.avatar_url}")
+		embed.set_image(url = f"{avi}")
 		await ctx.send(embed = embed)
 		await ctx.message.delete()
 

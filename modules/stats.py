@@ -181,9 +181,14 @@ class Stats:
         if highrole == "@everyone":
             role = "N/A"
 
-        if member.avatar:
-            e.set_thumbnail(url = member.avatar_url)
-            e.set_author(name = str(member), icon_url = member.avatar_url)
+        if member.avatar_url[54:].startswith('a_'):
+            avi = 'https://cdn.discordapp.com/avatars/' + member.avatar_url[35:-10]
+        else:
+            avi = member.avatar_url
+
+        if avi:
+            e.set_thumbnail(url = avi)
+            e.set_author(name = str(member), icon_url = avi)
         else:
             e.set_thumbnail(url = member.default_avatar_url)
             e.set_author(name = str(member), icon_url = member.default_avatar_url)
