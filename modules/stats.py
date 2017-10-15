@@ -147,7 +147,7 @@ class Stats:
         embed.add_field(name="Member Count:", value = f'Members Online: **{omembers}**\nMembers Total: **{tmembers}**', inline=True)
         embed.add_field(name="Channels Count:", value = "Text Channels: **"+ str(len(tchannels)) +"** \nVoice Channels: **"+ str(len(vchannels)) +"**", inline=True)
         embed.add_field(name="Verification Level:", value = f"{verification_text}", inline=True)
-        embed.add_field(name="AFK Channel & Time:", value = f"Channel: {ctx.guild.afk_channel}\n*{ctx.guild.afk_timeout} seconds*", inline=True)
+        embed.add_field(name="AFK Channel & Time:", value = f"Channel: **{ctx.guild.afk_channel}**\n" "Time: **{} minutes**".format(int(ctx.guild.afk_timeout / 60)), inline=True)
         embed.add_field(name="Server Region:", value = '%s'%str(ctx.guild.region), inline=True)
         embed.add_field(name="Server Roles:", value = '%s'%str(role_length), inline=True)
         embed.set_footer(text ='Server Created: %s'%time);
