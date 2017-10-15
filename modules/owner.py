@@ -14,9 +14,12 @@ class Owner:
 
 	@commands.command(name = 'shutdown', hidden = True, no_pm = True, aliases = ['sd'])
 	async def shutdown(self, ctx):
+		send_log = self.bot.get_channel(log_channel)
+		time_log = dt.utcnow().__format__('%H:%M:%S')
 		if ctx.author.id == bot_owner:
 			embed = discord.Embed(description = "**"+ ctx.author.name +"** byebye!", color = embed_color_succes)
 			await ctx.send(embed = embed)
+			await send_log.send(f"[{time_log}] - **{self.bot.user.name}** has been shut down by **{ctx.author.name}**")
 			await ctx.message.delete()
 			await self.bot.logout()
 		else:
@@ -24,23 +27,29 @@ class Owner:
 
 	@commands.command(name = 'restart', hidden = True, no_pm = True, aliases = ['rs'])
 	async def restart(self, ctx):
+		send_log = self.bot.get_channel(log_channel)
+		time_log = dt.utcnow().__format__('%H:%M:%S')
 		if ctx.author.id == bot_owner:
 			embed = discord.Embed(description = "**"+ ctx.author.name +"**, see you soon!", color = embed_color_succes)
 			await ctx.send(embed = embed)
+			await send_log.send(f"[{time_log}] - **{self.bot.user.name}** has been restarted by **{ctx.author.name}**")
 			await ctx.message.delete()
 			os.execve(sys.executable, ['python'] + sys.argv, os.environ)
 		else:
 			raise commands.NotOwner()
 
+
 ### Load Module Command ###
 	@commands.command(name = 'modload', hidden=True, no_pm = True, aliases = ['ml'])
 	async def modload(self, ctx, *, extension_name : str = None):
-
+		send_log = self.bot.get_channel(log_channel)
+		time_log = dt.utcnow().__format__('%H:%M:%S')
 		if ctx.author.id == bot_owner and extension_name is not None:
 			try:
 				self.bot.load_extension(extension_name)
 				embed = discord.Embed(description = "**"+ ctx.author.name +" **the module** {} **was successfully loaded.".format(extension_name), color = embed_color_succes)
 				message = await ctx.send(embed = embed)
+				await send_log.send(f"[{time_log}] - **{ctx.author.name}** successfully loaded the module **{extension_name}**")
 				await ctx.message.delete()
 				await message.edit(delete_after = message_delete_time)
 			except (AttributeError, ImportError) as e:
@@ -63,12 +72,14 @@ class Owner:
 ### Unload Module Command ###
 	@commands.command(name = 'modunload', hidden=True, no_pm = True, aliases = ['mu'])
 	async def modunload(self, ctx, *, extension_name : str = None):
-
+		send_log = self.bot.get_channel(log_channel)
+		time_log = dt.utcnow().__format__('%H:%M:%S')
 		if ctx.author.id == bot_owner and extension_name is not None:
 			try:
 				self.bot.unload_extension(extension_name)
 				embed = discord.Embed(description = "**"+ ctx.author.name +" **the module** {} **was successfully unloaded.".format(extension_name), color = embed_color_succes)
 				message = await ctx.send(embed = embed)
+				await send_log.send(f"[{time_log}] - **{ctx.author.name}** successfully unloaded the module **{extension_name}**")
 				await ctx.message.delete()
 				await message.edit(delete_after = message_delete_time)
 			except (AttributeError, ImportError) as e:
@@ -91,13 +102,15 @@ class Owner:
 ### Reload Module Command ###
 	@commands.command(name = 'modreload', hidden=True, no_pm = True, aliases = ['mr'])
 	async def modreload(self, ctx, *, extension_name : str = None):
-
+		send_log = self.bot.get_channel(log_channel)
+		time_log = dt.utcnow().__format__('%H:%M:%S')
 		if ctx.author.id == bot_owner and extension_name is not None:
 			try:
 				self.bot.unload_extension(extension_name)
 				self.bot.load_extension(extension_name)
 				embed = discord.Embed(description = "**"+ ctx.author.name +" **the module** {} **was successfully reloaded.".format(extension_name), color = embed_color_succes)
 				message = await ctx.send(embed = embed)
+				await send_log.send(f"[{time_log}] - **{ctx.author.name}** successfully reloaded the module **{extension_name}**")
 				await ctx.message.delete()
 				await message.edit(delete_after = message_delete_time)
 			except (AttributeError, ImportError) as e:
