@@ -1,5 +1,5 @@
 import discord
-import datetime
+from datetime import datetime as dt
 import time
 import asyncio
 from discord.ext import commands
@@ -12,12 +12,15 @@ bot.remove_command("ping")
 
 @bot.event
 async def on_ready():
-    print('Logged in as')
-    print("Name: {}".format(bot.user.name))
+    print("Logged in as {}".format(bot.user.name))
     print("Servers: {}".format(len(bot.guilds)))
     print("Prefix: {}".format(bot_prefix))
     print("ID: {}".format(bot.user.id))
     print('------')
+    global log_send
+    send_log = bot.get_channel(log_channel)
+    time_log = dt.utcnow().__format__('%H:%M:%S')
+    await send_log.send(f"[{time_log}] - **{bot.user.name}** is online now!")
 
 ##########################################
 ############## Help Command ##############
