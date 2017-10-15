@@ -121,6 +121,19 @@ class Stats:
         role_length = len(roles)
         roles = ', '.join(roles);
 
+        if str(ctx.guild.verification_level) == "none":
+            verification_text = "Protection: **None**\n*No further protection!*"
+        elif str(ctx.guild.verification_level) == "low":
+            verification_text = "Protection: **Low**\n*Verified Email*"
+        elif str(ctx.guild.verification_level) == "medium":
+            verification_text = "Protection: **Medium**\n*Registered for 5 Minutes*"
+        elif str(ctx.guild.verification_level) == "high":
+            verification_text = "Protection: **High**\n*Member for 10 Minutes*"
+        elif str(ctx.guild.verification_level) == "extreme":
+            verification_text = "Protection: **Extreme**\n*Verified Phone Number*"
+        else:
+            verification_text = "Protection: **N/A**\n*Cant find any protection*"
+
         embed = discord.Embed(colour = embed_color)
         if ctx.guild.icon_url:
             embed.set_thumbnail(url = ctx.guild.icon_url)
@@ -133,6 +146,8 @@ class Stats:
         embed.add_field(name="Server Owner ID:", value = ctx.guild.owner.id, inline=True)
         embed.add_field(name="Member Count:", value = f'Members Online: **{omembers}**\nMembers Total: **{tmembers}**', inline=True)
         embed.add_field(name="Channels Count:", value = "Text Channels: **"+ str(len(tchannels)) +"** \nVoice Channels: **"+ str(len(vchannels)) +"**", inline=True)
+        embed.add_field(name="Verification Level:", value = f"{verification_text}", inline=True)
+        embed.add_field(name="AFK Channel & Time:", value = f"Channel: {ctx.guild.afk_channel}\n*{ctx.guild.afk_timeout} seconds*", inline=True)
         embed.add_field(name="Server Region:", value = '%s'%str(ctx.guild.region), inline=True)
         embed.add_field(name="Server Roles:", value = '%s'%str(role_length), inline=True)
         embed.set_footer(text ='Server Created: %s'%time);
@@ -172,7 +187,23 @@ class Stats:
         if member is None:
             member = ctx.author
 
-        e = discord.Embed(description = f"**Nickname**: {member.nick}")
+        if str(member.status) == "online":
+            status_colour = embed_color_succes
+            status_name = "Online"
+        elif str(member.status) == "idle":
+            status_colour = embed_color_attention
+            status_name = "Away / Idle"
+        elif str(member.status) == "dnd":
+            status_colour = embed_color_error
+            status_name = "Do Not Disturb"
+        elif str(member.status) == "offline" or str(member.status) == "invisible":
+            status_colour = 0x000000
+            status_name = "Offline"
+        else:
+            status_colour = member.colour
+            status_name = "N/A"
+
+        e = discord.Embed(description = f"**Nickname**: {member.nick}", colour = status_colour)
         roles = [role.name.replace('@', '@\u200b') for role in member.roles]
         shared = sum(1 for m in self.bot.get_all_members() if m.id == member.id)
         voice = member.voice
@@ -197,12 +228,18 @@ class Stats:
         e.add_field(name = 'User ID', value = member.id)
         e.add_field(name = 'Servers', value = f'{shared} shared')
         #e.add_field(name = 'Voice', value = voice)
-        e.add_field(name = 'Client Status', value = member.status)
-        e.add_field(name = 'Game/Stream', value = member.game)
+        e.add_field(name = 'Client Status', value = status_name)
+
+        if member.game is None:
+            e.add_field(name = 'Doing:', value = "Completely nothing!")
+        elif member.game.url is None:
+            e.add_field(name = 'Playing:', value = f"{member.game}")
+        else:
+            e.add_field(name = 'Streaming:', value = f"[{member.game}]({member.game.url})")
+
         e.add_field(name = 'Created at', value = member.created_at.__format__('%d. %B %Y\n%H:%M:%S'))
         e.add_field(name='Highest Role', value = highrole)
         e.add_field(name = 'Roles', value = ' **|** '.join(roles) if len(roles) < 15 else f'{len(roles)} roles')
-        e.colour = member.colour
 
         await ctx.send(embed=e)
         await ctx.message.delete()
