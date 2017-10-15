@@ -39,6 +39,7 @@ class Core:
         await ctx.send(content)
         await ctx.message.delete()
 
+### Permissions Command ###
     async def say_permissions(self, ctx, member, channel):
         permissions = channel.permissions_for(member)
         e = discord.Embed(colour=member.colour)
@@ -56,7 +57,6 @@ class Core:
         await ctx.message.delete()
         await message.edit(delete_after = message_delete_time + 15)
 
-### Permissions Command ###
     @commands.command(no_pm = True, hidden = True, aliases = ['perm'])
     @commands.guild_only()
     async def permissions(self, ctx, member: discord.Member = None, channel: discord.TextChannel = None):
