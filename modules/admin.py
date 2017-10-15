@@ -63,12 +63,15 @@ class Admin():
 
 ########################################
 
-	@commands.has_permissions(change_nickname = True)
+
 	@commands.command(no_pm=True, aliases=['nick'])
 	async def nickname(self, ctx, *, txt = None):
-		await ctx.message.delete()
-		await ctx.message.author.edit(nick = txt)
-		await ctx.send(f"Changed nickname to: `{txt}`")
+		if ctx.author.guild_permissions.change_nickname:
+			await ctx.message.delete()
+			await ctx.message.author.edit(nick = txt)
+			await ctx.send(f"Changed nickname to: `{txt}`")
+		else:
+			raise commands.MissingPermissions(["ChangeNickname"])
 
 def setup(bot):
     bot.add_cog(Admin(bot))
