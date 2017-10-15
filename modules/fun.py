@@ -6,6 +6,7 @@ import discord
 import random
 from discord.ext import commands
 from extra.config import *
+import openweathermapy.core as owm
 
 class Fun():
 	def __init__(self, bot):
@@ -131,6 +132,46 @@ class Fun():
 		await message.edit(content = f"**Successfully** Injected __discord-virus.exe__ into **{member.name}**")
 		await message.edit(delete_after = message_delete_time)
 		await ctx.message.delete()
+
+#########################################
+
+	@commands.command(no_pm = True)
+	async def weather(self, ctx, *, city : str = None):
+		if city is None:
+			embed = discord.Embed(description = f"**{ctx.author.name}**, 'nothing' has no weather! That was an easy weather forecast! :rofl: ", color = embed_color_attention)
+			message = await ctx.send(embed = embed)
+			await message.edit(delete_after = message_delete_time)
+			return
+		else:
+			settings = {"APPID":f"{openweathermap_api}", "units": "metric"}
+			data = owm.get_current(f'{city}', **settings)
+			cityname = data.get_many(['name'])
+			country = data.get_many(['sys.country'])
+			coordinates = data.get_many(['coord.lon', 'coord.lat'])
+			temprature = data.get_many(['main.temp'])
+			tempminmax = data.get_many(['main.temp_min', 'main.temp_max'])
+			humidity = data.get_many(['main.humidity'])
+			windspeed = data.get_dict(['wind.speed'])
+
+			sunrise_raw = data.get_many(['sys.sunrise'])
+			sunrise_convert = f"{sunrise_raw}".replace('(', '').replace(',)', '')
+			sunrise = time.strftime("%H:%M", time.gmtime(int(sunrise_convert)))
+
+			sunset_raw = data.get_many(['sys.sunset'])
+			sunset_convert = f"{sunset_raw}".replace('(', '').replace(',)', '')
+			sunset = time.strftime("%H:%M", time.gmtime(int(sunset_convert)))
+
+			embed = discord.Embed(colour = embed_color)
+			embed.add_field(name = ":earth_africa: Location", value = f"{cityname}, {country}".replace("('", '').replace("',)", ''), inline = True)
+			embed.add_field(name = ":straight_ruler: Coordinates", value = f"{coordinates}".replace('(', '').replace(')', ''), inline = True)
+			embed.add_field(name = ":sweat: Humidity", value = f"{humidity}%".replace('(', '').replace(',)', ''), inline = True)
+			embed.add_field(name = ":dash: Wind speed", value = f"{windspeed} m/s".replace("{'wind", "").replace(".speed':", "").replace("}", ""), inline = True)
+			embed.add_field(name = ":thermometer: Temperature", value = f"{temprature}°C".replace('(', '').replace(',)', ''), inline = True)
+			embed.add_field(name = ":high_brightness: Min/Max", value = f"{tempminmax}°C".replace('(', '').replace(', ', '°C - ').replace(')', ''), inline = True)
+			embed.add_field(name = ":sunrise_over_mountains: Sunrise", value = f"{sunrise} UTC", inline = True)
+			embed.add_field(name = ":city_sunset: Sunset", value = f"{sunset} UTC", inline = True)
+			embed.set_thumbnail(url = "http://www.iconsfind.com/wp-content/uploads/2015/11/20151125_565508763073c.png")
+			await ctx.send(embed = embed)
 
 def setup(bot):
     bot.add_cog(Fun(bot))
