@@ -18,12 +18,10 @@ class Fun():
 		if question == None:
 			embed = discord.Embed(description = f"**{ctx.author.name}** you first need to ask me something! Duhh", color = embed_color_attention)
 			await ctx.send(embed=embed)
-			await ctx.message.delete()
 
 		elif not question.endswith("?"):
 			embed = discord.Embed(description = f"**{ctx.author.name}**, that doesn't look like a question!", color = embed_color_attention)
 			await ctx.send(embed=embed)
-			await ctx.message.delete()
 
 		else:
 			result = ["Neko", "Loli", "Kitsune"]
@@ -33,7 +31,6 @@ class Fun():
 			embed.add_field(name=f"**{ctx.author.name}** asks:", inline=False, value=f"{question}")
 			embed.add_field(name="**Holy 8ball** answers:", inline=False, value=f"{choice}")
 			await ctx.send(embed=embed)
-			await ctx.message.delete()
 
 #########################################
 
@@ -48,7 +45,6 @@ class Fun():
 		embed.set_thumbnail(url="https://cdn.discordapp.com/embed/avatars/4.png")
 		embed.set_author(name="%s Profile!"%member.name, icon_url="https://cdn.discordapp.com/embed/avatars/4.png")
 		await ctx.send(embed=embed)
-		await ctx.message.delete()
 
 #########################################
 
@@ -67,7 +63,6 @@ class Fun():
 		embed = discord.Embed(description = f"**{member.name}'s** avatar!\n[Click to open {member.name}'s avatar!]({member.avatar_url})", color = embed_color)
 		embed.set_image(url = f"{avi}")
 		await ctx.send(embed = embed)
-		await ctx.message.delete()
 
 #########################################
 
@@ -77,7 +72,6 @@ class Fun():
 		if osuplayer == None:
 			embed = discord.Embed(description = "**"+ ctx.author.name +"** you need to tell me a username!", color = embed_color)
 			await ctx.send(embed = embed)
-			await ctx.message.delete()
 
 		else:
 			#embed.set_thumbnail(url = ctx.author.avatar_url)
@@ -86,7 +80,6 @@ class Fun():
 			embed.set_footer(text = "Images provided by lemmmy.pw/osusig")
 			embed.set_image(url = f"http://lemmmy.pw/osusig/sig.php?colour=hexff66aa&uname={osuplayer}&pp=1&countryrank&flagshadow&flagstroke&opaqueavatar&avatarrounding=5&onlineindicator=undefined&xpbar&xpbarhex")
 			await ctx.send(embed = embed)
-			await ctx.message.delete()
 
 #########################################
 
@@ -131,7 +124,6 @@ class Fun():
 		await asyncio.sleep(2)
 		await message.edit(content = f"**Successfully** Injected __discord-virus.exe__ into **{member.name}**")
 		await message.edit(delete_after = message_delete_time)
-		await ctx.message.delete()
 
 #########################################
 
@@ -153,13 +145,13 @@ class Fun():
 			humidity = data.get_many(['main.humidity'])
 			windspeed = data.get_dict(['wind.speed'])
 
-			sunrise_raw = data.get_many(['sys.sunrise'])
-			sunrise_convert = f"{sunrise_raw}".replace('(', '').replace(',)', '')
-			sunrise = time.strftime("%H:%M", time.gmtime(int(sunrise_convert)))
+			#sunrise_raw = data.get_many(['sys.sunrise'])
+			#sunrise_convert = f"{sunrise_raw}".replace('(', '').replace(',)', '')
+			#sunrise = time.strftime("%H:%M", time.gmtime(int(sunrise_convert)))
 
-			sunset_raw = data.get_many(['sys.sunset'])
-			sunset_convert = f"{sunset_raw}".replace('(', '').replace(',)', '')
-			sunset = time.strftime("%H:%M", time.gmtime(int(sunset_convert)))
+			#sunset_raw = data.get_many(['sys.sunset'])
+			#sunset_convert = f"{sunset_raw}".replace('(', '').replace(',)', '')
+			#sunset = time.strftime("%H:%M", time.gmtime(int(sunset_convert)))
 
 			embed = discord.Embed(colour = embed_color)
 			embed.add_field(name = ":earth_africa: Location", value = f"{cityname}, {country}".replace("('", '').replace("',)", ''), inline = True)
@@ -168,8 +160,8 @@ class Fun():
 			embed.add_field(name = ":dash: Wind speed", value = f"{windspeed} m/s".replace("{'wind", "").replace(".speed':", "").replace("}", ""), inline = True)
 			embed.add_field(name = ":thermometer: Temperature", value = f"{temprature}°C".replace('(', '').replace(',)', ''), inline = True)
 			embed.add_field(name = ":high_brightness: Min/Max", value = f"{tempminmax}°C".replace('(', '').replace(', ', '°C - ').replace(')', ''), inline = True)
-			embed.add_field(name = ":sunrise_over_mountains: Sunrise", value = f"{sunrise} UTC", inline = True)
-			embed.add_field(name = ":city_sunset: Sunset", value = f"{sunset} UTC", inline = True)
+			#embed.add_field(name = ":sunrise_over_mountains: Sunrise", value = f"{sunrise} UTC", inline = True)
+			#embed.add_field(name = ":city_sunset: Sunset", value = f"{sunset} UTC", inline = True)
 			embed.set_thumbnail(url = "http://www.iconsfind.com/wp-content/uploads/2015/11/20151125_565508763073c.png")
 			await ctx.send(embed = embed)
 
