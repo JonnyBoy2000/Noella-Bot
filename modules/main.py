@@ -5,10 +5,8 @@ import asyncio
 from discord.ext import commands
 from extra.config import *
 
-# this specifies what extensions to load when the bot starts up
 bot = commands.Bot(command_prefix=bot_prefix)
 bot.remove_command("help")
-bot.remove_command("ping")
 
 @bot.event
 async def on_ready():

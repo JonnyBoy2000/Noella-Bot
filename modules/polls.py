@@ -14,7 +14,6 @@ class Polls:
         self.bot = bot
 
     @commands.command()
-    @commands.guild_only()
     async def poll(self, ctx, *questions_and_choices: str):
         """Makes a poll quickly.
         The first argument is the question and the rest are the choices.

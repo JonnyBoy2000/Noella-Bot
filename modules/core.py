@@ -34,10 +34,12 @@ class Core:
         self.process = psutil.Process()
 
     @commands.command(rest_is_raw = True, hidden = True, aliases = ['say'])
-    @commands.is_owner()
     async def echo(self, ctx, *, content):
-        await ctx.send(content)
-        await ctx.message.delete()
+        if ctx.author.id == bot_owner:
+            await ctx.send(content)
+            await ctx.message.delete()
+        else:
+            raise commands.NotOwner()
 
 ### Permissions Command ###
     async def say_permissions(self, ctx, member, channel):
@@ -58,7 +60,6 @@ class Core:
         await message.edit(delete_after = message_delete_time + 15)
 
     @commands.command(no_pm = True, hidden = True, aliases = ['perm'])
-    @commands.guild_only()
     async def permissions(self, ctx, member: discord.Member = None, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
         if member is None:
