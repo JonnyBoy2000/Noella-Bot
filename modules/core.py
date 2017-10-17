@@ -57,7 +57,7 @@ class Core:
         e.add_field(name='Denied', value='\n'.join(denied))
         await ctx.send(embed=e)
 
-    @commands.command(no_pm = True, hidden = True, aliases = ['perm'])
+    @commands.command(no_pm = True, hidden = True, aliases = ['perms'])
     async def permissions(self, ctx, member: discord.Member = None, channel: discord.TextChannel = None):
         channel = channel or ctx.channel
         if member is None:
