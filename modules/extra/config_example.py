@@ -41,7 +41,7 @@ dev_discord = "https://discord.gg/EVfHKKn"
 youtube_api = '****************'
 openweathermap_api = '***************'
 
-startup_extensions = ["owner", "admin", "core", "stats", "polls", "kawaii", "fun"]
+startup_extensions = ["help", "owner", "admin", "core", "stats", "polls", "kawaii", "fun"]
 bot_prefix = ">" #Default Prefix
 mute_role = "Server Mute"
 
