@@ -55,9 +55,7 @@ class Core:
 
         e.add_field(name='Allowed', value='\n'.join(allowed))
         e.add_field(name='Denied', value='\n'.join(denied))
-        message = await ctx.send(embed=e)
-        await ctx.message.delete()
-        await message.edit(delete_after = message_delete_time + 15)
+        await ctx.send(embed=e)
 
     @commands.command(no_pm = True, hidden = True, aliases = ['perm'])
     async def permissions(self, ctx, member: discord.Member = None, channel: discord.TextChannel = None):
@@ -71,9 +69,7 @@ class Core:
     async def invite(self, ctx):
         embed = discord.Embed(title = f"**Invite {self.bot.user.name} to your server!**", description = f"You want to invite **Noëlla** to your server?\nThen you can use this link to invite him!\n\n[Click here to invite **{self.bot.user.name}**](https://discordapp.com/oauth2/authorize?client_id=357852849029513216&scope=bot&permissions=527952983)\n[Click here to join **{self.bot.user.name}'s** Dev Discord]({dev_discord})", color = embed_color)
         embed.set_thumbnail(url = self.bot.user.avatar_url)
-        message = await ctx.send(embed = embed)
-        await ctx.message.delete()
-        await message.edit(delete_after = message_delete_time)
+        await ctx.send(embed = embed)
 
 ### Character Information Checker ###
     @commands.command(no_pm = True, hidden = True, aliases = ['char'])

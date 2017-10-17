@@ -55,7 +55,6 @@ class Stats:
     @commands.command(rest_is_raw = True, hidden = True)
     async def uptime(self, ctx, *, content):
         await ctx.send(self.getuptime())
-        await ctx.message.delete()
 
 #########################################
 
@@ -105,9 +104,7 @@ class Stats:
         #embed.add_field(name='Commands Run', value=sum(self.bot.command_stats.values()))
         embed.add_field(name='Uptime', value=(self.getuptime()))
         embed.set_footer(text='writen in discord.py', icon_url='http://i.imgur.com/5BFecvA.png')
-        message = await ctx.send(embed=embed)
-        await ctx.message.delete()
-        await message.edit(delete_after = message_delete_time + 15)
+        await ctx.send(embed=embed)
 
 ### Server Information Command ###
     @commands.command(no_pm = True, aliases=['si'])
@@ -152,9 +149,7 @@ class Stats:
         embed.add_field(name="Server Roles:", value = '%s'%str(role_length), inline=True)
         embed.set_footer(text ='Server Created: %s'%time);
 
-        message = await ctx.send(embed = embed)
-        await ctx.message.delete()
-        await message.edit(delete_after = message_delete_time + 15)
+        await ctx.send(embed = embed)
 
 ### List Servers Command ###
     @commands.command(aliases = ['ls'])
@@ -176,9 +171,7 @@ class Stats:
             omembers = sum(m.status is discord.Status.online for m in guild.members)
             e.add_field(name = guild.name, value = f"Server Owner: **{guild.owner.name}#{guild.owner.discriminator}**\nOnline Members: **{omembers}** - Total Members: **{tmembers}**\nText Channels: **"+ str(len(tchannels)) +"** - Voice Channels: **"+ str(len(vchannels)) +"**", inline = False)
             i += 1
-        message = await ctx.channel.send(embed = e)
-        await ctx.message.delete()
-        await message.edit(delete_after = message_delete_time + 15)
+        await ctx.channel.send(embed = e)
 
 ### User information Command ###
     @commands.group(invoke_without_command=True, aliases =  ['info', 'uinfo', 'user'])
@@ -242,7 +235,6 @@ class Stats:
         e.add_field(name = 'Roles', value = ' **|** '.join(roles) if len(roles) < 15 else f'{len(roles)} roles')
 
         await ctx.send(embed=e)
-        await ctx.message.delete()
 
 def setup(bot):
     bot.add_cog(Stats(bot))

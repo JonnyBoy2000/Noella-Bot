@@ -90,7 +90,7 @@ class Fun():
 		if not member:
 			member = ctx.guild
 
-		message = await ctx.send(f"[⠀▓▓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀] / discord-virus.exe Packing files..")
+		await ctx.send(f"[⠀▓▓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀] / discord-virus.exe Packing files..")
 		await asyncio.sleep(1)
 		await message.edit(content = f"[⠀▓▓▓▓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀] / discord-virus.exe Packing files..")
 		await asyncio.sleep(1)
@@ -123,7 +123,6 @@ class Fun():
 		await message.edit(content = f"Injecting virus..")
 		await asyncio.sleep(2)
 		await message.edit(content = f"**Successfully** Injected __discord-virus.exe__ into **{member.name}**")
-		await message.edit(delete_after = message_delete_time)
 
 #########################################
 

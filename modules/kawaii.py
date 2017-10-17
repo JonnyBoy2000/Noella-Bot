@@ -24,7 +24,6 @@ class Kawaii():
         embed = discord.Embed(description = f"**{member.name}** you got hugged by **{author.name}**", color = embed_color)
         embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
-        await ctx.message.delete()
 
 #poke command (-poke [@mention])
     @commands.command(pass_context = True, no_pm = True)
@@ -38,7 +37,6 @@ class Kawaii():
         embed = discord.Embed(description = f"**{member.name}** you got poked by **{author.name}**", color = embed_color)
         embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
-        await ctx.message.delete()
 
 #wave command (-wave [@mention])
     @commands.command(pass_context = True, no_pm = True)
@@ -51,7 +49,6 @@ class Kawaii():
         embed = discord.Embed(description = f"**{author.name}** waves at you **{member.name}**", color = embed_color)
         embed.set_image(url = "https://i.imgur.com/w5kTICt.gif")
         await ctx.send(embed = embed)
-        await ctx.message.delete()
 
 #hide command (-hide [@mention])
     @commands.command(pass_context = True, no_pm = True)
@@ -64,7 +61,6 @@ class Kawaii():
         embed = discord.Embed(description = f"**{author.name}** is hiding for **{member.name}**", color = embed_color)
         embed.set_image(url = "https://i.imgur.com/BZQwbid.gif")
         await ctx.send(embed = embed)
-        await ctx.message.delete()
 
 #blush command (-blush)
     @commands.command(pass_context = True, no_pm = True)
@@ -73,7 +69,6 @@ class Kawaii():
         embed = discord.Embed(description = f"**{ctx.author.name}** is blushing!", color = embed_color)
         embed.set_image(url = "https://i.imgur.com/DGhgJ1R.gif")
         await ctx.send(embed = embed)
-        await ctx.message.delete()
 
 #shine command (-shine)
     @commands.command(pass_context = True, no_pm = True)
@@ -82,7 +77,6 @@ class Kawaii():
         embed = discord.Embed(description = f"**{ctx.author.name}** is shining!", color = embed_color)
         embed.set_image(url = "https://i.imgur.com/VUuoZfa.gif")
         await ctx.send(embed = embed)
-        await ctx.message.delete()
 
 #happy command (-happy)
     @commands.command(pass_context = True, no_pm = True)
@@ -91,7 +85,6 @@ class Kawaii():
         embed = discord.Embed(description = f"**{ctx.author.name}** is super happy!", color = embed_color)
         embed.set_image(url = "https://i.imgur.com/4xSrwsj.gif")
         await ctx.send(embed = embed)
-        await ctx.message.delete()
 
 #Not Kawaii but still really needed!
 #dab command (-dab)
@@ -102,7 +95,6 @@ class Kawaii():
         embed = discord.Embed(description = f"**{ctx.author.name}** is dabbing!", color = embed_color)
         embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
-        await ctx.message.delete()
 
 def setup(bot):
     bot.add_cog(Kawaii(bot))

@@ -41,9 +41,7 @@ async def on_ready():
         await ctx.author.send(embed = embed),
 
         embed = discord.Embed(description = f"**{ctx.author.name}**, a personal message with all my commands is on the way!", color = embed_color_succes)
-        message = await ctx.send(embed = embed)
-        await ctx.message.delete()
-        await message.edit(delete_after = message_delete_time)
+        await ctx.send(embed = embed)
 
 #################################################
 ############## Contact Dev Command ##############
@@ -57,7 +55,6 @@ async def on_ready():
         if pmessage == None:
             embed = discord.Embed(description = f"**{ctx.author.name}**, my developers need to know something right? Type a feedback!", color = embed_color_attention)
             message = await ctx.send(embed = embed)
-            await ctx.message.delete()
             await message.edit(delete_after = 15)
 
         else:
@@ -66,9 +63,7 @@ async def on_ready():
             embed.set_author(name = f"{ctx.author.name} sent:", icon_url = f"{ctx.author.avatar_url}")
             await dev.send(embed = embed)
             embed = discord.Embed(description = f"I have PMed **{dev.name}#{dev.discriminator}** with your feedback! Thank you for your help!", color = embed_color_succes)
-            message = await ctx.send(embed = embed)
-            await ctx.message.delete()
-            await message.edit(delete_after = message_delete_time)
+            await ctx.send(embed = embed)
 
 #################################################
 
@@ -78,7 +73,6 @@ async def on_ready():
 
         embed = discord.Embed(description = f"**{ctx.author.name}**, the prefix to use **{bot.user.name}** is: `{bot_prefix}`", color = embed_color)
         message = await ctx.send(embed = embed)
-        await ctx.message.delete()
         await message.edit(delete_after = message_delete_time)
 
     @bot.event
@@ -86,7 +80,6 @@ async def on_ready():
         if message.content.startswith('prefix'):
             embed = discord.Embed(description = f"**{message.author.name}**, the prefix to use **{bot.user.name}** is: `{bot_prefix}`", color = embed_color)
             await message.channel.send(embed = embed)
-            await message.delete()
         await bot.process_commands(message)
 
 ### Ping/Latency Command ###
@@ -94,11 +87,10 @@ async def on_ready():
     async def latency(ctx):
         pingms = "{}".format(int(bot.latency * 1000))
         pings = "{}".format(int(bot.latency * 1))
-        message = await ctx.send("Ping - Calculating some shit in the background... beep beep...")
+        await ctx.send("Ping - Calculating some shit in the background... beep beep...")
         await asyncio.sleep(3)
         await message.edit(content = f"Pong! - My latency is **{pings}**s | **{pingms}**ms")
-        await message.edit(delete_after = message_delete_time)
-        await ctx.message.delete()
+
 
 if __name__ == "__main__":
     for extension in startup_extensions:
