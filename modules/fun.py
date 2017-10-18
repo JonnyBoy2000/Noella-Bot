@@ -12,7 +12,7 @@ class Fun():
 	def __init__(self, bot):
 		self.bot = bot
 
-	@commands.command(pass_context = True, no_pm = True, aliases=['8ball'])
+	@commands.command(no_pm = True, aliases=['8ball'])
 	async def eightball(self, ctx, *, question : str = None):
 
 		if question == None:
@@ -34,7 +34,7 @@ class Fun():
 
 #########################################
 
-	@commands.command(pass_context = True, no_pm = True, aliases = ['hub'])
+	@commands.command(no_pm = True, aliases = ['hub'])
 	async def discordhub(self, ctx, *, member : discord.Member = None):
 
 		author = ctx.author
@@ -48,7 +48,7 @@ class Fun():
 
 #########################################
 
-	@commands.command(pass_context=True)
+	@commands.command(no_pm = True, aliases = ['pfp'])
 	async def avatar(self, ctx, *, member : discord.Member = None):
 		author = ctx.author
 
@@ -90,7 +90,7 @@ class Fun():
 		if not member:
 			member = ctx.guild
 
-		await ctx.send(f"[⠀▓▓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀] / discord-virus.exe Packing files..")
+		message = await ctx.send(f"[⠀▓▓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀] / discord-virus.exe Packing files..")
 		await asyncio.sleep(1)
 		await message.edit(content = f"[⠀▓▓▓▓⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀] / discord-virus.exe Packing files..")
 		await asyncio.sleep(1)
