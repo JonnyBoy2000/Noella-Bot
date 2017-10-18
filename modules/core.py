@@ -6,7 +6,6 @@ from extra.config import *
 from discord.ext import commands
 from collections import Counter
 from utils import checks, formats, db
-from utils.paginator import HelpPaginator, CannotPaginate
 from collections import OrderedDict, deque, Counter
 
 #from .utils import checks, db

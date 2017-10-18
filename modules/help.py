@@ -128,9 +128,9 @@ class Help():
 			await ctx.send(embed = embed)
 
 		### Music Help Inputs ###
-		elif inputs == "join":
-			embed = discord.Embed(title = "Join - Command", description = f"Make {self.bot.user.name} join a given voice-channel.", colour = embed_color)
-			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}join [channel name]`", inline = False)
+		elif inputs == "summon":
+			embed = discord.Embed(title = "Join - Command", description = f"Make {self.bot.user.name} join your current voice channel.", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}summon` or `{bot_prefix}join`", inline = False)
 			embed.add_field(name = "Important: ", value = f"**This feature is still in development, do not expect much from it!**", inline = False)
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
 			await ctx.send(embed = embed)
@@ -142,16 +142,73 @@ class Help():
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
 			await ctx.send(embed = embed)
 
-		elif inputs == "volume" or inputs == "vol":
-			embed = discord.Embed(title = "Volume - Command", description = f"Change the volume of {self.bot.user.name} when playing music.", colour = embed_color)
-			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}volume [amount (1 - 100)]`, `{bot_prefix}vol [amount (1 - 100)]`", inline = False)
+		elif inputs == "skip":
+			embed = discord.Embed(title = "Skip - Command", description = f"Vote for a skip on the current playing song.", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}skip`", inline = False)
 			embed.add_field(name = "Important: ", value = f"**This feature is still in development, do not expect much from it!**", inline = False)
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
 			await ctx.send(embed = embed)
 
-		elif inputs == "stop" or inputs == "quit":
-			embed = discord.Embed(title = "Stop - Command", description = f"Stop current playing song and disconnects {self.bot.user.name} from the voice-channel.", colour = embed_color)
-			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}stop`, `{bot_prefix}quit`", inline = False)
+		elif inputs == "queue":
+			embed = discord.Embed(title = "Queue - Command", description = f"Request for the current queue.", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}queue`", inline = False)
+			embed.add_field(name = "Important: ", value = f"**This feature is still in development, do not expect much from it!**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "pause":
+			embed = discord.Embed(title = "Pause - Command", description = f"Pause the current playing song.", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}pause`", inline = False)
+			embed.add_field(name = "Important: ", value = f"**This feature is still in development, do not expect much from it!**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "resume":
+			embed = discord.Embed(title = "Resume - Command", description = f"Resume the song if it is paused.", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}resume`", inline = False)
+			embed.add_field(name = "Important: ", value = f"**This feature is still in development, do not expect much from it!**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "playlist":
+			embed = discord.Embed(title = "Playlist - Command", description = f"Add a playlist to the queue", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}playlist [url]`", inline = False)
+			embed.add_field(name = "Important: ", value = f"**This feature is still in development, do not expect much from it!**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "playing":
+			embed = discord.Embed(title = "Playing - Command", description = f"Show the current playing song", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}playing`", inline = False)
+			embed.add_field(name = "Important: ", value = f"**This feature is still in development, do not expect much from it!**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "shuffle":
+			embed = discord.Embed(title = "Shuffle - Command", description = f"Shuffle the current queue songs", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}shuffle`", inline = False)
+			embed.add_field(name = "Important: ", value = f"**This feature is still in development, do not expect much from it!**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "volume" or inputs == "vol":
+			embed = discord.Embed(title = "Volume - Command", description = f"Check or change the volume of {self.bot.user.name} when playing music.", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}volume`, `{bot_prefix}vol`", inline = False)
+			embed.add_field(name = "Other Usage: ", value = f"`{bot_prefix}volume [amount]`, `{bot_prefix}vol [amount]`", inline = False)
+			embed.add_field(name = "Important: ", value = f"**This feature is still in development, do not expect much from it!**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "stop":
+			embed = discord.Embed(title = "Stop - Command", description = f"Stop current playing song.", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}stop`", inline = False)
+			embed.add_field(name = "Important: ", value = f"**This feature is still in development, do not expect much from it!**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "quit":
+			embed = discord.Embed(title = "Quit - Command", description = f"Disconnects {self.bot.user.name} from the voice-channel.", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}quit`", inline = False)
 			embed.add_field(name = "Important: ", value = f"**This feature is still in development, do not expect much from it!**", inline = False)
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
 			await ctx.send(embed = embed)
@@ -215,7 +272,7 @@ class Help():
 			embed.add_field(name="Core Commands", value=f"``{bot_prefix}help`` **|** ``{bot_prefix}ctdev`` **|** ``{bot_prefix}invite`` **|** ``{bot_prefix}about``", inline = False)
 			embed.add_field(name="Kawaii Commands", value=f"``{bot_prefix}hug`` **|** ``{bot_prefix}poke`` **|** ``{bot_prefix}wave`` **|** ``{bot_prefix}hide`` **|** ``{bot_prefix}blush`` **|** ``{bot_prefix}shine`` **|** ``{bot_prefix}happy`` **|** ``{bot_prefix}dab``", inline = False)
 			embed.add_field(name="Fun Commands", value=f"``{bot_prefix}8ball`` **|** ``{bot_prefix}poll`` **|** ``{bot_prefix}hub`` **|** ``{bot_prefix}osu`` **|** ``{bot_prefix}avatar`` **|** ``{bot_prefix}weather`` **|** ``{bot_prefix}virus``", inline = False)
-			embed.add_field(name="Music/Voice Commands", value=f"``{bot_prefix}join`` **|** ``{bot_prefix}play`` **|** ``{bot_prefix}volume`` **|** ``{bot_prefix}stop``", inline=True)
+			embed.add_field(name="Music/Voice Commands", value=f"``{bot_prefix}summon`` **|** ``{bot_prefix}play`` **|** ``{bot_prefix}playlist`` **|** ``{bot_prefix}playing`` **|** ``{bot_prefix}volume`` **|** ``{bot_prefix}queue`` **|** ``{bot_prefix}stop`` **|** ``{bot_prefix}pause`` **|** ``{bot_prefix}resume`` **|** ``{bot_prefix}shuffle``", inline=True)
 			embed.add_field(name="Utility Commands", value=f"``{bot_prefix}ping`` **|** ``{bot_prefix}permissions`` **|** ``{bot_prefix}userinfo`` **|** ``{bot_prefix}serverinfo`` **|** ``{bot_prefix}listservers`` **|** ``{bot_prefix}uptime``", inline=True)
 			embed.add_field(name="Administrative Commands", value=f"``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}mute`` **|** ``{bot_prefix}unmute`` **|** ``{bot_prefix}nickname``", inline=True)
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
