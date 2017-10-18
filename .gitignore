@@ -2,5 +2,6 @@
 modules/config.py
 modules/extra/config.py
 *.pyc
+*.webm
 requirements.txt
 /Start.sh
