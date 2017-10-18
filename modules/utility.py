@@ -14,8 +14,8 @@ class Utility():
 ### Ping/Latency Command ###
 	@commands.command(no_pm = True, aliases = ['ping'])
 	async def latency(self, ctx):
-		pingms = "{}".format(int(bot.latency * 1000))
-		pings = "{}".format(int(bot.latency * 1))
+		pingms = "{}".format(int(self.bot.latency * 1000))
+		pings = "{}".format(int(self.bot.latency * 1))
 		message = await ctx.send("Ping - Calculating some shit in the background... beep beep...")
 		await asyncio.sleep(3)
 		await message.edit(content = f"Pong! - My latency is **{pings}**s | **{pingms}**ms")
