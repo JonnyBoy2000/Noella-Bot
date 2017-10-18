@@ -2,6 +2,7 @@
 modules/config.py
 modules/extra/config.py
 modules/stats.py
+modules/music_old.py
 *.pyc
 *.webm
 *.mp3
