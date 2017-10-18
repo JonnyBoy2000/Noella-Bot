@@ -6,3 +6,4 @@ modules/stats.py
 *.webm
 requirements.txt
 /Start.sh
+/Start Noella.bat
