@@ -4,6 +4,7 @@ modules/extra/config.py
 modules/stats.py
 *.pyc
 *.webm
+*.mp3
 requirements.txt
 /Start.sh
 /Start Noella.bat

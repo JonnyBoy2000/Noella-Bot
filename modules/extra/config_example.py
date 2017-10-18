@@ -5,7 +5,6 @@
 from discord.ext import commands
 from collections import Counter
 from utils import checks, formats
-from utils.paginator import HelpPaginator, CannotPaginate
 from collections import OrderedDict, deque, Counter
 from datetime import datetime as dt
 
@@ -41,7 +40,7 @@ dev_discord = "https://discord.gg/EVfHKKn"
 youtube_api = '****************'
 openweathermap_api = '***************'
 
-startup_extensions = ["help", "music", "utility", "owner", "admin", "core", "polls", "kawaii", "fun"]
+startup_extensions = ["extra.errorhandler", "help", "music", "utility", "owner", "admin", "core", "polls", "kawaii", "fun"]
 bot_prefix = ">" #Default Prefix
 mute_role = "Server Mute"
 
