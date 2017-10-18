@@ -59,16 +59,6 @@ async def on_ready():
             await message.channel.send(embed = embed)
         await bot.process_commands(message)
 
-### Ping/Latency Command ###
-    @bot.command(no_pm = True, aliases = ['ping'])
-    async def latency(ctx):
-        pingms = "{}".format(int(bot.latency * 1000))
-        pings = "{}".format(int(bot.latency * 1))
-        message = await ctx.send("Ping - Calculating some shit in the background... beep beep...")
-        await asyncio.sleep(3)
-        await message.edit(content = f"Pong! - My latency is **{pings}**s | **{pingms}**ms")
-
-
 if __name__ == "__main__":
     for extension in startup_extensions:
         try:
