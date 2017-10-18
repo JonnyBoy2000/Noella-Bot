@@ -1,6 +1,7 @@
 
 modules/config.py
 modules/extra/config.py
+modules/stats.py
 *.pyc
 *.webm
 requirements.txt
