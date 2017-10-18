@@ -41,29 +41,6 @@ class Core:
         else:
             raise commands.NotOwner()
 
-### Permissions Command ###
-    async def say_permissions(self, ctx, member, channel):
-        permissions = channel.permissions_for(member)
-        e = discord.Embed(colour=member.colour)
-        allowed, denied = [], []
-        for name, value in permissions:
-            name = name.replace('_', ' ').replace('guild', 'server').title()
-            if value:
-                allowed.append(name)
-            else:
-                denied.append(name)
-
-        e.add_field(name='Allowed', value='\n'.join(allowed))
-        e.add_field(name='Denied', value='\n'.join(denied))
-        await ctx.send(embed=e)
-
-    @commands.command(no_pm = True, hidden = True, aliases = ['perms'])
-    async def permissions(self, ctx, member: discord.Member = None, channel: discord.TextChannel = None):
-        channel = channel or ctx.channel
-        if member is None:
-            member = ctx.author
-        await self.say_permissions(ctx, member, channel)
-
 ### Invite Bot Link Command ###
     @commands.command(no_pm = True, hidden = True, aliases = ['inv'])
     async def invite(self, ctx):
