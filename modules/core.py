@@ -31,6 +31,7 @@ log = logging.getLogger(__name__)
 class Core:
     def __init__(self, bot):
         self.bot = bot
+        self.initialtime = time.time()
         self.process = psutil.Process()
 
     @commands.command(rest_is_raw = True, hidden = True, aliases = ['say'])
@@ -60,6 +61,28 @@ class Core:
             return f'`\\U{digit:>08}`: {name} - {c} \N{EM DASH} <http://www.fileformat.info/info/unicode/char/{digit}>'
 
         await ctx.send('\n'.join(map(to_string, characters)))
+
+    def getuptime(self):
+        seconds = int(time.time() - self.initialtime)
+        minutes = 0
+        hours = 0
+        days = 0
+
+        if seconds > 86399:
+            days = int(seconds/86400)
+            seconds = seconds % 86400
+        if seconds > 3599:
+            hours = int(seconds/3600)
+            seconds = seconds % 3600
+        if seconds > 59:
+            minutes = int(seconds/60)
+            seconds = seconds % 60
+
+        return "{d}d {h}h {m}m {s}s".format(d=days, h=hours, m=minutes, s=seconds)
+
+    @commands.command(rest_is_raw = True, hidden = True)
+    async def uptime(self, ctx, *, content):
+        await ctx.send(self.getuptime())
 
 ### About This Bot Command ###
     @commands.command()
