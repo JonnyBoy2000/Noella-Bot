@@ -216,7 +216,7 @@ class Help():
 			embed.add_field(name="Kawaii Commands", value=f"``{bot_prefix}hug`` **|** ``{bot_prefix}poke`` **|** ``{bot_prefix}wave`` **|** ``{bot_prefix}hide`` **|** ``{bot_prefix}blush`` **|** ``{bot_prefix}shine`` **|** ``{bot_prefix}happy`` **|** ``{bot_prefix}dab``", inline = False)
 			embed.add_field(name="Fun Commands", value=f"``{bot_prefix}8ball`` **|** ``{bot_prefix}poll`` **|** ``{bot_prefix}hub`` **|** ``{bot_prefix}osu`` **|** ``{bot_prefix}avatar`` **|** ``{bot_prefix}weather`` **|** ``{bot_prefix}virus``", inline = False)
 			embed.add_field(name="Music/Voice Commands", value=f"``{bot_prefix}join`` **|** ``{bot_prefix}play`` **|** ``{bot_prefix}volume`` **|** ``{bot_prefix}stop``", inline=True)
-			embed.add_field(name="Utility Commands", value=f"``{bot_prefix}ping`` **|** ``{bot_prefix}permissions`` **|** ``{bot_prefix}userinfo`` **|** ``{bot_prefix}serverinfo`` **|** ``{bot_prefix}listservers``", inline=True)
+			embed.add_field(name="Utility Commands", value=f"``{bot_prefix}ping`` **|** ``{bot_prefix}permissions`` **|** ``{bot_prefix}userinfo`` **|** ``{bot_prefix}serverinfo`` **|** ``{bot_prefix}listservers`` **|** ``{bot_prefix}uptime``", inline=True)
 			embed.add_field(name="Administrative Commands", value=f"``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}mute`` **|** ``{bot_prefix}unmute`` **|** ``{bot_prefix}nickname``", inline=True)
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
 			#await ctx.author.send(embed = embed),
