@@ -20,7 +20,6 @@ class Owner:
 			embed = discord.Embed(description = "**"+ ctx.author.name +"** byebye!", color = embed_color_succes)
 			await ctx.send(embed = embed)
 			await send_log.send(f"[{time_log}] - **{self.bot.user.name}** has been shut down by **{ctx.author.name}**")
-			await ctx.message.delete()
 			await self.bot.logout()
 		else:
 			raise commands.NotOwner()
@@ -33,7 +32,6 @@ class Owner:
 			embed = discord.Embed(description = "**"+ ctx.author.name +"**, see you soon!", color = embed_color_succes)
 			await ctx.send(embed = embed)
 			await send_log.send(f"[{time_log}] - **{self.bot.user.name}** has been restarted by **{ctx.author.name}**")
-			await ctx.message.delete()
 			os.execve(sys.executable, ['python'] + sys.argv, os.environ)
 		else:
 			raise commands.NotOwner()
