@@ -66,26 +66,26 @@ class Music:
 
         await channel.connect()
 
-    @commands.command()
-    async def play(self, ctx, *, query):
-        """Plays a file from the local filesystem"""
+#    @commands.command()
+#    async def play(self, ctx, *, query):
+#        """Plays a file from the local filesystem"""
+#
+#        if ctx.voice_client is None:
+#            if ctx.author.voice.channel:
+#                await ctx.author.voice.channel.connect()
+#            else:
+#                return await ctx.send("Not connected to a voice channel.")
+#
+#        if ctx.voice_client.is_playing():
+#            ctx.voice_client.stop()
+#
+#        source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(query))
+#        ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
+#
+#        await ctx.send('Now playing: {}'.format(query))
 
-        if ctx.voice_client is None:
-            if ctx.author.voice.channel:
-                await ctx.author.voice.channel.connect()
-            else:
-                return await ctx.send("Not connected to a voice channel.")
-
-        if ctx.voice_client.is_playing():
-            ctx.voice_client.stop()
-
-        source = discord.PCMVolumeTransformer(discord.FFmpegPCMAudio(query))
-        ctx.voice_client.play(source, after=lambda e: print('Player error: %s' % e) if e else None)
-
-        await ctx.send('Now playing: {}'.format(query))
-
-    @commands.command()
-    async def yt(self, ctx, *, url):
+    @commands.command(aliases = ['yt', 'sc'])
+    async def play(self, ctx, *, url):
         """Streams from a url (almost anything youtube_dl supports)"""
 
         if ctx.voice_client is None:
@@ -102,7 +102,7 @@ class Music:
 
         await ctx.send('Now playing: {}'.format(player.title))
 
-    @commands.command()
+    @commands.command(aliases = ['vol'])
     async def volume(self, ctx, volume: int):
         """Changes the player's volume"""
 
@@ -113,20 +113,11 @@ class Music:
         await ctx.send("Changed volume to {}%".format(volume))
 
 
-    @commands.command()
+    @commands.command(aliases = ['quit'])
     async def stop(self, ctx):
         """Stops and disconnects the bot from voice"""
 
         await ctx.voice_client.disconnect()
-
-
-bot = commands.Bot(command_prefix=commands.when_mentioned_or("!"),
-                   description='Music bot example')
-
-@bot.event
-async def on_ready():
-    print('Logged in as {0.id}/{0}'.format(bot.user))
-    print('------')
 
 def setup(bot):
     bot.add_cog(Music(bot))
