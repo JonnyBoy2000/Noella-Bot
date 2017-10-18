@@ -154,8 +154,9 @@ class Owner:
 
 		if ctx.message.author.id == bot_owner:
 			if game == "default":
-				await self.bot.change_presence(game=discord.Game(name = "-help | {} servers!".format(len(self.bot.guilds)), url = "https://twitch.tv/MikamiTenshii", type = 1), status = current_status)
-				embed = discord.Embed(description = f"**{ctx.author.name}** my **Now Streaming** was succesfully changed! [default]", color = embed_color)
+				total_members = sum(1 for _ in self.bot.get_all_members())
+				await self.bot.change_presence(game=discord.Game(name = f"{bot_prefix}help | {total_members} users!", url = "https://twitch.tv/MikamiTenshii", type = 1), status = current_status)
+				embed = discord.Embed(description = f"**{ctx.author.name}** my **Now Streaming** was succesfully changed! to **{bot_prefix}help | {total_members} users!** ", color = embed_color)
 				message = await ctx.send(embed = embed)
 				await ctx.message.delete()
 				await message.edit(delete_after = message_delete_time)
