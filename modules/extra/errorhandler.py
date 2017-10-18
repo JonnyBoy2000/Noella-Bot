@@ -12,7 +12,7 @@ class ErrorHandler:
 
 	async def on_command_error(self, ctx, error):
 			if isinstance (error, commands.CommandNotFound):
-				embed = discord.Embed(title = "Command not found!", description = "**" + ctx.author.name + "**, for a list with all my commands please use: `-help` or `-h`", color = embed_color_error)
+				embed = discord.Embed(title = "Command not found!", description = f"**{ctx.author.name}**, for a list with all my commands please use: `{bot_prefix}help` or `{bot_prefix}h`", color = embed_color_error)
 				embed.add_field(name="Command Used: ", value = ctx.message.content)
 				await ctx.send(embed = embed)
 
