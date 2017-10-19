@@ -182,6 +182,7 @@ class Music:
 
         vc.source.required_skips = math.ceil(members / 3)
 
+    @commands.guild_only()
     @commands.command(name='join')
     async def _join(self, ctx, *, channel: discord.VoiceChannel):
         """Joins a voice channel."""
@@ -194,6 +195,7 @@ class Music:
         await channel.connect()
         await ctx.send(f'Connected to {channel.name}.')
 
+    @commands.guild_only()
     @commands.command()
     async def summon(self, ctx):
         """Summons the bot to join your voice channel."""
@@ -209,6 +211,7 @@ class Music:
         else:
             return await voice.channel.connect()
 
+    @commands.guild_only()
     @commands.command()
     #@checks.admin_or_permissions(manage_guild=True)
     async def stop(self, ctx):
@@ -226,6 +229,7 @@ class Music:
         await vc.disconnect()
         await ctx.send('Disconnected.')
 
+    @commands.guild_only()
     @commands.command()
     async def skip(self, ctx):
         """Vote to skip a song. The song requester can automatically skip.
@@ -257,6 +261,7 @@ class Music:
         else:
             await ctx.send('You have already voted to skip this song.')
 
+    @commands.guild_only()
     @commands.command()
     #@checks.admin_or_permissions(manage_guild=True)
     async def pause(self, ctx):
@@ -270,6 +275,7 @@ class Music:
             await ctx.send(embed = embed)
             vc.pause()
 
+    @commands.guild_only()
     @commands.command()
     #@checks.admin_or_permissions(manage_guild=True)
     async def resume(self, ctx):
@@ -283,7 +289,8 @@ class Music:
             await ctx.send(embed = embed)
             vc.resume()
 
-    @commands.command(aliases = ['vole'])
+    @commands.guild_only()
+    @commands.command(aliases = ['vol'])
     async def volume(self, ctx, value: int = None):
         """Sets the volume of the currently playing song."""
         vc = ctx.guild.voice_client
@@ -293,15 +300,9 @@ class Music:
                 return await ctx.send(f'Set the volume to {vc.source.volume:.0%}.')
             await ctx.send(f'Volume is set to {vc.source.volume:.0%}.')
 
+    @commands.guild_only()
     @commands.command(aliases = ['yt', 'sc'])
     async def play(self, ctx, *, query: str):
-        """Plays a song.
-        If there is a song currently in the queue, then it is
-        queued until the next song is done playing.
-        This command automatically searches as well from YouTube.
-        The list of supported sites can be found here:
-        https://rg3.github.io/youtube-dl/supportedsites.html
-        """
         if ctx.author.voice is None:
             return await ctx.send('You need to be in a voice channel.')
         vc = ctx.guild.voice_client
@@ -323,6 +324,7 @@ class Music:
         await ctx.send(embed=embed)
         await queue.songs.put(source)
 
+    @commands.guild_only()
     @commands.command()
     async def playlist(self, ctx, *, link: str):
         """Adds tracks from a playlist to the queue."""
@@ -349,6 +351,7 @@ class Music:
         else:
             await ctx.send(f'Added {len(info["entries"])} songs to the queue.')
 
+    @commands.guild_only()
     @commands.command()
     async def playing(self, ctx):
         """Shows info about the currently playing song."""
@@ -361,6 +364,7 @@ class Music:
 
         await ctx.send(embed=vc.source.embed())
 
+    @commands.guild_only()
     @commands.command()
     async def wheresmysong(self, ctx):
         """Shows how long until your next song will play."""
@@ -384,6 +388,7 @@ class Music:
 
         await ctx.send(f'{time.human_time(remaining)} until your next song!')
 
+    @commands.guild_only()
     @commands.command()
     async def queue(self, ctx):
         """Shows the current queue."""
@@ -408,6 +413,7 @@ class Music:
         except Exception as e:
             await ctx.send(e)
 
+    @commands.guild_only()
     @commands.command()
     async def shuffle(self, ctx):
         """Shuffles the current queue."""

@@ -12,7 +12,8 @@ class Owner:
 	def __init__(self, bot):
 		self.bot = bot
 
-	@commands.command(name = 'shutdown', hidden = True, no_pm = True, aliases = ['sd'])
+	@commands.guild_only()
+	@commands.command(name = 'shutdown', aliases = ['sd'])
 	async def shutdown(self, ctx):
 		send_log = self.bot.get_channel(log_channel)
 		time_log = dt.utcnow().__format__('%H:%M:%S')
@@ -24,7 +25,8 @@ class Owner:
 		else:
 			raise commands.NotOwner()
 
-	@commands.command(name = 'restart', hidden = True, no_pm = True, aliases = ['rs'])
+	@commands.guild_only()
+	@commands.command(name = 'restart', aliases = ['rs'])
 	async def restart(self, ctx):
 		send_log = self.bot.get_channel(log_channel)
 		time_log = dt.utcnow().__format__('%H:%M:%S')
@@ -38,7 +40,8 @@ class Owner:
 
 
 ### Load Module Command ###
-	@commands.command(name = 'modload', hidden=True, no_pm = True, aliases = ['ml'])
+	@commands.guild_only()
+	@commands.command(name = 'modload', aliases = ['ml'])
 	async def modload(self, ctx, *, extension_name : str = None):
 		send_log = self.bot.get_channel(log_channel)
 		time_log = dt.utcnow().__format__('%H:%M:%S')
@@ -68,7 +71,8 @@ class Owner:
 			pass
 
 ### Unload Module Command ###
-	@commands.command(name = 'modunload', hidden=True, no_pm = True, aliases = ['mu'])
+	@commands.guild_only()
+	@commands.command(name = 'modunload', aliases = ['mu'])
 	async def modunload(self, ctx, *, extension_name : str = None):
 		send_log = self.bot.get_channel(log_channel)
 		time_log = dt.utcnow().__format__('%H:%M:%S')
@@ -98,7 +102,8 @@ class Owner:
 			pass
 
 ### Reload Module Command ###
-	@commands.command(name = 'modreload', hidden=True, no_pm = True, aliases = ['mr'])
+	@commands.guild_only()
+	@commands.command(name = 'modreload', aliases = ['mr'])
 	async def modreload(self, ctx, *, extension_name : str = None):
 		send_log = self.bot.get_channel(log_channel)
 		time_log = dt.utcnow().__format__('%H:%M:%S')
@@ -130,7 +135,8 @@ class Owner:
 
 #########################################
 
-	@commands.command(name = 'setgame', pass_context=True, no_pm = True, aliases = ['sg'])
+	@commands.guild_only()
+	@commands.command(name = 'setgame', pass_context=True, aliases = ['sg'])
 	async def setgame(self, ctx, *, game = None):
 
 		server = ctx.guild
@@ -146,7 +152,8 @@ class Owner:
 		else:
 			raise commands.NotOwner()
 
-	@commands.command(name = 'setstream', no_pm = True, aliases = ['ss'])
+	@commands.guild_only()
+	@commands.command(name = 'setstream', aliases = ['ss'])
 	async def setstream(self, ctx, *, game = None):
 
 		server = ctx.guild

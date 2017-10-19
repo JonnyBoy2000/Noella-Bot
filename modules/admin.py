@@ -17,7 +17,8 @@ class Admin():
 ############ Role  Commands ############
 ########################################
 
-	@commands.command(no_pm = True, aliases = ['rr'])
+	@commands.guild_only()
+	@commands.command(aliases = ['rr'])
 	async def removerole(self, ctx, user : discord.Member, *, role):
 			if ctx.author.guild_permissions.manage_roles:
 				await user.remove_roles(discord.utils.get(ctx.message.guild.roles, name=role))
@@ -27,7 +28,8 @@ class Admin():
 			else:
 				raise commands.MissingPermissions(["Manage Roles"])
 
-	@commands.command(no_pm = True, aliases = ['sr'])
+	@commands.guild_only()
+	@commands.command(aliases = ['sr'])
 	async def setrole(self, ctx, user : discord.Member, *, role):
 			if ctx.author.guild_permissions.manage_roles:
 				await user.add_roles(discord.utils.get(ctx.message.guild.roles, name=role))
@@ -41,7 +43,8 @@ class Admin():
 ############ Mute  Commands ############
 ########################################
 
-	@commands.command(no_pm = True, aliases = ['mute'])
+	@commands.guild_only()
+	@commands.command(aliases = ['mute'])
 	async def muteuser(self, ctx, *, user : discord.Member):
 			if ctx.author.guild_permissions.administrator:
 				overwrite = discord.PermissionOverwrite()
@@ -51,7 +54,8 @@ class Admin():
 			else:
 				raise commands.MissingPermissions(["Administrator"])
 
-	@commands.command(no_pm = True, aliases = ['unmute'])
+	@commands.guild_only()
+	@commands.command(aliases = ['unmute'])
 	async def unmuteuser(self, ctx, *, user : discord.Member):
 			if ctx.author.guild_permissions.administrator:
 				overwrite = discord.PermissionOverwrite()
@@ -63,8 +67,19 @@ class Admin():
 
 ########################################
 
+	@commands.guild_only()
+	@commands.command()
+	async def cleanup(self, ctx, limit: int = 250):
+		prefixes = tuple(ctx.bot.command_prefix(ctx.bot, ctx.message))
 
-	@commands.command(no_pm=True, aliases=['nick'])
+		def check(m):
+			return m.author == ctx.me or m.content.startswith(prefixes)
+
+		deleted = await ctx.purge(limit=limit, check=check)
+		await ctx.send(f'Cleaned up {len(deleted)} messages.')
+
+	@commands.guild_only()
+	@commands.command(aliases=['nick'])
 	async def nickname(self, ctx, *, txt = None):
 		if ctx.author.guild_permissions.change_nickname:
 			await ctx.message.delete()

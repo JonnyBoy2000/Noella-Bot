@@ -24,6 +24,7 @@ async def on_ready():
 ############## Contact Dev Command ##############
 #################################################
 
+    @commands.guild_only()
     @bot.command(pass_context = True)
     async def ctdev(ctx, *, pmessage : str = None):
         invite = await ctx.channel.create_invite(max_uses = 1, xkcd = True)
@@ -45,6 +46,7 @@ async def on_ready():
 #################################################
 
 ### Prefix Command ###
+    @commands.guild_only()
     @bot.command(no_pm = True, aliases = ['p'])
     async def prefix(ctx):
 

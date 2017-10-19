@@ -13,7 +13,8 @@ class Kawaii():
         self.bot = bot
 
 #hug command (-hug [@mention])
-    @commands.command(pass_context = True, no_pm = True)
+    @commands.guild_only()
+    @commands.command()
     async def hug(self, ctx, *, member : discord.Member = None):
 
         author = ctx.author
@@ -26,7 +27,8 @@ class Kawaii():
         await ctx.send(embed = embed)
 
 #poke command (-poke [@mention])
-    @commands.command(pass_context = True, no_pm = True)
+    @commands.guild_only()
+    @commands.command()
     async def poke(self, ctx, *, member : discord.Member = None):
 
         author = ctx.author
@@ -39,7 +41,8 @@ class Kawaii():
         await ctx.send(embed = embed)
 
 #wave command (-wave [@mention])
-    @commands.command(pass_context = True, no_pm = True)
+    @commands.guild_only()
+    @commands.command()
     async def wave(self, ctx, *, member : discord.Member = None):
 
         author = ctx.author
@@ -51,7 +54,8 @@ class Kawaii():
         await ctx.send(embed = embed)
 
 #hide command (-hide [@mention])
-    @commands.command(pass_context = True, no_pm = True)
+    @commands.guild_only()
+    @commands.command()
     async def hide(self, ctx, *, member : discord.Member = None):
 
         author = ctx.author
@@ -63,7 +67,8 @@ class Kawaii():
         await ctx.send(embed = embed)
 
 #blush command (-blush)
-    @commands.command(pass_context = True, no_pm = True)
+    @commands.guild_only()
+    @commands.command()
     async def blush(self, ctx):
 
         embed = discord.Embed(description = f"**{ctx.author.name}** is blushing!", color = embed_color)
@@ -71,7 +76,8 @@ class Kawaii():
         await ctx.send(embed = embed)
 
 #shine command (-shine)
-    @commands.command(pass_context = True, no_pm = True)
+    @commands.guild_only()
+    @commands.command()
     async def shine(self, ctx):
 
         embed = discord.Embed(description = f"**{ctx.author.name}** is shining!", color = embed_color)
@@ -79,7 +85,8 @@ class Kawaii():
         await ctx.send(embed = embed)
 
 #happy command (-happy)
-    @commands.command(pass_context = True, no_pm = True)
+    @commands.guild_only()
+    @commands.command()
     async def happy(self, ctx):
 
         embed = discord.Embed(description = f"**{ctx.author.name}** is super happy!", color = embed_color)
@@ -88,7 +95,8 @@ class Kawaii():
 
 #Not Kawaii but still really needed!
 #dab command (-dab)
-    @commands.command(pass_context = True, no_pm = True)
+    @commands.guild_only()
+    @commands.command()
     async def dab(self, ctx):
 
         choice = random.choice(dabs)

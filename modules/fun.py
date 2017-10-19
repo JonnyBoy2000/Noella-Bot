@@ -12,6 +12,7 @@ class Fun():
 	def __init__(self, bot):
 		self.bot = bot
 
+	@commands.guild_only()
 	@commands.command(no_pm = True, aliases=['8ball'])
 	async def eightball(self, ctx, *, question : str = None):
 
@@ -34,6 +35,7 @@ class Fun():
 
 #########################################
 
+	@commands.guild_only()
 	@commands.command(no_pm = True, aliases = ['hub'])
 	async def discordhub(self, ctx, *, member : discord.Member = None):
 
@@ -48,6 +50,7 @@ class Fun():
 
 #########################################
 
+	@commands.guild_only()
 	@commands.command(no_pm = True, aliases = ['pfp'])
 	async def avatar(self, ctx, *, member : discord.Member = None):
 		author = ctx.author
@@ -66,6 +69,7 @@ class Fun():
 
 #########################################
 
+	@commands.guild_only()
 	@commands.command(no_pm = True, aliases=['osu'])
 	async def osustats(self, ctx, *, osuplayer : str = None):
 
@@ -83,6 +87,7 @@ class Fun():
 
 #########################################
 
+	@commands.guild_only()
 	@commands.command(no_pm = True)
 	async def virus(self, ctx, *, member : discord.Member = None):
 
@@ -126,6 +131,32 @@ class Fun():
 
 #########################################
 
+#	@commands.guild_only()
+#	@commands.command(aliases=["pick"])
+#	async def picker(self, ctx, *, choices):
+#		"""Chooses between a number of options
+#		Seperate choices with "|" to denote seperate options.
+#		"""
+#		parsed_choices = [choice.strip() for choice in choices.split("|")]
+#
+#		if len(parsed_choices) < 1:
+#			await ctx.send("You need to give me things to choose from")
+#		elif len(parsed_choices) == 1:
+#			await ctx.send("ಠ╭╮ಠ")
+#		else:
+#			message = await ctx.send("Shuffle.. shuffle..")
+#			await asyncio.sleep(1)
+#			await message.edit(content = "3..")
+#			await asyncio.sleep(1)
+#			await message.edit(content = "2..")
+#			await asyncio.sleep(1)
+#			await message.edit(content = "1..")
+#			await asyncio.sleep(1)
+#			await message.edit(content = random.choice(parsed_choices))
+
+#########################################
+
+	@commands.guild_only()
 	@commands.command(no_pm = True)
 	async def weather(self, ctx, *, city : str = None):
 		if city is None:

@@ -13,6 +13,7 @@ class Polls:
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.guild_only()
     @commands.command()
     async def poll(self, ctx, *questions_and_choices: str):
         """Makes a poll quickly.

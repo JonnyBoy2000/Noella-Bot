@@ -12,7 +12,8 @@ class Utility():
 		self.bot = bot
 
 ### Ping/Latency Command ###
-	@commands.command(no_pm = True, aliases = ['ping'])
+	@commands.guild_only()
+	@commands.command(aliases = ['ping'])
 	async def latency(self, ctx):
 		pingms = "{}".format(int(self.bot.latency * 1000))
 		pings = "{}".format(int(self.bot.latency * 1))
@@ -36,6 +37,7 @@ class Utility():
 		e.add_field(name='Denied', value='\n'.join(denied))
 		await ctx.send(embed=e)
 
+	@commands.guild_only()
 	@commands.command(no_pm = True, hidden = True, aliases = ['perms'])
 	async def permissions(self, ctx, member: discord.Member = None, channel: discord.TextChannel = None):
 		channel = channel or ctx.channel
@@ -44,7 +46,8 @@ class Utility():
 		await self.say_permissions(ctx, member, channel)
 
 ### Server Information Command ###
-	@commands.command(no_pm = True, aliases=['si'])
+	@commands.guild_only()
+	@commands.command(aliases=['si'])
 	async def serverinfo(self, ctx):
 		vchannels = ctx.guild.voice_channels
 		tchannels = ctx.guild.text_channels
@@ -89,6 +92,7 @@ class Utility():
 		await ctx.send(embed = embed)
 
 ### List Servers Command ###
+	@commands.guild_only()
 	@commands.command(aliases = ['ls'])
 	async def listservers(self, ctx, number : int = 10):
 
@@ -111,7 +115,8 @@ class Utility():
 		await ctx.channel.send(embed = e)
 
 ### User information Command ###
-	@commands.group(invoke_without_command=True, aliases =  ['info', 'uinfo', 'user'])
+	@commands.guild_only()
+	@commands.group(invoke_without_command = True, aliases =  ['info', 'uinfo', 'user'])
 	async def userinfo(self, ctx, *, member: discord.Member = None):
 
 		if member is None:
