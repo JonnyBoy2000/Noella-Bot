@@ -274,18 +274,25 @@ class Help():
 			await ctx.send(embed = embed)
 
 		else:
-			embed = discord.Embed(title=f"Command List for {self.bot.user.name}!", colour = embed_color, description=f"Prefix for {ctx.guild}: **{bot_prefix}**\nIf a command is not working, or something goes wrong?\nUse the this command `{bot_prefix}ctdev [question/feedback]`!\nTo get more information about a command: `>help [command]`\n⠀")
+			dev = self.bot.get_user(bot_owner)
+			embed = discord.Embed(colour = embed_color)
+			embed.set_thumbnail(url = dev.avatar_url)
+			embed.add_field(name = f"{dev.name}#{dev.discriminator}", value = f"Hello. I'm **{dev.name}**, creator of **{self.bot.user.name}**.\nI'm a former webapplication coder and webdesigner.\nAnd I found it time to create a bot for Discord.\nTo expand my knowledge about Python.", inline = False)
+			embed.add_field(name = f"Having issues/feedback?", value = f"If you have any issues with **{self.bot.user.name}**.\nThen I wanna ask you, to join our **[support server]({dev_discord})**!\nOr sent us a message with: `{bot_prefix}ctdev [message]`", inline = False)
+			await ctx.author.send(embed = embed),
+
+			embed = discord.Embed(title=f"Command List for {self.bot.user.name}!", colour = embed_color, description=f"Prefix for {ctx.guild}: **{bot_prefix}**\nTo get more information about a command: `{bot_prefix}help [command]`\n⠀")
 			embed.set_thumbnail(url = self.bot.user.avatar_url)
 			embed.add_field(name="Core Commands", value=f"``{bot_prefix}help`` **|** ``{bot_prefix}ctdev`` **|** ``{bot_prefix}invite`` **|** ``{bot_prefix}about``", inline = False)
 			embed.add_field(name="Kawaii Commands", value=f"``{bot_prefix}hug`` **|** ``{bot_prefix}poke`` **|** ``{bot_prefix}wave`` **|** ``{bot_prefix}hide`` **|** ``{bot_prefix}blush`` **|** ``{bot_prefix}shine`` **|** ``{bot_prefix}happy`` **|** ``{bot_prefix}dab``", inline = False)
 			embed.add_field(name="Fun Commands", value=f"``{bot_prefix}8ball`` **|** ``{bot_prefix}poll`` **|** ``{bot_prefix}hub`` **|** ``{bot_prefix}osu`` **|** ``{bot_prefix}avatar`` **|** ``{bot_prefix}weather`` **|** ``{bot_prefix}virus``", inline = False)
-			embed.add_field(name="Music/Voice Commands", value=f"``{bot_prefix}summon`` **|** ``{bot_prefix}play`` **|** ``{bot_prefix}playlist`` **|** ``{bot_prefix}playing`` **|** ``{bot_prefix}volume`` **|** ``{bot_prefix}queue`` **|** ``{bot_prefix}stop`` **|** ``{bot_prefix}pause`` **|** ``{bot_prefix}resume`` **|** ``{bot_prefix}shuffle``", inline=True)
-			embed.add_field(name="Utility Commands", value=f"``{bot_prefix}ping`` **|** ``{bot_prefix}permissions`` **|** ``{bot_prefix}userinfo`` **|** ``{bot_prefix}serverinfo`` **|** ``{bot_prefix}listservers`` **|** ``{bot_prefix}uptime``", inline=True)
-			embed.add_field(name="Administrative Commands", value=f"``{bot_prefix}prune`` **|** ``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}mute`` **|** ``{bot_prefix}unmute`` **|** ``{bot_prefix}nickname``", inline=True)
+			embed.add_field(name="Music/Voice Commands", value=f"``{bot_prefix}summon`` **|** ``{bot_prefix}play`` **|** ``{bot_prefix}playlist`` **|** ``{bot_prefix}playing`` **|** ``{bot_prefix}volume`` **|** ``{bot_prefix}queue`` **|** ``{bot_prefix}stop`` **|** ``{bot_prefix}pause`` **|** ``{bot_prefix}resume`` **|** ``{bot_prefix}shuffle``", inline = False)
+			embed.add_field(name="Utility Commands", value=f"``{bot_prefix}ping`` **|** ``{bot_prefix}permissions`` **|** ``{bot_prefix}userinfo`` **|** ``{bot_prefix}serverinfo`` **|** ``{bot_prefix}listservers`` **|** ``{bot_prefix}uptime``", inline = False)
+			embed.add_field(name="Administrative Commands", value=f"``{bot_prefix}prune`` **|** ``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}mute`` **|** ``{bot_prefix}unmute`` **|** ``{bot_prefix}nickname``", inline = False)
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
-			#await ctx.author.send(embed = embed),
+			await ctx.author.send(embed = embed),
 
-			#embed = discord.Embed(description = f"**{ctx.author.name}**, a pm with all my commands is on the way!\nUse `{bot_prefix}h [command]` for more information about specific commands!", color = embed_color_succes)
+			embed = discord.Embed(description = f"**{ctx.author.name}**, a pm with all my commands is on the way!\nUse `{bot_prefix}h [command]` for more information about specific commands!", color = embed_color_succes)
 			await ctx.send(embed = embed)
 
 def setup(bot):
