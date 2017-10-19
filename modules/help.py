@@ -266,6 +266,13 @@ class Help():
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
 			await ctx.send(embed = embed)
 
+		elif inputs == "prune" or inputs == "clear" or inputs == "clean" or inputs == "cls":
+			embed = discord.Embed(title = "Prune - Administrative Commands", description = f"Prune messages with just one simple command", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}prune [amount]`, `{bot_prefix}clear [amount]`, `{bot_prefix}clean [amount]` or `{bot_prefix}cls [amount]`", inline = False)
+			embed.add_field(name = "Important: ", value = f"**This feature is only for people with the correct permissions**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
 		else:
 			embed = discord.Embed(title=f"Command List for {self.bot.user.name}!", colour = embed_color, description=f"Prefix for {ctx.guild}: **{bot_prefix}**\nIf a command is not working, or something goes wrong?\nUse the this command `{bot_prefix}ctdev [question/feedback]`!\nTo get more information about a command: `>help [command]`\n⠀")
 			embed.set_thumbnail(url = self.bot.user.avatar_url)
@@ -274,7 +281,7 @@ class Help():
 			embed.add_field(name="Fun Commands", value=f"``{bot_prefix}8ball`` **|** ``{bot_prefix}poll`` **|** ``{bot_prefix}hub`` **|** ``{bot_prefix}osu`` **|** ``{bot_prefix}avatar`` **|** ``{bot_prefix}weather`` **|** ``{bot_prefix}virus``", inline = False)
 			embed.add_field(name="Music/Voice Commands", value=f"``{bot_prefix}summon`` **|** ``{bot_prefix}play`` **|** ``{bot_prefix}playlist`` **|** ``{bot_prefix}playing`` **|** ``{bot_prefix}volume`` **|** ``{bot_prefix}queue`` **|** ``{bot_prefix}stop`` **|** ``{bot_prefix}pause`` **|** ``{bot_prefix}resume`` **|** ``{bot_prefix}shuffle``", inline=True)
 			embed.add_field(name="Utility Commands", value=f"``{bot_prefix}ping`` **|** ``{bot_prefix}permissions`` **|** ``{bot_prefix}userinfo`` **|** ``{bot_prefix}serverinfo`` **|** ``{bot_prefix}listservers`` **|** ``{bot_prefix}uptime``", inline=True)
-			embed.add_field(name="Administrative Commands", value=f"``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}mute`` **|** ``{bot_prefix}unmute`` **|** ``{bot_prefix}nickname``", inline=True)
+			embed.add_field(name="Administrative Commands", value=f"``{bot_prefix}prune`` **|** ``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}mute`` **|** ``{bot_prefix}unmute`` **|** ``{bot_prefix}nickname``", inline=True)
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
 			#await ctx.author.send(embed = embed),
 

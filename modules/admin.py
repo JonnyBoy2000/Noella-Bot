@@ -68,15 +68,26 @@ class Admin():
 ########################################
 
 	@commands.guild_only()
-	@commands.command()
-	async def cleanup(self, ctx, limit: int = 250):
-		prefixes = tuple(ctx.bot.command_prefix(ctx.bot, ctx.message))
-
-		def check(m):
-			return m.author == ctx.me or m.content.startswith(prefixes)
-
-		deleted = await ctx.purge(limit=limit, check=check)
-		await ctx.send(f'Cleaned up {len(deleted)} messages.')
+	@commands.command(aliases = ['clear', 'clean', 'cls'])
+	async def prune(self, ctx, amount : int):
+		if ctx.author.guild_permissions.manage_messages:
+			try:
+				await ctx.message.delete()
+			except discord.errors.Forbidden:
+				embed = discord.Embed(description = f"**{ctx.author.name}**, I lack permissions to **Manage Messages**!", color = embed_color_error)
+				await ctx.send(embed = embed)
+				return
+			deleted = await ctx.channel.purge(limit = amount)
+			embed = discord.Embed(title = "Prune Messages", description = f"**{ctx.author.name}**, {len(deleted)} messages were successfully deletes.", color = embed_color_succes)
+			deleted_message = await ctx.send(embed = embed)
+			await asyncio.sleep(10)
+			# The try and except pass is so in the event a user prunes again or deletes the prune notification before the bot automatically does it, it will not raise an error
+			try:
+				await deleted_message.delete()
+			except:
+				pass
+		else:
+			raise commands.MissingPermissions(["Manage Messages"])
 
 	@commands.guild_only()
 	@commands.command(aliases=['nick'])
