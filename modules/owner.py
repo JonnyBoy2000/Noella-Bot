@@ -162,11 +162,20 @@ class Owner:
 		if ctx.message.author.id == bot_owner:
 			if game == "default":
 				total_members = sum(1 for _ in self.bot.get_all_members())
-				await self.bot.change_presence(game=discord.Game(name = f"{bot_prefix}help | {total_members} users!", url = "https://twitch.tv/MikamiTenshii", type = 1), status = current_status)
-				embed = discord.Embed(description = f"**{ctx.author.name}** my **Now Streaming** was succesfully changed! to **{bot_prefix}help | {total_members} users!** ", color = embed_color)
+				total_servers = len(self.bot.guilds)
+
+				embed = discord.Embed(description = f"**{ctx.author.name}** my **Now Streaming** was succesfully changed! [Default Messages]", color = embed_color)
 				message = await ctx.send(embed = embed)
-				await ctx.message.delete()
 				await message.edit(delete_after = message_delete_time)
+
+				games = [f"Need Help? Use {bot_prefix}help", f"{total_members} users | {total_servers} guilds", f"Wanna invite {self.bot.user.name}? Use: {bot_prefix}invite", f"Give us feedback? Use: {bot_prefix}ctdev [message]"]
+				current_number = 0
+				while True:
+					if current_number == len(games):
+						current_number = 0
+					await self.bot.change_presence(game=discord.Game(name = games[current_number], url = "https://twitch.tv/MikamiTenshii", type = 1), status = current_status)
+					await asyncio.sleep(20)
+					current_number += 1
 
 			else:
 				await self.bot.change_presence(game=discord.Game(name = game, url = "https://twitch.tv/MikamiTenshii", type = 1), status = current_status)
