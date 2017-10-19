@@ -122,21 +122,25 @@ class Utility():
 		if member is None:
 			member = ctx.author
 
-		if str(member.status) == "online":
-			status_colour = embed_color_succes
-			status_name = "Online"
-		elif str(member.status) == "idle":
-			status_colour = embed_color_attention
-			status_name = "Away / Idle"
-		elif str(member.status) == "dnd":
-			status_colour = embed_color_error
-			status_name = "Do Not Disturb"
-		elif str(member.status) == "offline" or str(member.status) == "invisible":
-			status_colour = 0x000000
-			status_name = "Offline"
+		if member.game is None or member.game.url is None:
+			if str(member.status) == "online":
+				status_colour = embed_color_succes
+				status_name = "Online"
+			elif str(member.status) == "idle":
+				status_colour = embed_color_attention
+				status_name = "Away / Idle"
+			elif str(member.status) == "dnd":
+				status_colour = embed_color_error
+				status_name = "Do Not Disturb"
+			elif str(member.status) == "offline" or str(member.status) == "invisible":
+				status_colour = 0x000000
+				status_name = "Offline"
+			else:
+				status_colour = member.colour
+				status_name = "N/A"
 		else:
-			status_colour = member.colour
-			status_name = "N/A"
+			status_colour = 0x593695
+			status_name = "Streaming"
 
 		e = discord.Embed(description = f"**Nickname**: {member.nick}", colour = status_colour)
 		roles = [role.name.replace('@', '@\u200b') for role in member.roles]
