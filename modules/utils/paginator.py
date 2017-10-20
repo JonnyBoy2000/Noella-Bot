@@ -53,7 +53,7 @@ class Pages:
             ('\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE WITH VERTICAL BAR}', self.last_page),
             ('\N{INPUT SYMBOL FOR NUMBERS}', self.numbered_page),
             ('\N{BLACK SQUARE FOR STOP}', self.stop_pages),
-            ('\N{INFORMATION SOURCE}', self.show_help),
+            #('\N{INFORMATION SOURCE}', self.show_help),
         ]
 
         guild = ctx.guild
@@ -95,7 +95,7 @@ class Pages:
             raise CannotPaginate('Bot does not have Read Message History permission.')
 
         p.append('')
-        p.append('Confused? React with \N{INFORMATION SOURCE} for more info.')
+        #p.append('Confused? React with \N{INFORMATION SOURCE} for more info.')
         self.embed.description = '\n'.join(p)
         self.message = await self.ctx.send(embed=self.embed)
         for (reaction, _) in self.reaction_emojis:
