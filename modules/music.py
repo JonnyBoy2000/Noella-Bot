@@ -138,7 +138,7 @@ class Music:
         }
         self.ytdl = youtube_dl.YoutubeDL(self.opts)
         self._ytdl = youtube_dl.YoutubeDL(self.opts)
-        self._ytdl.params['ignoreerrors'] = True
+        self._ytdl.params['ignoreerrors'] = False
         self.executor = ThreadPoolExecutor(max_workers=2)
 
     def get_queue(self, guild):
@@ -214,7 +214,7 @@ class Music:
     @commands.guild_only()
     @commands.command()
     #@checks.admin_or_permissions(manage_guild=True)
-    async def stop(self, ctx):
+    async def quit(self, ctx):
         """Stops playing audio and leaves the voice channel.
         This also clears the queue.
         """
@@ -228,6 +228,35 @@ class Music:
 
         await vc.disconnect()
         await ctx.send('Disconnected.')
+
+    @commands.guild_only()
+    @commands.command()
+    async def stop(self, ctx):
+        vc = ctx.guild.voice_client
+        voice = ctx.author.voice
+
+        if voice:
+            if vc is None:
+                return await ctx.send('Not in a voice channel.')
+
+            if vc:
+                if vc.is_playing() or vc.is_paused():
+                    embed = discord.Embed(description = f"**{ctx.author.name}** stopped the music. To play a song: `{bot_prefix}play`", color = embed_color)
+                    queue = self.get_queue(ctx.guild)
+                    queue.audio_player.cancel()
+                    del self.queues[ctx.guild.id]
+                    await ctx.send(embed = embed)
+                    await vc.stop()
+
+                else:
+                    embed = discord.Embed(description = f"**{ctx.author.name}**, something went wrong here, is there music playing?", color = embed_color_attention)
+                    await ctx.send(embed = embed)
+            else:
+                embed = discord.Embed(description = f"**{ctx.author.name}**, I'm not connected to a voice channel", color = embed_color_attention)
+                await ctx.send(embed = embed)
+        else:
+            embed = discord.Embed(description = f"**{ctx.author.name}**, you're not in a voice channel.", color = embed_color_attention)
+            await ctx.send(embed = embed)
 
     @commands.guild_only()
     @commands.command()
@@ -260,34 +289,6 @@ class Music:
                 await ctx.send(f'Skip vote added, currently at [{votes}/{vc.source.required_skips}]')
         else:
             await ctx.send('You have already voted to skip this song.')
-
-    @commands.guild_only()
-    @commands.command()
-    #@checks.admin_or_permissions(manage_guild=True)
-    async def pause(self, ctx):
-        """Pauses the currently playing song."""
-        vc = ctx.guild.voice_client
-        if vc is None:
-            return
-
-        if vc.is_playing():
-            embed = discord.Embed(description = f"**{ctx.author.name}** paused the music. To resume the music type: `{bot_prefix}resume`", color = embed_color)
-            await ctx.send(embed = embed)
-            vc.pause()
-
-    @commands.guild_only()
-    @commands.command()
-    #@checks.admin_or_permissions(manage_guild=True)
-    async def resume(self, ctx):
-        """Resumes the currently playing song."""
-        vc = ctx.guild.voice_client
-        if vc is None:
-            return
-
-        if vc.is_paused():
-            embed = discord.Embed(description = f"**{ctx.author.name}** resumed the music", color = embed_color)
-            await ctx.send(embed = embed)
-            vc.resume()
 
     @commands.guild_only()
     @commands.command(aliases = ['vol'])
