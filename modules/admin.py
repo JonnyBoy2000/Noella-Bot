@@ -80,7 +80,7 @@ class Admin():
 				await ctx.send(embed = embed)
 				return
 			deleted = await ctx.channel.purge(limit = amount)
-			embed = discord.Embed(title = "Prune Messages", description = f"**{ctx.author.name}**, {len(deleted)} messages were successfully deletes.", color = embed_color_succes)
+			embed = discord.Embed(title = "Prune Messages", description = f"**{ctx.author.name}**, {len(deleted)} messages were successfully deleted.", color = embed_color_succes)
 			deleted_message = await ctx.send(embed = embed)
 			await asyncio.sleep(10)
 			# The try and except pass is so in the event a user prunes again or deletes the prune notification before the bot automatically does it, it will not raise an error
