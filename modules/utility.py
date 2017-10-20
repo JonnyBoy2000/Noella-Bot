@@ -5,6 +5,7 @@
 import discord
 import random
 from discord.ext import commands
+from utils.paginator import Pages
 from extra.config import *
 
 class Utility():
@@ -94,25 +95,15 @@ class Utility():
 ### List Servers Command ###
 	@commands.guild_only()
 	@commands.command(aliases = ['ls'])
-	async def listservers(self, ctx, number : int = 10):
-
-		e = discord.Embed(colour = embed_color)
-		if number > 50:
-			number = 50
-		if number < 1:
-			await ctx.channel.send('Oookay - look!  No servers!  Just like you wanted!')
-			return
-		i = 1
+	async def listservers(self, ctx):
 		for guild in self.bot.guilds:
-			if i > number:
-				break
-			tmembers = guild.member_count
-			vchannels = guild.voice_channels
-			tchannels = guild.text_channels
-			omembers = sum(m.status is discord.Status.online for m in guild.members)
-			e.add_field(name = guild.name, value = f"Server Owner: **{guild.owner.name}#{guild.owner.discriminator}**\nOnline Members: **{omembers}** - Total Members: **{tmembers}**\nText Channels: **"+ str(len(tchannels)) +"** - Voice Channels: **"+ str(len(vchannels)) +"**", inline = False)
-			i += 1
-		await ctx.channel.send(embed = e)
+			guilds = [f"**{guild.name}** \nServer Owner: **{guild.owner.name}#{guild.owner.discriminator}**\nOnline Members: **{sum(m.status is discord.Status.online for m in guild.members)}** - Total Members: **{guild.member_count}**\nText Channels: **{str(len(guild.text_channels))}** - Voice Channels: **{str(len(guild.voice_channels))}**\n" for guild in self.bot.guilds]
+		try:
+			p = Pages(ctx, entries=guilds, per_page=5)
+			p.embed.colour = embed_color
+			await p.paginate()
+		except Exception as e:
+			await ctx.send(e)
 
 ### User information Command ###
 	@commands.guild_only()
