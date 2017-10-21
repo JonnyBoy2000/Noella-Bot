@@ -187,5 +187,21 @@ class Owner:
 		else:
 			raise commands.NotOwner()
 
+
+	@commands.guild_only()
+	@commands.command()
+	async def updateavatar(self, ctx):
+
+		if ctx.message.author.id == bot_owner:
+			avatar_rb = open(f"modules/data/images/new_avatar.png", "rb")
+			try:
+				await ctx.bot.user.edit(avatar = avatar_rb.read())
+			except Exception as e:
+				await ctx.send(e)
+			else:
+				await ctx.send('Avatar set.')
+		else:
+			raise commands.NotOwner()
+
 def setup(bot):
     bot.add_cog(Owner(bot))
