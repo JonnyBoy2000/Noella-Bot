@@ -70,6 +70,17 @@ class Fun():
 #########################################
 
 	@commands.guild_only()
+	@commands.command(no_pm = True, aliases = ['gicon'])
+	async def guildicon(self, ctx):
+		guild = ctx.guild
+
+		embed = discord.Embed(description = f"**{guild.name}'s** guild icon!\n[Click to open {guild.name}'s guild icon!]({guild.icon_url})", color = embed_color)
+		embed.set_image(url = f"{guild.icon_url}")
+		await ctx.send(embed = embed)
+
+#########################################
+
+	@commands.guild_only()
 	@commands.command(no_pm = True, aliases=['osu'])
 	async def osustats(self, ctx, *, osuplayer : str = None):
 
