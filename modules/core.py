@@ -46,7 +46,7 @@ class Core:
     @commands.guild_only()
     @commands.command(aliases = ['inv'])
     async def invite(self, ctx):
-        embed = discord.Embed(title = f"**Invite {self.bot.user.name} to your server!**", description = f"You want to invite **Noëlla** to your server?\nThen you can use this link to invite him!\n\n[Click here to invite **{self.bot.user.name}**](https://discordapp.com/oauth2/authorize?client_id=357852849029513216&scope=bot&permissions=527952983)\n[Click here to join **{self.bot.user.name}'s** Dev Discord]({dev_discord})", color = embed_color)
+        embed = discord.Embed(title = f"**Invite {self.bot.user.name} to your server!**", description = f"You want to invite **Noëlla** to your server?\nThen you can use this link to invite him!\n\n[Click here to invite **{self.bot.user.name}**](https://discordapp.com/oauth2/authorize?client_id=357852849029513216&scope=bot&permissions=527952983)\n[Click here to visit **{self.bot.user.name}'s** website](https://goo.gl/2FCCPw)\n[Click here to join **{self.bot.user.name}'s** Dev Discord]({dev_discord})", color = embed_color)
         embed.set_thumbnail(url = self.bot.user.avatar_url)
         await ctx.send(embed = embed)
 
