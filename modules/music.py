@@ -138,7 +138,7 @@ class Music:
         }
         self.ytdl = youtube_dl.YoutubeDL(self.opts)
         self._ytdl = youtube_dl.YoutubeDL(self.opts)
-        self._ytdl.params['ignoreerrors'] = False
+        self._ytdl.params['ignoreerrors'] = True
         self.executor = ThreadPoolExecutor(max_workers=2)
 
     def get_queue(self, guild):
