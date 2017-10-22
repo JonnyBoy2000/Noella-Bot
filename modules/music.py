@@ -134,7 +134,7 @@ class Music:
         self.queues = {}
         self.opts = {
             'quiet': True,
-            'ignoreerrors': False
+            'ignoreerrors': True
         }
         self.ytdl = youtube_dl.YoutubeDL(self.opts)
         self._ytdl = youtube_dl.YoutubeDL(self.opts)
