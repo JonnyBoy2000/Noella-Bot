@@ -288,7 +288,7 @@ class Help():
 			embed = discord.Embed(colour = embed_color)
 			embed.set_thumbnail(url = dev.avatar_url)
 			embed.add_field(name = f"{dev.name}#{dev.discriminator}", value = f"Hello. I'm **{dev.name}** creator of **{self.bot.user.name}**.\nI'm a former web application coder and web designer. \nI found it is time to create a bot for Discord \nto expand my knowledge about Python.", inline = False)
-			embed.add_field(name = f"Having issues/feedback?", value = f"If you have any issues with **{self.bot.user.name}**,\nthen you can join our **[support server]({dev_discord})**, visit our [website](https://goo.gl/2FCCPw)!\nOr send us a message using: `{bot_prefix}ctdev [message]`", inline = False)
+			embed.add_field(name = f"Having issues/feedback?", value = f"If you have any issues with **{self.bot.user.name}**,\nthen you can join our **[support server]({dev_discord})**, visit our **[website](https://goo.gl/2FCCPw)**!\nOr send us a message using: `{bot_prefix}ctdev [message]`", inline = False)
 			await ctx.author.send(embed = embed),
 
 			embed = discord.Embed(title=f"Command List for {self.bot.user.name}!", colour = embed_color, description=f"Prefix for {ctx.guild}: **{bot_prefix}**\nTo get more information about a command: `{bot_prefix}help [command]`\n⠀")

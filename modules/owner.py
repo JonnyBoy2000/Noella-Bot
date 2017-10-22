@@ -168,7 +168,7 @@ class Owner:
 				message = await ctx.send(embed = embed)
 				await message.edit(delete_after = message_delete_time)
 
-				games = [f"Need Help? Use {bot_prefix}help", f"{total_members} users | {total_servers} guilds", f"Wanna invite {self.bot.user.name}? Use: {bot_prefix}invite", f"Give us feedback? Use: {bot_prefix}ctdev [message]"]
+				games = [f"Need Help? Use {bot_prefix}help", f"{total_members} users | {total_servers} guilds", f"Wanna invite {self.bot.user.name}? Use: {bot_prefix}invite", f"Give us feedback? Use: {bot_prefix}ctdev [message]", "{self.bot.user.name} has a website: goo.gl/2FCCPw"]
 				current_number = 0
 				while True:
 					if current_number == len(games):
