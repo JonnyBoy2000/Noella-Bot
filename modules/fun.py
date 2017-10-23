@@ -75,7 +75,7 @@ class Fun():
 
 	@commands.guild_only()
 	@commands.command(no_pm = True, aliases = ['gicon'])
-	async def guildicon(self, ctx):
+	async def guildicon(self, ctx, member : discord.Member = None):
 		guild = ctx.guild
 
 		if guild.icon_url:
@@ -86,6 +86,19 @@ class Fun():
 			embed = discord.Embed(description = f"**{guild.name}** has no icon!\n", color = embed_color)
 			embed.set_image(url = "https://i.imgur.com/lkeELEJ.png")
 			await ctx.send(embed = embed)
+
+#########################################
+
+	@commands.guild_only()
+	@commands.command(no_pm = True, aliases = ['uid'])
+	async def userid(self, ctx):
+		author = ctx.author
+		if not member:
+			member = author
+
+		embed = discord.Embed(description = f"`{member.id}`", color = embed_color)
+		embed.set_author(name = f"{member.name}", icon = f"{member.avatar_url}")
+		await ctx.send(embed = embed)
 
 #########################################
 
