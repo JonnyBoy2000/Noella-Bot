@@ -161,14 +161,12 @@ class Owner:
 
 		if ctx.message.author.id == bot_owner:
 			if game == "default":
-				total_members = sum(1 for _ in self.bot.get_all_members())
-				total_servers = len(self.bot.guilds)
 
 				embed = discord.Embed(description = f"**{ctx.author.name}** my **Now Streaming** was succesfully changed! [Default Messages]", color = embed_color)
 				message = await ctx.send(embed = embed)
 				await message.edit(delete_after = message_delete_time)
 
-				games = [f"Need Help? Use {bot_prefix}help", f"{total_members} users | {total_servers} guilds", f"Wanna invite {self.bot.user.name}? Use: {bot_prefix}invite", f"Give us feedback? Use: {bot_prefix}ctdev [message]", f"{self.bot.user.name} has a website: goo.gl/2FCCPw"]
+				games = [f"Need Help? Use {bot_prefix}help", f"{sum(1 for _ in self.bot.get_all_members())} users | {len(self.bot.guilds)} guilds", f"Wanna invite {self.bot.user.name}? Use: {bot_prefix}invite", f"Give us feedback? Use: {bot_prefix}ctdev [message]", f"{self.bot.user.name} has a website: goo.gl/2FCCPw"]
 				current_number = 0
 				while True:
 					if current_number == len(games):
