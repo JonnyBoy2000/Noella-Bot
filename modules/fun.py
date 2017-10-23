@@ -97,7 +97,7 @@ class Fun():
 			member = author
 
 		embed = discord.Embed(description = f"`{member.id}`", color = embed_color)
-		embed.set_author(name = f"{member.name}", icon = f"{member.avatar_url}")
+		embed.set_author(name = f"{member.name}", icon_url = f"{member.avatar_url}")
 		await ctx.send(embed = embed)
 
 #########################################
