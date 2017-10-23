@@ -60,6 +60,8 @@ class Fun():
 
 		if member.avatar_url[54:].startswith('a_'):
 			avi = 'https://cdn.discordapp.com/avatars/' + member.avatar_url[35:-10]
+		elif member.default_avatar_url:
+			avi = "https://i.imgur.com/lkeELEJ.png"
 		else:
 			avi = member.avatar_url
 
@@ -74,9 +76,14 @@ class Fun():
 	async def guildicon(self, ctx):
 		guild = ctx.guild
 
-		embed = discord.Embed(description = f"**{guild.name}'s** guild icon!\n[Click to open {guild.name}'s guild icon!]({guild.icon_url})", color = embed_color)
-		embed.set_image(url = f"{guild.icon_url}")
-		await ctx.send(embed = embed)
+		if guild.icon_url:
+			embed = discord.Embed(description = f"**{guild.name}'s** guild icon!\n[Click to open {guild.name}'s guild icon!]({guild.icon_url})", color = embed_color)
+			embed.set_image(url = f"{guild.icon_url}")
+			await ctx.send(embed = embed)
+		else:
+			embed = discord.Embed(description = f"**{guild.name}** has no icon!\n", color = embed_color)
+			embed.set_image(url = "https://i.imgur.com/lkeELEJ.png")
+			await ctx.send(embed = embed)
 
 #########################################
 
