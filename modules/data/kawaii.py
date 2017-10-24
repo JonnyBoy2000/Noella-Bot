@@ -13,6 +13,7 @@ hugs = [
 'https://cdn.weeb.sh/images/S1gUsu_Qw-.gif',
 'https://cdn.weeb.sh/images/ryjJFdmvb.gif'
 ]
+
 pokes = [
 'https://i.imgur.com/GHQqKWz.gif',
 'https://i.imgur.com/kXBD83W.gif',
@@ -21,10 +22,35 @@ pokes = [
 'https://i.imgur.com/KoHpuOu.gif',
 'https://media.tenor.com/images/9bbab6835a2b7d880ae1999b47786cfa/tenor.gif'
 ]
+
 waves = [
 'https://i.imgur.com/GHgVMub.gif',
 'https://i.imgur.com/YUzXTia.gif'
 ]
+
+dancing = [
+'https://i.imgur.com/KkW5ixN.gif',
+'https://i.imgur.com/KjnFTMw.gif',
+]
+
+pats = [
+'https://i.imgur.com/Lf4fJYJ.gif',
+]
+
+hits = [
+'https://i.imgur.com/EJRPL4Y.gif',
+'https://i.imgur.com/JiQR6rH.gif'
+]
+
+shines = [
+'https://i.imgur.com/VUuoZfa.gif',
+'https://i.imgur.com/uz1XoSH.gif',
+]
+
+sad = [
+'https://i.imgur.com/qRvfXyd.gif',
+]
+
 dabs = [
 'https://media.alienwarearena.com/media/dab.png',
 'https://i.redd.it/qex0wyanhmay.jpg',
