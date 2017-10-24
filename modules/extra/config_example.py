@@ -32,6 +32,7 @@ import json
 
 bot_token = "************************" #Bot Token
 bot_owner = ******************** #Bot Owner ID
+bot_version = "3.61" #Bot Version
 log_channel = ***************** #Log Channel ID
 postgresql = 'postgresql://***:****@******'
 dev_discord = "https://discord.gg/EVfHKKn"
