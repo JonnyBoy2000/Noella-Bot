@@ -110,7 +110,7 @@ class Kawaii():
 
         choice = random.choice(shines)
         embed = discord.Embed(description = f"**{ctx.author.name}** is shining!", color = embed_color)
-        embed.set_image(url = "{choice}")
+        embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
 
 #happy command (-happy)

@@ -44,7 +44,7 @@ hits = [
 
 shines = [
 'https://i.imgur.com/VUuoZfa.gif',
-'https://i.imgur.com/uz1XoSH.gif',
+'https://i.imgur.com/uz1XoSH.gif'
 ]
 
 sad = [
