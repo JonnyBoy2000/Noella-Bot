@@ -45,7 +45,7 @@ class Core:
 ### Invite Bot Link Command ###
     @commands.guild_only()
     @commands.command(aliases = ['inv'])
-    async def invite(self, ctx): 
+    async def invite(self, ctx):
         embed = discord.Embed(title = f"**Invite {self.bot.user.name} to your server!**", description = f"You want to invite **Noëlla** to your server?\nThen you can use this link to invite him!\n\n[Click here to invite **{self.bot.user.name}**](https://discordapp.com/oauth2/authorize?client_id=357852849029513216&scope=bot&permissions=527952983)\n[Click here to visit **{self.bot.user.name}'s** website](https://goo.gl/2FCCPw)\n[Click here to join **{self.bot.user.name}'s** Dev Discord]({dev_discord})", color = embed_color)
         embed.set_thumbnail(url = self.bot.user.avatar_url)
         await ctx.send(embed = embed)
@@ -91,7 +91,6 @@ class Core:
     @commands.guild_only()
     @commands.command()
     async def about(self, ctx):
-        """Tells you information about the bot itself."""
         cmd = r'git show -s HEAD~3..HEAD --format="[{}](https://github.com/exunious/Noella-Bot/commit/%H) %s (%cr)"'
         if os.name == 'posix':
             cmd = cmd.format(r'\`%h\`')
@@ -99,9 +98,9 @@ class Core:
             cmd = cmd.format(r'`%h`')
 
         revision = os.popen(cmd).read().strip()
-        embed = discord.Embed(description='⠀\n**Latest Changes**\n' + revision + '\n⠀')
+        embed = discord.Embed(description='⠀\n**Last Changelogs**\n' + revision + '\n⠀')
         embed.set_thumbnail(url = self.bot.user.avatar_url)
-        embed.title = 'Official Bot Server Invite'
+        embed.title = f"Official {self.bot.user.name} Bot Support Server!"
         embed.url = dev_discord
         embed.colour = embed_color
 
@@ -122,18 +121,16 @@ class Core:
         text = len(text_channels)
         voice = len(voice_channels)
 
-        embed.add_field(name='Members in Guilds', value=f'Total Users: **{total_members}**\nTotal Unique: **{total_unique}**\nTotal Online: **{total_online}**')
-        embed.add_field(name='Channels in Guilds', value=f'Total Channels: **{text + voice}**\nText Channels: **{text}**\nVoice Channels: **{voice}**')
+        embed.add_field(name = "Members in all Guilds", value = f"Total Users: **{total_members}**\nTotal Unique: **{total_unique}**\nTotal Online: **{total_online}**")
+        embed.add_field(name = "Channels in all Guilds", value = f"Total Channels: **{text + voice}**\nText Channels: **{text}**\nVoice Channels: **{voice}**")
 
         memory_usage = self.process.memory_full_info().uss / 1024**2
         cpu_usage = self.process.cpu_percent() / psutil.cpu_count()
-        embed.add_field(name='Process', value=f'{memory_usage:.2f} MiB\n{cpu_usage:.2f}% CPU')
+        embed.add_field(name = "Process Information", value = f"{memory_usage:.2f} MiB\n{cpu_usage:.2f}% CPU")
 
-
-        embed.add_field(name='Active in Guilds', value = len(self.bot.guilds))
         #embed.add_field(name='Commands Run', value=sum(self.bot.command_stats.values()))
-        embed.add_field(name='Uptime', value=(self.getuptime()))
-        embed.set_footer(text='writen in discord.py', icon_url='http://i.imgur.com/5BFecvA.png')
+        embed.add_field(name = f"{self.bot.user.name} Uptime", value = (self.getuptime()))
+        embed.set_footer(text = f"{self.bot.user.name} version: {bot_version} | active in {len(self.bot.guilds)} guilds", icon_url = self.bot.user.avatar_url)
         await ctx.send(embed=embed)
 
 def setup(bot):
