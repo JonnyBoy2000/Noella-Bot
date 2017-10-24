@@ -248,6 +248,20 @@ class Help():
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
 			await ctx.send(embed = embed)
 
+		elif inputs == "love":
+			embed = discord.Embed(title = "Love - Kawaii Command", description = f"Tell someone that you love her/him or {self.bot.user.name}.", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}love`", inline = False)
+			embed.add_field(name = "Other Usage: ", value = f"`{bot_prefix}love [person]`", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "gg":
+			embed = discord.Embed(title = "Good Game - Kawaii Command", description = f"Tell someone Good Game or {self.bot.user.name}.", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}gg`", inline = False)
+			embed.add_field(name = "Other Usage: ", value = f"`{bot_prefix}gg [person]`", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
 		elif inputs == "dance":
 			embed = discord.Embed(title = "Dance - Kawaii Command", description = f"Express that you're dancing.", colour = embed_color)
 			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}dance`", inline = False)
@@ -326,7 +340,7 @@ class Help():
 			embed = discord.Embed(title=f"Command List for {self.bot.user.name}!", colour = embed_color, description=f"Prefix for {ctx.guild}: **{bot_prefix}**\nTo get more information about a command: `{bot_prefix}help [command]`\n⠀")
 			embed.set_thumbnail(url = self.bot.user.avatar_url)
 			embed.add_field(name="Core Commands", value=f"``{bot_prefix}help`` **|** ``{bot_prefix}ctdev`` **|** ``{bot_prefix}invite`` **|** ``{bot_prefix}about``", inline = False)
-			embed.add_field(name="Kawaii Commands", value=f"``{bot_prefix}hug`` **|** ``{bot_prefix}poke`` **|** ``{bot_prefix}hit`` **|** ``{bot_prefix}wave`` **|** ``{bot_prefix}dance`` **|** ``{bot_prefix}hide`` **|** ``{bot_prefix}pat`` **|** ``{bot_prefix}blush`` **|** ``{bot_prefix}shine`` **|** ``{bot_prefix}happy`` **|** ``{bot_prefix}sad`` **|** ``{bot_prefix}dab``", inline = False)
+			embed.add_field(name="Kawaii Commands", value=f"``{bot_prefix}hug`` **|** ``{bot_prefix}poke`` **|** ``{bot_prefix}hit`` **|** ``{bot_prefix}love`` **|** ``{bot_prefix}gg`` **|**  ``{bot_prefix}wave`` **|** ``{bot_prefix}dance`` **|** ``{bot_prefix}hide`` **|** ``{bot_prefix}pat`` **|** ``{bot_prefix}blush`` **|** ``{bot_prefix}shine`` **|** ``{bot_prefix}happy`` **|** ``{bot_prefix}sad`` **|** ``{bot_prefix}dab``", inline = False)
 			embed.add_field(name="Fun Commands", value=f"``{bot_prefix}8ball`` **|** ``{bot_prefix}poll`` **|** ``{bot_prefix}hub`` **|** ``{bot_prefix}osu`` **|** ``{bot_prefix}avatar`` **|** ``{bot_prefix}guildicon`` **|** ``{bot_prefix}weather`` **|** ``{bot_prefix}virus``", inline = False)
 			embed.add_field(name=f"Music/Voice Commands", value=f"**Need more information?** ``{bot_prefix}help music`` \n``{bot_prefix}summon`` **|** ``{bot_prefix}play`` **|** ``{bot_prefix}playlist`` **|** ``{bot_prefix}playing`` **|** ``{bot_prefix}volume`` **|** ``{bot_prefix}queue`` **|** ``{bot_prefix}stop`` **|** ``{bot_prefix}shuffle``", inline = False)
 			embed.add_field(name="Utility Commands", value=f"``{bot_prefix}ping`` **|** ``{bot_prefix}permissions`` **|** ``{bot_prefix}userinfo`` **|** ``{bot_prefix}serverinfo`` **|** ``{bot_prefix}listservers`` **|** ``{bot_prefix}uptime`` **|** ``{bot_prefix}nickname``", inline = False)
