@@ -40,6 +40,34 @@ class Kawaii():
         embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
 
+#love command (-love [@mention])
+    @commands.guild_only()
+    @commands.command()
+    async def gg(self, ctx, *, member : discord.Member = None):
+
+        author = ctx.author
+        if not member:
+            member = self.bot.user
+
+        choice = random.choice(gg)
+        embed = discord.Embed(description = f"**{author.name}** said: GG **{member.name}**", color = embed_color)
+        embed.set_image(url = f"{choice}")
+        await ctx.send(embed = embed)
+
+#love command (-love [@mention])
+    @commands.guild_only()
+    @commands.command()
+    async def love(self, ctx, *, member : discord.Member = None):
+
+        author = ctx.author
+        if not member:
+            member = self.bot.user
+
+        choice = random.choice(love)
+        embed = discord.Embed(description = f"**{author.name}** loves **{member.name}**", color = embed_color)
+        embed.set_image(url = f"{choice}")
+        await ctx.send(embed = embed)
+
 #wave command (-wave [@mention])
     @commands.guild_only()
     @commands.command()
@@ -119,8 +147,9 @@ class Kawaii():
     @commands.command()
     async def happy(self, ctx):
 
+        choice = random.choice(happy)
         embed = discord.Embed(description = f"**{ctx.author.name}** is super happy!", color = embed_color)
-        embed.set_image(url = "https://i.imgur.com/4xSrwsj.gif")
+        embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
 
 #sad command (-sad)
