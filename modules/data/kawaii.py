@@ -42,6 +42,11 @@ hits = [
 'https://i.imgur.com/JiQR6rH.gif'
 ]
 
+blush = [
+'https://i.imgur.com/d9YauPq.gif',
+'https://i.imgur.com/DGhgJ1R.gif'
+]
+
 shines = [
 'https://i.imgur.com/VUuoZfa.gif',
 'https://i.imgur.com/uz1XoSH.gif'

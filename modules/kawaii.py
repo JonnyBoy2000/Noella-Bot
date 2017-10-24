@@ -99,8 +99,9 @@ class Kawaii():
     @commands.command()
     async def blush(self, ctx):
 
+        choice = random.choice(blush)
         embed = discord.Embed(description = f"**{ctx.author.name}** is blushing!", color = embed_color)
-        embed.set_image(url = "https://i.imgur.com/DGhgJ1R.gif")
+        embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
 
 #shine command (-shine)
