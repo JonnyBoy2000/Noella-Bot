@@ -109,20 +109,24 @@ class Core:
 
         # statistics
         total_members = sum(1 for _ in self.bot.get_all_members())
-        total_online = len({m.id for m in self.bot.get_all_members() if m.status is discord.Status.online})
+        total_online = len({m.id for m in self.bot.get_all_members() if m.status is not discord.Status.offline})
         total_unique = len(self.bot.users)
+        total_bots = len([m.id for m in self.bot.get_all_members() if m.bot])
 
+        categories_channels = []
         voice_channels = []
         text_channels = []
         for guild in self.bot.guilds:
+            categories_channels.extend(guild.categories)
             voice_channels.extend(guild.voice_channels)
             text_channels.extend(guild.text_channels)
 
         text = len(text_channels)
         voice = len(voice_channels)
+        categories = len(categories_channels)
 
-        embed.add_field(name = "Members in all Guilds", value = f"Total Users: **{total_members}**\nTotal Unique: **{total_unique}**\nTotal Online: **{total_online}**")
-        embed.add_field(name = "Channels in all Guilds", value = f"Total Channels: **{text + voice}**\nText Channels: **{text}**\nVoice Channels: **{voice}**")
+        embed.add_field(name = "Members in all Guilds", value = f"Total Users: **{total_members}**\nTotal Unique: **{total_unique}**\nTotal Online: **{total_online}**\nTotal Bots: **{total_bots}**")
+        embed.add_field(name = "Channels in all Guilds", value = f"Total Categories: **{categories}**\nTotal Channels: **{text + voice}**\nText Channels: **{text}**\nVoice Channels: **{voice}**")
 
         memory_usage = self.process.memory_full_info().uss / 1024**2
         cpu_usage = self.process.cpu_percent() / psutil.cpu_count()
