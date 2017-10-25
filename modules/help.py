@@ -330,26 +330,44 @@ class Help():
 			await ctx.send(embed = embed)
 
 		else:
-			dev = self.bot.get_user(bot_owner)
-			embed = discord.Embed(colour = embed_color)
-			embed.set_thumbnail(url = dev.avatar_url)
-			embed.add_field(name = f"{dev.name}#{dev.discriminator}", value = f"Hello. I'm **{dev.name}** creator of **{self.bot.user.name}**.\nI'm a former web application coder and web designer. \nI found it is time to create a bot for Discord \nto expand my knowledge about Python.", inline = False)
-			embed.add_field(name = f"Having issues/feedback?", value = f"If you have any issues with **{self.bot.user.name}**,\nthen you can join our **[support server]({dev_discord})**, visit our **[website](https://goo.gl/2FCCPw)**!\nOr send us a message using: `{bot_prefix}ctdev [message]`", inline = False)
-			await ctx.author.send(embed = embed),
+			try:
+				dev = self.bot.get_user(bot_owner)
+				embed = discord.Embed(colour = embed_color)
+				embed.set_thumbnail(url = dev.avatar_url)
+				embed.add_field(name = f"{dev.name}#{dev.discriminator}", value = f"Hello. I'm **{dev.name}** creator of **{self.bot.user.name}**.\nI'm a former web application coder and web designer. \nI found it is time to create a bot for Discord \nto expand my knowledge about Python.", inline = False)
+				embed.add_field(name = f"Having issues/feedback?", value = f"If you have any issues with **{self.bot.user.name}**,\nthen you can join our **[support server]({dev_discord})**, visit our **[website](https://goo.gl/2FCCPw)**!\nOr send us a message using: `{bot_prefix}ctdev [message]`", inline = False)
+				await ctx.author.send(embed = embed),
 
-			embed = discord.Embed(title=f"Command List for {self.bot.user.name}!", colour = embed_color, description=f"Prefix for {ctx.guild}: **{bot_prefix}**\nTo get more information about a command: `{bot_prefix}help [command]`\n⠀")
-			embed.set_thumbnail(url = self.bot.user.avatar_url)
-			embed.add_field(name="Core Commands", value=f"``{bot_prefix}help`` **|** ``{bot_prefix}ctdev`` **|** ``{bot_prefix}invite`` **|** ``{bot_prefix}about``", inline = False)
-			embed.add_field(name="Kawaii Commands", value=f"``{bot_prefix}hug`` **|** ``{bot_prefix}poke`` **|** ``{bot_prefix}hit`` **|** ``{bot_prefix}love`` **|** ``{bot_prefix}gg`` **|**  ``{bot_prefix}wave`` **|** ``{bot_prefix}dance`` **|** ``{bot_prefix}hide`` **|** ``{bot_prefix}pat`` **|** ``{bot_prefix}blush`` **|** ``{bot_prefix}shine`` **|** ``{bot_prefix}happy`` **|** ``{bot_prefix}sad`` **|** ``{bot_prefix}dab``", inline = False)
-			embed.add_field(name="Fun Commands", value=f"``{bot_prefix}8ball`` **|** ``{bot_prefix}poll`` **|** ``{bot_prefix}hub`` **|** ``{bot_prefix}osu`` **|** ``{bot_prefix}avatar`` **|** ``{bot_prefix}guildicon`` **|** ``{bot_prefix}weather`` **|** ``{bot_prefix}virus``", inline = False)
-			embed.add_field(name=f"Music/Voice Commands", value=f"**Need more information?** ``{bot_prefix}help music`` \n``{bot_prefix}summon`` **|** ``{bot_prefix}play`` **|** ``{bot_prefix}playlist`` **|** ``{bot_prefix}playing`` **|** ``{bot_prefix}volume`` **|** ``{bot_prefix}queue`` **|** ``{bot_prefix}stop`` **|** ``{bot_prefix}shuffle``", inline = False)
-			embed.add_field(name="Utility Commands", value=f"``{bot_prefix}ping`` **|** ``{bot_prefix}permissions`` **|** ``{bot_prefix}userinfo`` **|** ``{bot_prefix}serverinfo`` **|** ``{bot_prefix}listservers`` **|** ``{bot_prefix}uptime`` **|** ``{bot_prefix}nickname``", inline = False)
-			embed.add_field(name=f"Administrative Commands", value=f"**Need more information?** ``{bot_prefix}help admin`` \n``{bot_prefix}prune`` **|** ``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}mute`` **|** ``{bot_prefix}unmute``", inline = False)
-			embed.set_footer(text = "Do not use the example brackets when using the commands!")
-			await ctx.author.send(embed = embed),
+				embed = discord.Embed(title=f"Command List for {self.bot.user.name}!", colour = embed_color, description=f"Prefix for {ctx.guild}: **{bot_prefix}**\nTo get more information about a command: `{bot_prefix}help [command]`\n⠀")
+				embed.set_thumbnail(url = self.bot.user.avatar_url)
+				embed.add_field(name="Core Commands", value=f"``{bot_prefix}help`` **|** ``{bot_prefix}ctdev`` **|** ``{bot_prefix}invite`` **|** ``{bot_prefix}about``", inline = False)
+				embed.add_field(name="Kawaii Commands", value=f"``{bot_prefix}hug`` **|** ``{bot_prefix}poke`` **|** ``{bot_prefix}hit`` **|** ``{bot_prefix}love`` **|** ``{bot_prefix}gg`` **|**  ``{bot_prefix}wave`` **|** ``{bot_prefix}dance`` **|** ``{bot_prefix}hide`` **|** ``{bot_prefix}pat`` **|** ``{bot_prefix}blush`` **|** ``{bot_prefix}shine`` **|** ``{bot_prefix}happy`` **|** ``{bot_prefix}sad`` **|** ``{bot_prefix}dab``", inline = False)
+				embed.add_field(name="Fun Commands", value=f"``{bot_prefix}8ball`` **|** ``{bot_prefix}poll`` **|** ``{bot_prefix}hub`` **|** ``{bot_prefix}osu`` **|** ``{bot_prefix}avatar`` **|** ``{bot_prefix}guildicon`` **|** ``{bot_prefix}weather`` **|** ``{bot_prefix}virus``", inline = False)
+				embed.add_field(name=f"Music/Voice Commands", value=f"**Need more information?** ``{bot_prefix}help music`` \n``{bot_prefix}summon`` **|** ``{bot_prefix}play`` **|** ``{bot_prefix}playlist`` **|** ``{bot_prefix}playing`` **|** ``{bot_prefix}volume`` **|** ``{bot_prefix}queue`` **|** ``{bot_prefix}stop`` **|** ``{bot_prefix}shuffle``", inline = False)
+				embed.add_field(name="Utility Commands", value=f"``{bot_prefix}ping`` **|** ``{bot_prefix}permissions`` **|** ``{bot_prefix}userinfo`` **|** ``{bot_prefix}serverinfo`` **|** ``{bot_prefix}listservers`` **|** ``{bot_prefix}uptime`` **|** ``{bot_prefix}nickname``", inline = False)
+				embed.add_field(name=f"Administrative Commands", value=f"**Need more information?** ``{bot_prefix}help admin`` \n``{bot_prefix}prune`` **|** ``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}mute`` **|** ``{bot_prefix}unmute``", inline = False)
+				embed.set_footer(text = "Do not use the example brackets when using the commands!")
+				await ctx.author.send(embed = embed),
 
-			embed = discord.Embed(description = f"**{ctx.author.name}**, a pm with all my commands is on the way!\nUse `{bot_prefix}h [command]` for more information about specific commands!", color = embed_color_succes)
-			await ctx.send(embed = embed)
+				embed = discord.Embed(description = f"**{ctx.author.name}**, a pm with all my commands is on the way!\nUse `{bot_prefix}h [command]` for more information about specific commands!", color = embed_color_succes)
+				await ctx.send(embed = embed)
+			except discord.Forbidden:
+				dev = self.bot.get_user(bot_owner)
+
+				embed = discord.Embed(description = f"**{ctx.author.name}**, I was not allowed to sent you a personal message!", color = embed_color_error)
+				await ctx.send(embed = embed),
+
+				embed = discord.Embed(title=f"Command List for {self.bot.user.name}!", colour = embed_color, description=f"Prefix for {ctx.guild}: **{bot_prefix}**\nTo get more information about a command: `{bot_prefix}help [command]`\n⠀")
+				embed.set_thumbnail(url = self.bot.user.avatar_url)
+				embed.add_field(name="Core Commands", value=f"``{bot_prefix}help`` **|** ``{bot_prefix}ctdev`` **|** ``{bot_prefix}invite`` **|** ``{bot_prefix}about``", inline = False)
+				embed.add_field(name="Kawaii Commands", value=f"``{bot_prefix}hug`` **|** ``{bot_prefix}poke`` **|** ``{bot_prefix}hit`` **|** ``{bot_prefix}love`` **|** ``{bot_prefix}gg`` **|**  ``{bot_prefix}wave`` **|** ``{bot_prefix}dance`` **|** ``{bot_prefix}hide`` **|** ``{bot_prefix}pat`` **|** ``{bot_prefix}blush`` **|** ``{bot_prefix}shine`` **|** ``{bot_prefix}happy`` **|** ``{bot_prefix}sad`` **|** ``{bot_prefix}dab``", inline = False)
+				embed.add_field(name="Fun Commands", value=f"``{bot_prefix}8ball`` **|** ``{bot_prefix}poll`` **|** ``{bot_prefix}hub`` **|** ``{bot_prefix}osu`` **|** ``{bot_prefix}avatar`` **|** ``{bot_prefix}guildicon`` **|** ``{bot_prefix}weather`` **|** ``{bot_prefix}virus``", inline = False)
+				embed.add_field(name=f"Music/Voice Commands", value=f"**Need more information?** ``{bot_prefix}help music`` \n``{bot_prefix}summon`` **|** ``{bot_prefix}play`` **|** ``{bot_prefix}playlist`` **|** ``{bot_prefix}playing`` **|** ``{bot_prefix}volume`` **|** ``{bot_prefix}queue`` **|** ``{bot_prefix}stop`` **|** ``{bot_prefix}shuffle``", inline = False)
+				embed.add_field(name="Utility Commands", value=f"``{bot_prefix}ping`` **|** ``{bot_prefix}permissions`` **|** ``{bot_prefix}userinfo`` **|** ``{bot_prefix}serverinfo`` **|** ``{bot_prefix}listservers`` **|** ``{bot_prefix}uptime`` **|** ``{bot_prefix}nickname``", inline = False)
+				embed.add_field(name=f"Administrative Commands", value=f"**Need more information?** ``{bot_prefix}help admin`` \n``{bot_prefix}prune`` **|** ``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}mute`` **|** ``{bot_prefix}unmute``", inline = False)
+				embed.set_footer(text = "Do not use the example brackets when using the commands!")
+				await ctx.send(embed = embed)
+
 
 def setup(bot):
     bot.add_cog(Help(bot))
