@@ -1,1 +1,1 @@
-start cmd.exe /k "python C:\Users\timob\Documents\GitHub\Noella-Bot\modules\main.py"
+start cmd.exe /k "python C:\Users\timob\Documents\Noella-Bot-Rewrite\launcher.py"
