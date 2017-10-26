@@ -43,7 +43,7 @@ class Meta:
         # mention is there twice
         del prefixes[1]
 
-        e = discord.Embed(title='Prefixes', colour=discord.Colour.blurple())
+        e = discord.Embed(title=f'Prefixes for {str(ctx.guild)}', colour=discord.Colour.blurple())
         e.set_footer(text=f'{len(prefixes)} prefixes')
         e.description = '\n'.join(f'{index}. {elem}' for index, elem in enumerate(prefixes, 1))
         await ctx.send(embed=e)

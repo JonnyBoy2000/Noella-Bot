@@ -134,7 +134,7 @@ class Stats:
     @commands.guild_only()
     @commands.command()
     async def about(self, ctx):
-        bot_version = "4.12"
+        bot_version = "4.15"
         cmd = r'git show -s HEAD~3..HEAD --format="%s (%cr)"'
         if os.name == 'posix':
             cmd = cmd.format(r'\`%h\`')

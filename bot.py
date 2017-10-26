@@ -25,7 +25,7 @@ def _prefix_callable(bot, msg):
     if msg.guild is None:
         base.append('>')
     else:
-        base.extend(bot.prefixes.get(msg.guild.id, ['>']))
+        base.extend(bot.prefixes.get(msg.guild.id, ['n.', '>']))
     return base
 
 class NoellaBot(commands.AutoShardedBot):
