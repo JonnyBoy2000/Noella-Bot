@@ -88,7 +88,8 @@ happy = [
 'https://vignette.wikia.nocookie.net/date-a-live/images/b/b5/Yoshino_Kawaii.gif',
 'https://media.giphy.com/media/CCmXp18hhZAZy/giphy.gif',
 'https://i.imgur.com/14SCF7p.gif',
-'https://i.imgur.com/4xSrwsj.gif'
+'https://i.imgur.com/4xSrwsj.gif',
+'https://pa1.narvii.com/5961/2c8bbd5cf0c5ea7f8767cfa360941f9ad59c014e_hq.gif'
 ]
 
 sad = [

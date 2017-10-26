@@ -16,7 +16,7 @@ import config
 import asyncpg
 
 log = logging.getLogger(__name__)
-initial_extensions = ('cogs.config', 'cogs.meta', 'cogs.utility', 'cogs.admin', 'cogs.owner', 'cogs.mod', 'cogs.stats', 'cogs.help', 'cogs.kawaii', 'cogs.core', 'cogs.fun', 'cogs.polls', 'cogs.music')
+initial_extensions = ('cogs.config', 'cogs.errorhandler', 'cogs.meta', 'cogs.utility', 'cogs.admin', 'cogs.owner', 'cogs.mod', 'cogs.stats', 'cogs.help', 'cogs.kawaii', 'cogs.core', 'cogs.fun', 'cogs.polls', 'cogs.music')
 #'modules.extra.errorhandler', 'modules.help', 'modules.utility', 'modules.help', 'modules.owner'
 
 def _prefix_callable(bot, msg):
