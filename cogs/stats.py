@@ -134,8 +134,8 @@ class Stats:
     @commands.guild_only()
     @commands.command()
     async def about(self, ctx):
-        bot_version = "3.63"
-        cmd = r'git show -s HEAD~3..HEAD --format="[{}](https://github.com/exunious/Noella-Bot/commit/%H) %s (%cr)"'
+        bot_version = "4.12"
+        cmd = r'git show -s HEAD~3..HEAD --format="%s (%cr)"'
         if os.name == 'posix':
             cmd = cmd.format(r'\`%h\`')
         else:
