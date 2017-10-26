@@ -28,8 +28,8 @@ import json
 bot_version = "3.63" #Bot Version
 dev_discord = "https://discord.gg/EVfHKKn"
 
-client_id   = '372996043970707458' # your bot's client ID
-token = 'MzcyOTk2MDQzOTcwNzA3NDU4.DNMTJg.GbsKLhcVGLJoVvoXv643RhJTRso' # your bot's token
+client_id   = '357852849029513216' # your bot's client ID
+token = 'MzU3ODUyODQ5MDI5NTEzMjE2.DNMy-Q.37xJjs-r-oWI6rH660g1ntkjDmI' # your bot's token
 postgresql = 'postgresql://noella:Not-4-You@localhost/noella' # your postgresql info from above
 
 carbon_key = '' # your bot's key on carbon's site
