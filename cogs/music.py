@@ -253,7 +253,7 @@ class Music:
 
             if vc:
                 if vc.is_playing() or vc.is_paused():
-                    embed = discord.Embed(description = f"**{ctx.author.name}** stopped the music. To play a song: `{bot_prefix}play`", color = embed_color)
+                    embed = discord.Embed(description = f"**{ctx.author.name}** stopped the music. To play a song: `>play`", color = embed_color)
                     queue = self.get_queue(ctx.guild)
                     queue.audio_player.cancel()
                     del self.queues[ctx.guild.id]
