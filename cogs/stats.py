@@ -1,9 +1,9 @@
-from discord.ext import commands
-from collections import Counter
+from discord.ext    import commands
+from collections    import Counter
+from config         import *
+from .utils         import checks, db
+from .              import config
 
-from .utils import checks, db
-
-from . import config
 import logging
 import discord
 import datetime
@@ -187,6 +187,82 @@ class Stats:
         embed.add_field(name = f"{self.bot.user.name} Uptime", value = (self.get_bot_uptime()))
         embed.set_footer(text = f"{self.bot.user.name} version: {bot_version} | active in {len(self.bot.guilds)} guilds", icon_url = self.bot.user.avatar_url)
         await ctx.send(embed=embed)
+
+### User information Command ###
+    @commands.guild_only()
+    @commands.group(invoke_without_command = True, aliases =  ['info', 'uinfo', 'user'])
+    async def userinfo(self, ctx, *, member: discord.Member = None):
+
+        if member is None:
+            member = ctx.author
+
+        if member.game is None or member.game.url is None:
+            if str(member.status) == "online":
+                status_colour = embed_color_succes
+                status_name = "Online"
+            elif str(member.status) == "idle":
+                status_colour = embed_color_attention
+                status_name = "Away / Idle"
+            elif str(member.status) == "dnd":
+                status_colour = embed_color_error
+                status_name = "Do Not Disturb"
+            elif str(member.status) == "offline" or str(member.status) == "invisible":
+                status_colour = 0x000000
+                status_name = "Offline"
+            else:
+                status_colour = member.colour
+                status_name = "N/A"
+        else:
+            status_colour = 0x593695
+            status_name = "Streaming"
+
+        if member.game is None:
+            activity = f"**Doing**: Completely nothing!"
+        elif member.game.url is None:
+            activity = f"**Playing**: {member.game}"
+        else:
+            activity = f"**Streaming**: [{member.game}]({member.game.url})"
+
+        e = discord.Embed(description = f"**Nickname**: {member.nick}\n{activity}", colour = status_colour)
+        roles = [role.name.replace('@', '@\u200b') for role in member.roles]
+        shared = sum(1 for m in self.bot.get_all_members() if m.id == member.id)
+        voice = member.voice
+
+        highrole = member.top_role.name
+        if highrole == "@everyone":
+            role = "N/A"
+
+        if member.avatar_url[54:].startswith('a_'):
+            avi = 'https://cdn.discordapp.com/avatars/' + member.avatar_url[35:-10]
+        else:
+            avi = member.avatar_url
+
+        if avi:
+            e.set_thumbnail(url = avi)
+            e.set_author(name = str(member), icon_url = avi)
+        else:
+            e.set_thumbnail(url = member.default_avatar_url)
+            e.set_author(name = str(member), icon_url = member.default_avatar_url)
+
+        e.set_footer(text = f"Member since: {member.joined_at.__format__('%d %b %Y at %H:%M:%S')}")#.timestamp = member.joined_at
+        e.add_field(name = 'User ID', value = member.id)
+        e.add_field(name = 'Servers', value = f'{shared} shared')
+        #e.add_field(name = 'Voice', value = voice)
+        e.add_field(name = 'Client Status', value = status_name)
+        e.add_field(name = 'Highest Role', value = highrole)
+
+        query_usertotalused = "SELECT COUNT(*), MIN(used) FROM commands WHERE guild_id=$1 AND author_id=$2;"
+        count_usertotalused = await ctx.db.fetchrow(query_usertotalused, ctx.guild.id, member.id)
+
+        query_usermostused = """SELECT command, COUNT(*) as "uses" FROM commands WHERE guild_id=$1 AND author_id=$2 GROUP BY command ORDER BY "uses" DESC LIMIT 1;"""
+        records_usermostused = await ctx.db.fetch(query_usermostused, ctx.guild.id, member.id)
+        value_usermostused = '\n'.join(f'**>{command}**' for (index, (command, uses)) in enumerate(records_usermostused)) or '**None yet**!'
+
+        e.add_field(name = 'Commands stats', value = f"Total Used: **{count_usertotalused[0]}**\nMost Used: {value_usermostused}")
+        e.add_field(name = 'Account created at', value = member.created_at.__format__('Date: **%d %b %Y**\nTime: **%H:%M:%S**'))
+        e.add_field(name = 'Roles', value = ' **|** '.join(roles) if len(roles) < 15 else f'{len(roles)} roles')
+
+        await ctx.send(embed=e)
 
     async def show_guild_stats(self, ctx):
         lookup = (
