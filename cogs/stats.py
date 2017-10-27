@@ -126,7 +126,7 @@ class Stats:
         return fmt.format(d=days, h=hours, m=minutes, s=seconds)
 
     @commands.command()
-    async def uptime(self, ctx):
+    async def uptime(self, ctx, member):
         """Tells you how long the bot has been up for."""
         await ctx.send(f'Uptime: **{self.get_bot_uptime()}**')
 
@@ -174,9 +174,16 @@ class Stats:
 
         memory_usage = self.process.memory_full_info().uss / 1024**2
         cpu_usage = self.process.cpu_percent() / psutil.cpu_count()
-        embed.add_field(name = "Process Information", value = f"{memory_usage:.2f} MiB\n{cpu_usage:.2f}% CPU")
+        embed.add_field(name = "Process Information", value = f"Memory: **{memory_usage:.2f}** MiB\nProcessor: **{cpu_usage:.2f}**%")
 
-        embed.add_field(name='Commands Run', value=sum(self.bot.command_stats.values()))
+        query_mostused = """SELECT command, COUNT(*) AS "uses" FROM commands GROUP BY command ORDER BY "uses" DESC LIMIT 1;"""
+        query_totalused = "SELECT COUNT(*) FROM commands;"
+
+        total_totalused = await ctx.db.fetchrow(query_totalused)
+        records_mostused = await ctx.db.fetch(query_mostused)
+        value_mostused = '\n'.join(f'{command}' for (index, (command, uses)) in enumerate(records_mostused)) # (**{uses}** uses)
+
+        embed.add_field(name='Commands Stats', value = f"Total Used: **{total_totalused[0]}**\nMost Used: **>{value_mostused}**")
         embed.add_field(name = f"{self.bot.user.name} Uptime", value = (self.get_bot_uptime()))
         embed.set_footer(text = f"{self.bot.user.name} version: {bot_version} | active in {len(self.bot.guilds)} guilds", icon_url = self.bot.user.avatar_url)
         await ctx.send(embed=embed)
