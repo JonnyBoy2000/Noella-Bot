@@ -2,6 +2,7 @@ from discord.ext import commands
 from .utils import checks, db, time, cache
 from collections import Counter, defaultdict
 from inspect import cleandoc
+from config import embed_color, embed_color_succes, embed_color_error
 
 import re
 import json
@@ -440,7 +441,7 @@ class Mod:
         deleted = await ctx.channel.purge(limit=search, check=check, before=ctx.message)
         return Counter(m.author.display_name for m in deleted)
 
-    @commands.command()
+    @commands.command(aliases = ['clear', 'clean', 'cls'])
     @checks.has_permissions(manage_messages=True)
     async def cleanup(self, ctx, search=100):
         """Cleans up the bot's messages from the channel.
@@ -468,89 +469,55 @@ class Mod:
             spammers = sorted(spammers.items(), key=lambda t: t[1], reverse=True)
             messages.extend(f'- **{author}**: {count}' for author, count in spammers)
 
-        await ctx.send('\n'.join(messages), delete_after=10)
+        embed = discord.Embed(title = f"**Message Cleanup**", description = f"\n".join(messages), color = embed_color_succes)
+        await ctx.send(embed = embed, delete_after = 15)
 
     @commands.command()
     @commands.guild_only()
     @checks.has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member, *, reason: ActionReason = None):
-        """Kicks a member from the server.
-
-        In order for this to work, the bot must have Kick Member permissions.
-
-        To use this command you must have Kick Members permission.
-        """
 
         if reason is None:
-            reason = f'Action done by {ctx.author} (ID: {ctx.author.id})'
+            reason = f'{ctx.author.name}#{ctx.author.discriminator} did not give any reasons.'
 
-        await member.kick(reason=reason)
-        await ctx.send('\N{OK HAND SIGN}')
+        await member.kick(reason = reason)
+        embed = discord.Embed(color = embed_color_succes)
+        embed.add_field(name = f"Member: ", value = f"**{member.name}#{member.discriminator}**", inline = False)
+        embed.add_field(name = f"Kicked by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
+        embed.set_thumbnail(url = member.avatar_url)
+        await ctx.send(embed = embed)
 
     @commands.command()
     @commands.guild_only()
     @checks.has_permissions(ban_members=True)
     async def ban(self, ctx, member: MemberID, *, reason: ActionReason = None):
-        """Bans a member from the server.
-
-        You can also ban from ID to ban regardless whether they're
-        in the server or not.
-
-        In order for this to work, the bot must have Ban Member permissions.
-
-        To use this command you must have Ban Members permission.
-        """
 
         if reason is None:
-            reason = f'Action done by {ctx.author} (ID: {ctx.author.id})'
+            reason = f'{ctx.author.name}#{ctx.author.discriminator} did not give any reasons.'
 
         await ctx.guild.ban(discord.Object(id=member), reason=reason)
-        await ctx.send('\N{OK HAND SIGN}')
-
-    @commands.command()
-    @commands.guild_only()
-    @checks.has_permissions(ban_members=True)
-    async def massban(self, ctx, reason: ActionReason, *members: MemberID):
-        """Mass bans multiple members from the server.
-
-        You can also ban from ID to ban regardless whether they're
-        in the server or not.
-
-        Note that unlike the ban command, the reason comes first
-        and is not optional.
-
-        In order for this to work, the bot must have Ban Member permissions.
-
-        To use this command you must have Ban Members permission.
-        """
-
-        for member_id in members:
-            await ctx.guild.ban(discord.Object(id=member_id), reason=reason)
-
-        await ctx.send('\N{OK HAND SIGN}')
+        embed = discord.Embed(color = embed_color_succes)
+        embed.add_field(name = f"Member: ", value = f"**{member.name}#{member.discriminator}**", inline = False)
+        embed.add_field(name = f"Banned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
+        embed.set_thumbnail(url = member.avatar_url)
+        await ctx.send(embed = embed)
 
     @commands.command()
     @commands.guild_only()
     @checks.has_permissions(kick_members=True)
     async def softban(self, ctx, member: MemberID, *, reason: ActionReason = None):
-        """Soft bans a member from the server.
-
-        A softban is basically banning the member from the server but
-        then unbanning the member as well. This allows you to essentially
-        kick the member while removing their messages.
-
-        In order for this to work, the bot must have Ban Member permissions.
-
-        To use this command you must have Kick Members permissions.
-        """
 
         if reason is None:
-            reason = f'Action done by {ctx.author} (ID: {ctx.author.id})'
+            reason = f'{ctx.author.name}#{ctx.author.discriminator} did not give any reasons.'
 
         obj = discord.Object(id=member)
         await ctx.guild.ban(obj, reason=reason)
         await ctx.guild.unban(obj, reason=reason)
-        await ctx.send('\N{OK HAND SIGN}')
+        embed = discord.Embed(color = embed_color_succes)
+        embed.add_field(name = f"Member: ", value = f"**{member.name}#{member.discriminator}**", inline = False)
+        embed.add_field(name = f"Soft Banned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
+        embed.set_thumbnail(url = member.avatar_url)
+        await ctx.send(embed = embed)
 
     @commands.command()
     @commands.guild_only()
@@ -570,162 +537,11 @@ class Mod:
             reason = f'Action done by {ctx.author} (ID: {ctx.author.id})'
 
         await ctx.guild.unban(member.user, reason=reason)
-        if member.reason:
-            await ctx.send(f'Unbanned {member.user} (ID: {member.user.id}), previously banned for {member.reason}.')
-        else:
-            await ctx.send(f'Unbanned {member.user} (ID: {member.user.id}).')
-
-    @commands.command()
-    @commands.guild_only()
-    @checks.has_permissions(ban_members=True)
-    async def tempban(self, ctx, duration: time.FutureTime, member: MemberID, *, reason: ActionReason = None):
-        """Temporarily bans a member for the specified duration.
-
-        The duration can be a a short time form, e.g. 30d or a more human
-        duration such as "until thursday at 3PM" or a more concrete time
-        such as "2017-12-31".
-
-        Note that times are in UTC.
-
-        You can also ban from ID to ban regardless whether they're
-        in the server or not.
-
-        In order for this to work, the bot must have Ban Member permissions.
-
-        To use this command you must have Ban Members permission.
-        """
-
-        if reason is None:
-            reason = f'Action done by {ctx.author} (ID: {ctx.author.id})'
-
-        reminder = self.bot.get_cog('Reminder')
-        if reminder is None:
-            return await ctx.send('Sorry, this functionality is currently unavailable. Try again later?')
-
-        await ctx.guild.ban(discord.Object(id=member), reason=reason)
-        timer = await reminder.create_timer(duration.dt, 'tempban', ctx.guild.id, ctx.author.id, member, connection=ctx.db)
-        await ctx.send(f'Banned ID {member} for {time.human_timedelta(duration.dt)}.')
-
-    async def on_tempban_timer_complete(self, timer):
-        guild_id, mod_id, member_id = timer.args
-
-        guild = self.bot.get_guild(guild_id)
-        if guild is None:
-            # RIP
-            return
-
-        moderator = guild.get_member(mod_id)
-        if moderator is None:
-            try:
-                moderator = await self.bot.get_user_info(mod_id)
-            except:
-                # request failed somehow
-                moderator = f'Mod ID {mod_id}'
-            else:
-                moderator = f'{moderator} (ID: {mod_id})'
-        else:
-            moderator = f'{moderator} (ID: {mod_id})'
-
-        reason = f'Automatic unban from timer made on {timer.created_at} by {moderator}.'
-        await guild.unban(discord.Object(id=member_id), reason=reason)
-
-    @commands.group(invoke_without_command=True)
-    @commands.guild_only()
-    @checks.has_permissions(ban_members=True)
-    async def mentionspam(self, ctx, count: int=None):
-        """Enables auto-banning accounts that spam mentions.
-
-        If a message contains `count` or more mentions then the
-        bot will automatically attempt to auto-ban the member.
-        The `count` must be greater than 3. If the `count` is 0
-        then this is disabled.
-
-        This only applies for user mentions. Everyone or Role
-        mentions are not included.
-
-        To use this command you must have the Ban Members permission.
-        """
-
-        if count is None:
-            query = """SELECT mention_count, COALESCE(safe_mention_channel_ids, '{}') AS channel_ids
-                       FROM guild_mod_config
-                       WHERE id=$1;
-                    """
-
-            row = await ctx.db.fetchrow(query, ctx.guild.id)
-            if row is None or not row['mention_count']:
-                return await ctx.send('This server has not set up mention spam banning.')
-
-            ignores = ', '.join(f'<#{e}>' for e in row['channel_ids']) or 'None'
-            return await ctx.send(f'- Threshold: {row["mention_count"]} mentions\n- Ignored Channels: {ignores}')
-
-        if count == 0:
-            query = """UPDATE guild_mod_config SET mention_count = NULL WHERE id=$1;"""
-            await ctx.db.execute(query, ctx.guild.id)
-            self.get_guild_config.invalidate(self, ctx.guild.id)
-            return await ctx.send('Auto-banning members has been disabled.')
-
-        if count <= 3:
-            await ctx.send('\N{NO ENTRY SIGN} Auto-ban threshold must be greater than three.')
-            return
-
-        query = """INSERT INTO guild_mod_config (id, mention_count, safe_mention_channel_ids)
-                   VALUES ($1, $2, '{}')
-                   ON CONFLICT (id) DO UPDATE SET
-                       mention_count = $2;
-                """
-        await ctx.db.execute(query, ctx.guild.id, count)
-        self.get_guild_config.invalidate(self, ctx.guild.id)
-        await ctx.send(f'Now auto-banning members that mention more than {count} users.')
-
-    @mentionspam.command(name='ignore', aliases=['bypass'])
-    @commands.guild_only()
-    @checks.has_permissions(ban_members=True)
-    async def mentionspam_ignore(self, ctx, *channels: discord.TextChannel):
-        """Specifies what channels ignore mentionspam auto-bans.
-
-        If a channel is given then that channel will no longer be protected
-        by auto-banning from mention spammers.
-
-        To use this command you must have the Ban Members permission.
-        """
-
-        query = """UPDATE guild_mod_config
-                   SET safe_mention_channel_ids =
-                       ARRAY(SELECT DISTINCT * FROM unnest(COALESCE(safe_mention_channel_ids, '{}') || $2::bigint[]))
-                   WHERE id = $1;
-                """
-
-        if len(channels) == 0:
-            return await ctx.send('Missing channels to ignore.')
-
-        channel_ids = [c.id for c in channels]
-        await ctx.db.execute(query, ctx.guild.id, channel_ids)
-        self.get_guild_config.invalidate(self, ctx.guild.id)
-        await ctx.send(f'Mentions are now ignored on {", ".join(c.mention for c in channels)}.')
-
-    @mentionspam.command(name='unignore', aliases=['protect'])
-    @commands.guild_only()
-    @checks.has_permissions(ban_members=True)
-    async def mentionspam_unignore(self, ctx, *channels: discord.TextChannel):
-        """Specifies what channels to take off the ignore list.
-
-        To use this command you must have the Ban Members permission.
-        """
-
-        if len(channels) == 0:
-            return await ctx.send('Missing channels to protect.')
-
-        query = """UPDATE guild_mod_config
-                   SET safe_mention_channel_ids =
-                       ARRAY(SELECT element FROM unnest(safe_mention_channel_ids) AS element
-                             WHERE NOT(element = ANY($2::bigint[])))
-                   WHERE id = $1;
-                """
-
-        await ctx.db.execute(query, ctx.guild.id, [c.id for c in channels])
-        self.get_guild_config.invalidate(self, ctx.guild.id)
-        await ctx.send('Updated mentionspam ignore list.')
+        embed = discord.Embed(color = embed_color_succes)
+        embed.add_field(name = f"Member: ", value = f"**{member.name}#{member.discriminator}**", inline = False)
+        embed.add_field(name = f"Unbanned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
+        embed.set_thumbnail(url = member.avatar_url)
+        await ctx.send(embed = embed)
 
     @commands.group(aliases=['purge'])
     @commands.guild_only()
