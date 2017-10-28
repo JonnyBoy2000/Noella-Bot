@@ -538,10 +538,9 @@ class Mod:
         if reason is None:
             reason = f'Action done by {ctx.author} (ID: {ctx.author.id})'
 
-        membername = self.bot.get_user(member)
         await ctx.guild.unban(member.user, reason=reason)
         embed = discord.Embed(color = embed_color_succes)
-        embed.add_field(name = "Member: ", value = f"**{member.id}**", inline = False)
+        embed.add_field(name = "Member: ", value = f"**{member}**", inline = False)
         embed.add_field(name = "Unbanned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
         await ctx.send(embed = embed)
 
