@@ -495,9 +495,10 @@ class Mod:
         if reason is None:
             reason = f'{ctx.author.name}#{ctx.author.discriminator} did not give any reasons.'
 
+        membername = self.bot.get_user(member)
         await ctx.guild.ban(discord.Object(id=member), reason=reason)
         embed = discord.Embed(color = embed_color_succes)
-        embed.add_field(name = "Member: ", value = f"**{member.name}#{member.discriminator}**", inline = False)
+        embed.add_field(name = "Member: ", value = f"**{membername.name}#{membername.discriminator}**", inline = False)
         embed.add_field(name = "Banned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
         embed.set_thumbnail(url = member.avatar_url)
         await ctx.send(embed = embed)
@@ -510,13 +511,14 @@ class Mod:
         if reason is None:
             reason = f'{ctx.author.name}#{ctx.author.discriminator} did not give any reasons.'
 
-        embed = discord.Embed(color = embed_color_succes)
-        embed.add_field(name = "Member: ", value = f"**{member.name}#{member.discriminator}**", inline = False)
-        embed.add_field(name = "Soft Banned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
-        embed.set_thumbnail(url = member.avatar_url)
+        membername = self.bot.get_user(member)
         obj = discord.Object(id=member)
         await ctx.guild.ban(obj, reason=reason)
         await ctx.guild.unban(obj, reason=reason)
+        embed = discord.Embed(color = embed_color_succes)
+        embed.add_field(name = "Member: ", value = f"**{membername.name}#{membername.discriminator}**", inline = False)
+        embed.add_field(name = "Soft Banned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
+        embed.set_thumbnail(url = member.avatar_url)
         await ctx.send(embed = embed)
 
     @commands.command()
@@ -536,9 +538,10 @@ class Mod:
         if reason is None:
             reason = f'Action done by {ctx.author} (ID: {ctx.author.id})'
 
+        membername = self.bot.get_user(member)
         await ctx.guild.unban(member.user, reason=reason)
         embed = discord.Embed(color = embed_color_succes)
-        embed.add_field(name = "Member: ", value = f"**{member.name}#{member.discriminator}**", inline = False)
+        embed.add_field(name = "Member: ", value = f"**{membername.name}#{membername.discriminator}**", inline = False)
         embed.add_field(name = "Unbanned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
         embed.set_thumbnail(url = member.avatar_url)
         await ctx.send(embed = embed)
