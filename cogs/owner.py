@@ -70,7 +70,7 @@ class Owner:
 	async def updateavatar(self, ctx):
 
 		if ctx.message.author.id == self.bot.owner_id:
-			avatar_rb = open(f"modules/data/images/new_avatar.png", "rb")
+			avatar_rb = open(f"cogs/data/images/new_avatar.png", "rb")
 			try:
 				await ctx.bot.user.edit(avatar = avatar_rb.read())
 			except Exception as e:
