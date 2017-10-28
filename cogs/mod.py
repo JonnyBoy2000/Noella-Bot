@@ -500,7 +500,6 @@ class Mod:
         embed = discord.Embed(color = embed_color_succes)
         embed.add_field(name = "Member: ", value = f"**{membername.name}#{membername.discriminator}**", inline = False)
         embed.add_field(name = "Banned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
-        embed.set_thumbnail(url = member.avatar_url)
         await ctx.send(embed = embed)
 
     @commands.command()
@@ -518,7 +517,6 @@ class Mod:
         embed = discord.Embed(color = embed_color_succes)
         embed.add_field(name = "Member: ", value = f"**{membername.name}#{membername.discriminator}**", inline = False)
         embed.add_field(name = "Soft Banned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
-        embed.set_thumbnail(url = member.avatar_url)
         await ctx.send(embed = embed)
 
     @commands.command()
@@ -543,7 +541,6 @@ class Mod:
         embed = discord.Embed(color = embed_color_succes)
         embed.add_field(name = "Member: ", value = f"**{membername.name}#{membername.discriminator}**", inline = False)
         embed.add_field(name = "Unbanned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
-        embed.set_thumbnail(url = member.avatar_url)
         await ctx.send(embed = embed)
 
     @commands.group(aliases=['purge'])
