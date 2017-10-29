@@ -444,18 +444,6 @@ class Mod:
     @commands.command(aliases = ['clear', 'clean', 'cls'])
     @checks.has_permissions(manage_messages=True)
     async def cleanup(self, ctx, search=100):
-        """Cleans up the bot's messages from the channel.
-
-        If a search number is specified, it searches that many messages to delete.
-        If the bot has Manage Messages permissions then it will try to delete
-        messages that look like they invoked the bot as well.
-
-        After the cleanup is completed, the bot will send you a message with
-        which people got their messages deleted and their count. This is useful
-        to see which users are spammers.
-
-        You must have Manage Messages permission to use this.
-        """
 
         strategy = self._basic_cleanup_strategy
         if ctx.me.permissions_in(ctx.channel).manage_messages:
@@ -495,7 +483,7 @@ class Mod:
         if reason is None:
             reason = f'{ctx.author.name}#{ctx.author.discriminator} did not give any reasons.'
 
-        membername = self.bot.get_user(member)
+        membername = await self.bot.get_user_info(member)
         await ctx.guild.ban(discord.Object(id=member), reason=reason)
         embed = discord.Embed(color = embed_color_error)
         embed.add_field(name = "Member: ", value = f"**{membername.name}#{membername.discriminator}**", inline = False)
@@ -511,7 +499,7 @@ class Mod:
         if reason is None:
             reason = f'{ctx.author.name}#{ctx.author.discriminator} did not give any reasons.'
 
-        membername = self.bot.get_user(member)
+        membername = await self.bot.get_user_info(member)
         obj = discord.Object(id=member)
         await ctx.guild.ban(obj, reason=reason)
         await ctx.guild.unban(obj, reason=reason)
@@ -525,15 +513,6 @@ class Mod:
     @commands.guild_only()
     @checks.has_permissions(ban_members=True)
     async def unban(self, ctx, member: BannedMember, *, reason: ActionReason = None):
-        """Unbans a member from the server.
-
-        You can pass either the ID of the banned member or the Name#Discrim
-        combination of the member. Typically the ID is easiest to use.
-
-        In order for this to work, the bot must have Ban Member permissions.
-
-        To use this command you must have Ban Members permissions.
-        """
 
         if reason is None:
             reason = f'Action done by {ctx.author} (ID: {ctx.author.id})'
