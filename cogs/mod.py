@@ -460,6 +460,26 @@ class Mod:
         embed = discord.Embed(title = f"**Message Cleanup**", description = f"\n".join(messages), color = embed_color_succes)
         await ctx.send(embed = embed, delete_after = 15)
 
+    @commands.command(rest_is_raw=True, hidden=True)
+    @commands.guild_only()
+    @commands.is_owner()
+    async def pm(self, ctx, member: MemberID, *, content):
+        try:
+            destination = await self.bot.get_user_info(member)
+            embed = discord.Embed(color = embed_color)
+            embed.set_author(name = f"Direct Message from {self.bot.user.name}'s developers (click to join Support Server)", icon_url = f"{self.bot.user.avatar_url}")
+            embed.title = f"⠀"
+            embed.url = "https://discord.gg/EVfHKKn"
+            embed.add_field(name = f"Dear **{destination.name}**", value = f"You received a message from developer **{ctx.author.name}#{ctx.author.discriminator}**.", inline = False)
+            embed.add_field(name = "Content:", value = f"{content}", inline = False)
+            await destination.send(embed = embed)
+        except discord.Forbidden:
+            embed = discord.Embed(color = embed_color_error)
+            embed.add_field(name = "Oops, something went wrong!", value = f"**{ctx.author.name}**, I'm not allowed to do this!", inline = False)
+            await ctx.send(embed = embed)
+        except Exception as e:
+            await ctx.send(e)
+
     @commands.command()
     @commands.guild_only()
     @checks.has_permissions(kick_members=True)
