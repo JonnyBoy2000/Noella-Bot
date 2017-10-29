@@ -8,13 +8,24 @@ from discord.ext import commands
 # admin (Administrator). Having these signify certain bypasses.
 # Of course, the owner will always be able to execute commands.
 
+#async def check_permissions(ctx, perms, *, check=all):
+#    is_owner = await ctx.bot.is_owner(ctx.author)
+#    if is_owner:
+#        return True
+#
+#    resolved = ctx.channel.permissions_for(ctx.author)
+#    return check(getattr(resolved, name, None) == value for name, value in perms.items())
+
 async def check_permissions(ctx, perms, *, check=all):
     is_owner = await ctx.bot.is_owner(ctx.author)
     if is_owner:
         return True
 
     resolved = ctx.channel.permissions_for(ctx.author)
-    return check(getattr(resolved, name, None) == value for name, value in perms.items())
+    has_perms = check(getattr(resolved, name, None) == value for name, value in perms.items())
+
+    if not has_perms: raise commands.MissingPermissions(perms.keys())
+    else: return True
 
 def has_permissions(*, check=all, **perms):
     async def pred(ctx):
