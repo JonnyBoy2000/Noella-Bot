@@ -84,7 +84,7 @@ class Meta:
 
     @prefix.command(name='remove', aliases=['delete'], ignore_extra=False)
     @checks.is_mod()
-    async def prefix_remove(self, ctx, prefix: Prefix):
+    async def prefix_rem(self, ctx, prefix: Prefix):
         """Removes a prefix from the list of custom prefixes.
 
         This is the inverse of the 'prefix add' command. You can
