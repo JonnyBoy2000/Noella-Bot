@@ -468,12 +468,17 @@ class Mod:
         if reason is None:
             reason = f'{ctx.author.name}#{ctx.author.discriminator} did not give any reasons.'
 
-        await member.kick(reason = reason)
-        embed = discord.Embed(color = embed_color_error)
-        embed.add_field(name = "Member: ", value = f"**{member.name}#{member.discriminator}**", inline = False)
-        embed.add_field(name = "Kicked by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
-        embed.set_thumbnail(url = member.avatar_url)
-        await ctx.send(embed = embed)
+        try:
+            await member.kick(reason = reason)
+            embed = discord.Embed(color = embed_color_error)
+            embed.add_field(name = "Member: ", value = f"**{member.name}#{member.discriminator}**", inline = False)
+            embed.add_field(name = "Kicked by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
+            embed.set_thumbnail(url = member.avatar_url)
+            await ctx.send(embed = embed)
+        except discord.Forbidden:
+            embed = discord.Embed(color = embed_color_error)
+            embed.add_field(name = "Oops, something went wrong!", value = f"**{ctx.author.name}**, I'm not allowed to do this!", inline = False)
+            await ctx.send(embed = embed)
 
     @commands.command()
     @commands.guild_only()
@@ -483,13 +488,18 @@ class Mod:
         if reason is None:
             reason = f'{ctx.author.name}#{ctx.author.discriminator} did not give any reasons.'
 
-        membername = await self.bot.get_user_info(member)
-        await ctx.guild.ban(discord.Object(id=member), reason=reason)
-        embed = discord.Embed(color = embed_color_error)
-        embed.add_field(name = "Member: ", value = f"**{membername.name}#{membername.discriminator}**", inline = False)
-        embed.add_field(name = "Banned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
-        embed.set_thumbnail(url = membername.avatar_url)
-        await ctx.send(embed = embed)
+        try:
+            membername = await self.bot.get_user_info(member)
+            await ctx.guild.ban(discord.Object(id=member), reason=reason)
+            embed = discord.Embed(color = embed_color_error)
+            embed.add_field(name = "Member: ", value = f"**{membername.name}#{membername.discriminator}**", inline = False)
+            embed.add_field(name = "Banned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
+            embed.set_thumbnail(url = membername.avatar_url)
+            await ctx.send(embed = embed)
+        except discord.Forbidden:
+            embed = discord.Embed(color = embed_color_error)
+            embed.add_field(name = "Oops, something went wrong!", value = f"**{ctx.author.name}**, I'm not allowed to do this!", inline = False)
+            await ctx.send(embed = embed)
 
     @commands.command()
     @commands.guild_only()
@@ -498,16 +508,20 @@ class Mod:
 
         if reason is None:
             reason = f'{ctx.author.name}#{ctx.author.discriminator} did not give any reasons.'
-
-        membername = await self.bot.get_user_info(member)
-        obj = discord.Object(id=member)
-        await ctx.guild.ban(obj, reason=reason)
-        await ctx.guild.unban(obj, reason=reason)
-        embed = discord.Embed(color = embed_color_attention)
-        embed.add_field(name = "Member: ", value = f"**{membername.name}#{membername.discriminator}**", inline = False)
-        embed.add_field(name = "Soft Banned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
-        embed.set_thumbnail(url = membername.avatar_url)
-        await ctx.send(embed = embed)
+        try:
+            membername = await self.bot.get_user_info(member)
+            obj = discord.Object(id=member)
+            await ctx.guild.ban(obj, reason=reason)
+            await ctx.guild.unban(obj, reason=reason)
+            embed = discord.Embed(color = embed_color_attention)
+            embed.add_field(name = "Member: ", value = f"**{membername.name}#{membername.discriminator}**", inline = False)
+            embed.add_field(name = "Soft Banned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
+            embed.set_thumbnail(url = membername.avatar_url)
+            await ctx.send(embed = embed)
+        except discord.Forbidden:
+            embed = discord.Embed(color = embed_color_error)
+            embed.add_field(name = "Oops, something went wrong!", value = f"**{ctx.author.name}**, I'm not allowed to do this!", inline = False)
+            await ctx.send(embed = embed)
 
     @commands.command()
     @commands.guild_only()
@@ -516,13 +530,59 @@ class Mod:
 
         if reason is None:
             reason = f'Action done by {ctx.author} (ID: {ctx.author.id})'
+        try:
+            await ctx.guild.unban(member.user, reason=reason)
+            embed = discord.Embed(color = embed_color_succes)
+            embed.add_field(name = "Member: ", value = f"**{member.user.name}#{member.user.discriminator}**", inline = False)
+            embed.add_field(name = "Unbanned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
+            embed.set_thumbnail(url = member.user.avatar_url)
+            await ctx.send(embed = embed)
+        except discord.Forbidden:
+            embed = discord.Embed(color = embed_color_error)
+            embed.add_field(name = "Oops, something went wrong!", value = f"**{ctx.author.name}**, I'm not allowed to do this!", inline = False)
+            await ctx.send(embed = embed)
 
-        await ctx.guild.unban(member.user, reason=reason)
-        embed = discord.Embed(color = embed_color_succes)
-        embed.add_field(name = "Member: ", value = f"**{member.user.name}#{member.user.discriminator}**", inline = False)
-        embed.add_field(name = "Unbanned by: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
-        embed.set_thumbnail(url = member.user.avatar_url)
-        await ctx.send(embed = embed)
+    @commands.command(aliases = ['rr'])
+    @commands.guild_only()
+    @checks.has_permissions(manage_roles=True)
+    async def removerole(self, ctx, user : discord.Member, *, role):
+        try:
+            await user.remove_roles(discord.utils.get(ctx.message.guild.roles, name=role))
+            embed = discord.Embed(color = embed_color_error)
+            embed.add_field(name = "Member: ", value = f"**{user.name}#{user.discriminator}**", inline = True)
+            embed.add_field(name = "Role Taken: ", value = f"**{role}**", inline = True)
+            embed.add_field(name = "Invoked By: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
+            embed.set_thumbnail(url = user.avatar_url)
+            await ctx.send(embed = embed)
+        except discord.Forbidden:
+            embed = discord.Embed(color = embed_color_error)
+            embed.add_field(name = "Oops, something went wrong!", value = f"**{ctx.author.name}**, I'm not allowed to do this!", inline = False)
+            await ctx.send(embed = embed)
+        except AttributeError:
+            embed = discord.Embed(color = embed_color_error)
+            embed.add_field(name = "Oops, something went wrong!", value = f"**{ctx.author.name}**, does that role exist?", inline = False)
+            await ctx.send(embed = embed)
+
+    @commands.command(aliases = ['sr'])
+    @commands.guild_only()
+    @checks.has_permissions(manage_roles=True)
+    async def setrole(self, ctx, user : discord.Member, *, role):
+        try:
+            await user.add_roles(discord.utils.get(ctx.message.guild.roles, name=role))
+            embed = discord.Embed(color = embed_color_succes)
+            embed.add_field(name = "Member: ", value = f"**{user.name}#{user.discriminator}**", inline = True)
+            embed.add_field(name = "Role Given: ", value = f"**{role}**", inline = True)
+            embed.add_field(name = "Invoked By: ", value = f"**{ctx.author.name}#{ctx.author.discriminator}**", inline = False)
+            embed.set_thumbnail(url = user.avatar_url)
+            await ctx.send(embed = embed)
+        except discord.Forbidden:
+            embed = discord.Embed(color = embed_color_error)
+            embed.add_field(name = "Oops, something went wrong!", value = f"**{ctx.author.name}**, I'm not allowed to do this!", inline = False)
+            await ctx.send(embed = embed)
+        except AttributeError:
+            embed = discord.Embed(color = embed_color_error)
+            embed.add_field(name = "Oops, something went wrong!", value = f"**{ctx.author.name}**, does that role exist?", inline = False)
+            await ctx.send(embed = embed)
 
     @commands.group(aliases=['purge'])
     @commands.guild_only()

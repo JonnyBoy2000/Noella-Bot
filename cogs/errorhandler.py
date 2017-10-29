@@ -3,7 +3,7 @@
 ###########################################
 
 import discord
-from config import *
+from config import embed_color, embed_color_succes, embed_color_error
 from discord.ext import commands
 
 class ErrorHandler:
@@ -15,7 +15,8 @@ class ErrorHandler:
 				pass
 
 			elif isinstance (error, commands.MissingPermissions):
-				embed = discord.Embed(description = "**"+ ctx.author.name +"**, you're not allowed to do this!", color = embed_color_error)
+				embed = discord.Embed(color = embed_color_error)
+				embed.add_field(name = "Oops, something went wrong!", value = f"**{ctx.author.name}**, you're sooo not allowed to do this!", inline = False)
 				await ctx.send(embed = embed)
 
 			elif isinstance(error, commands.NotOwner):
