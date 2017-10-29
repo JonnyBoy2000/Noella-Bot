@@ -15,6 +15,7 @@ class Help():
 	async def help(self, ctx, *, inputs : str = None):
 		bot_prefix = ">"
 		### Core Help Inputs ###
+
 		if inputs == "help" or inputs == "h":
 			embed = discord.Embed(title = "Help - Command", description = f"To request a personal message with information.\nTo request information about a specific command.", colour = embed_color)
 			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}help` or `{bot_prefix}h`", inline = False)
@@ -31,12 +32,6 @@ class Help():
 		elif inputs == "ctdev":
 			embed = discord.Embed(title = "Contact Developers - Command", description = f"Sent the developers of {self.bot.user.name} feedback or questions.", colour = embed_color)
 			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}ctdev [message]`", inline = False)
-			embed.set_footer(text = "Do not use the example brackets when using the commands!")
-			await ctx.send(embed = embed)
-
-		elif inputs == "prefix":
-			embed = discord.Embed(title = "Prefix - Command", description = f"Request for the prefix of {self.bot.user.name} on your current server.", colour = embed_color)
-			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}prefix` or `prefix`", inline = False)
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
 			await ctx.send(embed = embed)
 
@@ -298,10 +293,51 @@ class Help():
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
 			await ctx.send(embed = embed)
 
-		elif inputs == "prune" or inputs == "clear" or inputs == "clean" or inputs == "cls":
-			embed = discord.Embed(title = "Prune - Administrative Commands", description = f"Prune messages with just one simple command", colour = embed_color)
+		elif inputs == "cleanup" or inputs == "clear" or inputs == "clean" or inputs == "cls":
+			embed = discord.Embed(title = "Cleanup - Administrative Commands", description = f"Prune messages with just one simple command", colour = embed_color)
 			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}prune [amount]`, `{bot_prefix}clear [amount]`, `{bot_prefix}clean [amount]` or `{bot_prefix}cls [amount]`", inline = False)
-			embed.add_field(name = "Important: ", value = f"**This feature is only for people with the correct permissions**", inline = False)
+			#embed.add_field(name = "Important: ", value = f"**This feature is only for people with the correct permissions**", inline = False)
+			embed.add_field(name = "Permissions Needed: ", value = f"**To use this command, you need `Manage Messages` permission**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "kick":
+			embed = discord.Embed(title = "Kick - Administrative Commands", description = f"Kick a member from the server!", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}kick [member]`", inline = False)
+			#embed.add_field(name = "Important: ", value = f"**This feature is only for people with the correct permissions**", inline = False)
+			embed.add_field(name = "Permissions Needed: ", value = f"**To use this command, you need `Kick Members` permission**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "softban":
+			embed = discord.Embed(title = "Softban - Administrative Commands", description = f"Kick, ban and unban a member from the server!", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}softban [member]`", inline = False)
+			#embed.add_field(name = "Important: ", value = f"**This feature is only for people with the correct permissions**", inline = False)
+			embed.add_field(name = "Permissions Needed: ", value = f"**To use this command, you need `Kick Members` permission**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "ban":
+			embed = discord.Embed(title = "Ban - Administrative Commands", description = f"Ban a member from the server!", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}ban [member]`", inline = False)
+			#embed.add_field(name = "Important: ", value = f"**This feature is only for people with the correct permissions**", inline = False)
+			embed.add_field(name = "Permissions Needed: ", value = f"**To use this command, you need `Ban Members` permission**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "ban":
+			embed = discord.Embed(title = "Unban - Administrative Commands", description = f"Unban a member from the server!", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}ban [member]`", inline = False)
+			#embed.add_field(name = "Important: ", value = f"**This feature is only for people with the correct permissions**", inline = False)
+			embed.add_field(name = "Permissions Needed: ", value = f"**To use this command, you need `Ban Members` permission**", inline = False)
+			embed.set_footer(text = "Do not use the example brackets when using the commands!")
+			await ctx.send(embed = embed)
+
+		elif inputs == "prefix" or inputs == "prefix add" or inputs == "prefix rem" or inputs == "prefix clear":
+			embed = discord.Embed(title = "Prefix - Command", description = f"Check the prefixes on the server! (everyone)\n**Add**, **Remove** or **Clear** prefixes on the server! (administration)", colour = embed_color)
+			embed.add_field(name = "Basic Usage: ", value = f"`{bot_prefix}prefix`", inline = False)
+			embed.add_field(name = "Other Usage: ", value = f"`{bot_prefix}prefix add [prefix]`, `{bot_prefix}prefix rem [prefix]` or `{bot_prefix}prefix clear`", inline = False)
+			embed.add_field(name = "Permissions Needed: ", value = f"**To use the __add__, __rem__ and __clear__, you need `Manage Server` permission**", inline = False)
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
 			await ctx.send(embed = embed)
 
@@ -322,9 +358,11 @@ class Help():
 
 		elif inputs == "admin" or inputs == "administrator" or inputs == "administrative":
 			embed = discord.Embed(title = "Administrative Commands", description = f"Information about all the administrative commands.", colour = embed_color)
-			embed.add_field(name = "Manage Messages Permission", value = f"``{bot_prefix}prune``", inline = False)
+			embed.add_field(name = "Manage Messages Permission", value = f"``{bot_prefix}cleanup``", inline = False)
 			embed.add_field(name = "Manage Roles Permission", value = f"``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole``", inline = False)
-			embed.add_field(name = "Administrator Permission", value = f"``{bot_prefix}mute`` **|** ``{bot_prefix}unmute``", inline = False)
+			embed.add_field(name = "Kick Members Permission", value = f"``{bot_prefix}kick`` **|** ``{bot_prefix}softban``", inline = False)
+			embed.add_field(name = "Ban Members Permission", value = f"``{bot_prefix}ban`` **|** ``{bot_prefix}unban``", inline = False)
+			embed.add_field(name = "Manage Guild Permission", value = f"``{bot_prefix}prefix add`` **|** ``{bot_prefix}prefix rem`` **|** ``{bot_prefix}prefix clear``", inline = False)
 			embed.add_field(name = "Important: ", value = f"**These features are only for people with the correct permissions**", inline = False)
 			embed.set_footer(text = "Do not use the example brackets when using the commands!")
 			await ctx.send(embed = embed)
@@ -345,7 +383,7 @@ class Help():
 				embed.add_field(name="Fun Commands", value=f"``{bot_prefix}8ball`` **|** ``{bot_prefix}poll`` **|** ``{bot_prefix}hub`` **|** ``{bot_prefix}osu`` **|** ``{bot_prefix}avatar`` **|** ``{bot_prefix}guildicon`` **|** ``{bot_prefix}weather`` **|** ``{bot_prefix}virus``", inline = False)
 				embed.add_field(name=f"Music/Voice Commands", value=f"**Need more information?** ``{bot_prefix}help music`` \n``{bot_prefix}summon`` **|** ``{bot_prefix}play`` **|** ``{bot_prefix}playlist`` **|** ``{bot_prefix}playing`` **|** ``{bot_prefix}volume`` **|** ``{bot_prefix}queue`` **|** ``{bot_prefix}stop`` **|** ``{bot_prefix}shuffle``", inline = False)
 				embed.add_field(name="Utility Commands", value=f"``{bot_prefix}ping`` **|** ``{bot_prefix}permissions`` **|** ``{bot_prefix}userinfo`` **|** ``{bot_prefix}serverinfo`` **|** ``{bot_prefix}listservers`` **|** ``{bot_prefix}uptime`` **|** ``{bot_prefix}nickname``", inline = False)
-				embed.add_field(name=f"Administrative Commands", value=f"**Need more information?** ``{bot_prefix}help admin`` \n``{bot_prefix}prune`` **|** ``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}mute`` **|** ``{bot_prefix}unmute``", inline = False)
+				embed.add_field(name=f"Administrative Commands", value=f"**Need more information?** ``{bot_prefix}help admin`` \n``{bot_prefix}cleanup`` **|** ``{bot_prefix}prefix`` **|** ``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}kick`` **|** ``{bot_prefix}softban`` **|** ``{bot_prefix}ban`` **|** ``{bot_prefix}unban``", inline = False)
 				embed.set_footer(text = "Do not use the example brackets when using the commands!")
 				await ctx.author.send(embed = embed),
 
@@ -364,7 +402,7 @@ class Help():
 				embed.add_field(name="Fun Commands", value=f"``{bot_prefix}8ball`` **|** ``{bot_prefix}poll`` **|** ``{bot_prefix}hub`` **|** ``{bot_prefix}osu`` **|** ``{bot_prefix}avatar`` **|** ``{bot_prefix}guildicon`` **|** ``{bot_prefix}weather`` **|** ``{bot_prefix}virus``", inline = False)
 				embed.add_field(name=f"Music/Voice Commands", value=f"**Need more information?** ``{bot_prefix}help music`` \n``{bot_prefix}summon`` **|** ``{bot_prefix}play`` **|** ``{bot_prefix}playlist`` **|** ``{bot_prefix}playing`` **|** ``{bot_prefix}volume`` **|** ``{bot_prefix}queue`` **|** ``{bot_prefix}stop`` **|** ``{bot_prefix}shuffle``", inline = False)
 				embed.add_field(name="Utility Commands", value=f"``{bot_prefix}ping`` **|** ``{bot_prefix}permissions`` **|** ``{bot_prefix}userinfo`` **|** ``{bot_prefix}serverinfo`` **|** ``{bot_prefix}listservers`` **|** ``{bot_prefix}uptime`` **|** ``{bot_prefix}nickname``", inline = False)
-				embed.add_field(name=f"Administrative Commands", value=f"**Need more information?** ``{bot_prefix}help admin`` \n``{bot_prefix}prune`` **|** ``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}mute`` **|** ``{bot_prefix}unmute``", inline = False)
+				embed.add_field(name=f"Administrative Commands", value=f"**Need more information?** ``{bot_prefix}help admin`` \n``{bot_prefix}cleanup`` **|** ``{bot_prefix}prefix`` **|** ``{bot_prefix}setrole`` **|** ``{bot_prefix}removerole`` **|** ``{bot_prefix}kick`` **|** ``{bot_prefix}softban`` **|** ``{bot_prefix}ban`` **|** ``{bot_prefix}unban``", inline = False)
 				embed.set_footer(text = "Do not use the example brackets when using the commands!")
 				await ctx.send(embed = embed)
 
