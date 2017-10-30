@@ -52,12 +52,19 @@ class Core:
             await message.edit(delete_after = 15)
 
         else:
-            embed = discord.Embed(title = f"Invite to {ctx.guild} discord server!", colour = embed_color, url = f"{invite.url}", description = f"**Feedback:** {pmessage}")
-            embed.set_thumbnail(url = f"{ctx.author.avatar_url}")
-            embed.set_author(name = f"{ctx.author.name} sent:", icon_url = f"{ctx.author.avatar_url}")
-            await dev.send(embed = embed)
-            embed = discord.Embed(description = f"I have PMed **{dev.name}#{dev.discriminator}** with your feedback! Thank you for your help!", color = embed_color_succes)
-            await ctx.send(embed = embed)
+            try:
+                embed = discord.Embed(colour = embed_color)
+                embed.set_thumbnail(url = f"{ctx.author.avatar_url}")
+                embed.add_field(name = f"Information: ", value = f"Name: **{ctx.author.name}**\nID: **{ctx.author.id}**\nServer: [**{ctx.guild}**]({invite.url})", inline = False)
+                embed.add_field(name = f"Feedback/Message: ", value = f"{pmessage}", inline = False)
+                await dev.send(embed = embed)
+                embed = discord.Embed(description = f"I have PMed **{dev.name}#{dev.discriminator}** with your feedback! Thank you for your help!", color = embed_color_succes)
+                await ctx.send(embed = embed)
+            except discord.Forbidden:
+                embed = discord.Embed(color = embed_color_error)
+                embed.add_field(name = "Oops, something went wrong!", value = f"**{ctx.author.name}**, I'm not allowed to do this!", inline = False)
+                await ctx.send(embed = embed)
+
 
 def setup(bot):
     bot.add_cog(Core(bot))
