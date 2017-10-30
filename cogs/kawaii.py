@@ -120,7 +120,7 @@ class Kawaii():
             member = self.bot.user
 
         choice = random.choice(hits)
-        embed = discord.Embed(description = f"**{member.name}** you got hitted by **{author.name}**", color = embed_color)
+        embed = discord.Embed(description = f"**{member.name}** got hit by **{author.name}**", color = embed_color)
         embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
 
