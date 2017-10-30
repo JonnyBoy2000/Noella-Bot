@@ -77,8 +77,9 @@ class Kawaii():
         if not member:
             member = self.bot.user
 
+        choice = random.choice(waves)
         embed = discord.Embed(description = f"**{author.name}** waves at you **{member.name}**", color = embed_color)
-        embed.set_image(url = "https://i.imgur.com/w5kTICt.gif")
+        embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
 
 #hide command (-hide [@mention])
@@ -90,8 +91,9 @@ class Kawaii():
         if not member:
             member = self.bot.user
 
+        choice = random.choice(hides)
         embed = discord.Embed(description = f"**{author.name}** is hiding for **{member.name}**", color = embed_color)
-        embed.set_image(url = "https://i.imgur.com/BZQwbid.gif")
+        embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
 
 #pat command (-pat [@mention])
@@ -148,7 +150,17 @@ class Kawaii():
     async def happy(self, ctx):
 
         choice = random.choice(happy)
-        embed = discord.Embed(description = f"**{ctx.author.name}** is super happy!", color = embed_color)
+        embed = discord.Embed(description = f"**{ctx.author.name}** feels happy!", color = embed_color)
+        embed.set_image(url = f"{choice}")
+        await ctx.send(embed = embed)
+
+#angry command (-angry)
+    @commands.guild_only()
+    @commands.command()
+    async def angry(self, ctx):
+
+        choice = random.choice(angry)
+        embed = discord.Embed(description = f"**{ctx.author.name}** feels angry!", color = embed_color)
         embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
 
@@ -158,7 +170,7 @@ class Kawaii():
     async def sad(self, ctx):
 
         choice = random.choice(sad)
-        embed = discord.Embed(description = f"**{ctx.author.name}** is really sad!", color = embed_color)
+        embed = discord.Embed(description = f"**{ctx.author.name}** feels sad!", color = embed_color)
         embed.set_image(url = f"{choice}")
         await ctx.send(embed = embed)
 

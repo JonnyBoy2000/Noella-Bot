@@ -5,7 +5,12 @@ hugs = [
 'https://media.tenor.com/images/ff8a2ea033a2f87a35d895eebd09cbe8/tenor.gif',
 'https://i.imgur.com/cLHRyeB.gif',
 'https://i.imgur.com/NUBqeqp.gif',
-'http://i.imgur.com/AriSq63.gif',
+'https://i.imgur.com/AriSq63.gif',
+'https://i.imgur.com/GlGMQfX.gif',
+'https://i.imgur.com/6HmshZe.gif',
+'https://i.imgur.com/OsiIuxY.gif',
+'https://i.imgur.com/Ror9fmh.gif',
+'https://i.imgur.com/7aQmpz6.gif',
 'https://i.pinimg.com/originals/68/0b/69/680b69563aceba3df48b4483d007bce3.gif',
 'https://cdn.weeb.sh/images/SknauOQwb.gif',
 'https://cdn.weeb.sh/images/BJCCd_7Pb.gif',
@@ -26,12 +31,23 @@ pokes = [
 waves = [
 'https://i.imgur.com/GHgVMub.gif',
 'https://i.imgur.com/YUzXTia.gif',
+'https://i.imgur.com/tCavdTp.gif',
+'https://i.imgur.com/w5kTICt.gif',
 'https://media.giphy.com/media/FOJWFdlarLO6c/giphy.gif'
+]
+
+hides = [
+'https://i.imgur.com/JZ1PsBL.gif',
+'https://i.imgur.com/iBV881B.gif',
+'https://i.imgur.com/BZQwbid.gif'
 ]
 
 dancing = [
 'https://i.imgur.com/KkW5ixN.gif',
 'https://i.imgur.com/KjnFTMw.gif',
+'https://i.imgur.com/ESzZLsw.gif',
+'https://i.imgur.com/SFfcwFG.gif',
+'https://i.imgur.com/dsNX2Pq.gif',
 'https://media.giphy.com/media/psDYaMLHbXrqg/giphy.gif',
 'https://media.giphy.com/media/pztnkAJOQT5Ti/giphy.gif',
 'https://media.giphy.com/media/HAbCMiblL0gnu/giphy.gif',
@@ -45,20 +61,21 @@ pats = [
 'https://i.imgur.com/Lf4fJYJ.gif',
 'https://i.imgur.com/aKndQkv.gif',
 'https://i.imgur.com/hQ6Fktz.gif',
-'https://i.imgur.com/bDMMk0L.gif',
+'https://i.imgur.com/bDMMk0L.gif'
 ]
 
 hits = [
 'https://i.imgur.com/EJRPL4Y.gif',
 'https://i.imgur.com/JiQR6rH.gif',
 'https://i.imgur.com/ypCzzPq.gif',
+'https://i.imgur.com/Yz0aizi.gif',
+'https://i.imgur.com/QzyVr0u.gif',
 'http://i0.kym-cdn.com/photos/images/original/000/975/967/4e0.gif'
 ]
 
 gg = [
 'http://www.lovethispic.com/uploaded_images/17959-Good-Job-Gif.gif',
-'https://vignette.wikia.nocookie.net/kancolle/images/5/59/Double_Loli_Wink_Congrats.gif',
-
+'https://vignette.wikia.nocookie.net/kancolle/images/5/59/Double_Loli_Wink_Congrats.gif'
 ]
 
 love = [
@@ -76,7 +93,14 @@ blush = [
 
 shines = [
 'https://i.imgur.com/VUuoZfa.gif',
-'https://i.imgur.com/uz1XoSH.gif'
+'https://i.imgur.com/uz1XoSH.gif',
+'https://i.imgur.com/egsvRdE.gif'
+]
+
+angry = [
+'https://i.imgur.com/9mehV14.gif',
+'https://i.imgur.com/NfVhnZs.gif',
+'https://i.imgur.com/KCIteNX.gif'
 ]
 
 happy = [
@@ -89,11 +113,23 @@ happy = [
 'https://media.giphy.com/media/CCmXp18hhZAZy/giphy.gif',
 'https://i.imgur.com/14SCF7p.gif',
 'https://i.imgur.com/4xSrwsj.gif',
+'https://i.imgur.com/Re8f1En.gif',
+'https://i.imgur.com/FKfSJGd.gif',
+'https://i.imgur.com/OQqwW4U.gif',
+'https://i.imgur.com/TsHdrKy.gif',
+'https://i.imgur.com/U0aagKY.gif',
+'https://i.imgur.com/kLt5jTI.gif',
+'https://i.imgur.com/vm0przi.gif',
 'https://pa1.narvii.com/5961/2c8bbd5cf0c5ea7f8767cfa360941f9ad59c014e_hq.gif'
 ]
 
 sad = [
 'https://i.imgur.com/qRvfXyd.gif',
+'https://i.imgur.com/3B7EXVC.gif',
+'https://i.imgur.com/rR3SPkn.gif',
+'https://i.imgur.com/x42XcLy.gif',
+'https://i.imgur.com/kIxtnFx.gif',
+'https://i.imgur.com/UPs6pOX.gif'
 ]
 
 dabs = [
