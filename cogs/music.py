@@ -187,11 +187,11 @@ class Music:
     async def _join(self, ctx, *, channel: discord.VoiceChannel):
         if ctx.author.voice is None:
             embed = discord.Embed(description = f"**{ctx.author.name}**, you need to be in a voice channel.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
         vc = ctx.guild.voice_client
         if vc is not None:
             embed = discord.Embed(description = f"**{ctx.author.name}**, I'm already in another voice channel.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
 
         await channel.connect()
         await ctx.send(f'Connected to {channel.name}.')
@@ -202,7 +202,7 @@ class Music:
         voice = ctx.author.voice
         if voice is None:
             embed = discord.Embed(description = f"**{ctx.author.name}**, you're not in a voice channel.", color = embed_color_attention)
-            await ctx.send(embed = embed)
+            await ctx.send(embed = embed, delete_after = 15)
             return
 
         vc = ctx.guild.voice_client
@@ -221,7 +221,7 @@ class Music:
         if voice:
             if vc is None:
                 embed = discord.Embed(description = f"**{ctx.author.name}**, I'm not in a voice channel.", color = embed_color_attention)
-                return await ctx.send(embed = embed)
+                return await ctx.send(embed = embed, delete_after = 15)
 
             if vc:
                 if vc.is_playing() or vc.is_paused():
@@ -231,18 +231,18 @@ class Music:
 
                     await vc.disconnect()
                     embed = discord.Embed(description = f"**{ctx.author.name}** stopped the music and disconnected.", color = embed_color)
-                    await ctx.send(embed = embed)
+                    await ctx.send(embed = embed, delete_after = 15)
                 else:
                     await vc.disconnect()
                     embed = discord.Embed(description = f"**{ctx.author.name}** disconnected.", color = embed_color)
-                    await ctx.send(embed = embed)
+                    await ctx.send(embed = embed, delete_after = 15)
 
             else:
                 embed = discord.Embed(description = f"**{ctx.author.name}**, I'm not connected to a voice channel.", color = embed_color_attention)
-                await ctx.send(embed = embed)
+                await ctx.send(embed = embed, delete_after = 15)
         else:
             embed = discord.Embed(description = f"**{ctx.author.name}**, you're not in a voice channel.", color = embed_color_attention)
-            await ctx.send(embed = embed)
+            await ctx.send(embed = embed, delete_after = 15)
 
     @commands.guild_only()
     @commands.command()
@@ -253,7 +253,7 @@ class Music:
         if voice:
             if vc is None:
                 embed = discord.Embed(description = f"**{ctx.author.name}**, I'm not in a voice channel.", color = embed_color_attention)
-                return await ctx.send(embed = embed)
+                return await ctx.send(embed = embed, delete_after = 15)
 
             if vc:
                 if vc.is_playing() or vc.is_paused():
@@ -261,18 +261,18 @@ class Music:
                     queue = self.get_queue(ctx.guild)
                     queue.audio_player.cancel()
                     del self.queues[ctx.guild.id]
-                    await ctx.send(embed = embed)
+                    await ctx.send(embed = embed, delete_after = 15)
                     await vc.stop()
 
                 else:
                     embed = discord.Embed(description = f"**{ctx.author.name}**, something went wrong here, is there music playing?", color = embed_color_attention)
-                    await ctx.send(embed = embed)
+                    await ctx.send(embed = embed, delete_after = 15)
             else:
                 embed = discord.Embed(description = f"**{ctx.author.name}**, I'm not connected to a voice channel.", color = embed_color_attention)
-                await ctx.send(embed = embed)
+                await ctx.send(embed = embed, delete_after = 15)
         else:
             embed = discord.Embed(description = f"**{ctx.author.name}**, you're not in a voice channel.", color = embed_color_attention)
-            await ctx.send(embed = embed)
+            await ctx.send(embed = embed, delete_after = 15)
 
     @commands.guild_only()
     @commands.command()
@@ -283,20 +283,20 @@ class Music:
         """
         if ctx.author.voice is None:
             embed = discord.Embed(description = f"**{ctx.author.name}**, you need to be in a voice channel.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
         vc = ctx.guild.voice_client
         if vc is None:
             embed = discord.Embed(description = f"**{ctx.author.name}**, I'm not in a voice channel.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
 
         if not vc.is_playing() and not vc.is_paused():
             embed = discord.Embed(description = f"**{ctx.author.name}**, I'm currently not playing any music.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
 
         voter = ctx.author
         if voter == vc.source.requester:
             embed = discord.Embed(description = f"Requester: {vc.source.requester} skipped the song.", color = embed_color)
-            await ctx.send(embed = embed)
+            await ctx.send(embed = embed, delete_after = 15)
             vc.stop()
         elif voter not in vc.source.skip_votes:
             vc.source.skip_votes.add(voter.id)
@@ -304,14 +304,14 @@ class Music:
 
             if votes >= vc.source.required_skips:
                 embed = discord.Embed(description = f"Skip Voting passed, skipping song", color = embed_color)
-                await ctx.send(embed = embed)
+                await ctx.send(embed = embed, delete_after = 15)
                 vc.stop()
             else:
                 embed = discord.Embed(description = f"**{ctx.author.name}**'s Vote added: currently at [{votes}/{vc.source.required_skips}]", color = embed_color)
-                await ctx.send(embed = embed)
+                await ctx.send(embed = embed, delete_after = 15)
         else:
             embed = discord.Embed(description = f"**{ctx.author.name}**, you have already voted to skip the song.", color = embed_color_attention)
-            await ctx.send(embed = embed)
+            await ctx.send(embed = embed, delete_after = 15)
 
     @commands.guild_only()
     @commands.command(aliases = ['vol'])
@@ -322,16 +322,16 @@ class Music:
             if value is not None: #and checks.role_or_permissions(ctx, lambda r: r.name == 'Admin', manage_guild=True):
                 vc.source.volume = min(value / 100, 2.0)
                 embed = discord.Embed(description = f"**{ctx.author.name}** have set the volume to: {vc.source.volume:.0%}.", color = embed_color)
-                return await ctx.send(embed = embed)
+                return await ctx.send(embed = embed, delete_after = 15)
             embed = discord.Embed(description = f"The current volume is: {vc.source.volume:.0%}.", color = embed_color)
-            await ctx.send(embed = embed)
+            await ctx.send(embed = embed, delete_after = 15)
 
     @commands.guild_only()
     @commands.command(aliases = ['yt', 'sc'])
     async def play(self, ctx, *, query: str):
         if ctx.author.voice is None:
             embed = discord.Embed(description = f"**{ctx.author.name}**, you need to be in a voice channel.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
         vc = ctx.guild.voice_client
         if vc is None:
             vc = await ctx.invoke(self.summon)
@@ -348,7 +348,7 @@ class Music:
             length = sum(song.length for song in songs) + vc.source.remaining
             time_until = time.human_time(length)
         embed.add_field(name='Time until playing', value=time_until)
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed, delete_after = 15)
         await queue.songs.put(source)
 
     @commands.guild_only()
@@ -357,7 +357,7 @@ class Music:
         """Adds tracks from a playlist to the queue."""
         if ctx.author.voice is None:
             embed = discord.Embed(description = f"**{ctx.author.name}**, you need to be in a voice channel.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
         vc = ctx.guild.voice_client
         if vc is None:
             vc = await ctx.invoke(self.summon)
@@ -375,9 +375,9 @@ class Music:
             except Exception:
                 bad_entries += 1
         if bad_entries:
-            await ctx.send(f'Added {len(info["entries"]) - bad_entries} songs to the queue. {bad_entries} songs couldn\'t be added.')
+            await ctx.send(f'Added {len(info["entries"]) - bad_entries} songs to the queue. {bad_entries} songs couldn\'t be added.', delete_after = 15)
         else:
-            await ctx.send(f'Added {len(info["entries"])} songs to the queue.')
+            await ctx.send(f'Added {len(info["entries"])} songs to the queue.', delete_after = 15)
 
     @commands.guild_only()
     @commands.command()
@@ -386,11 +386,11 @@ class Music:
         vc = ctx.guild.voice_client
         if vc is None:
             embed = discord.Embed(description = f"**{ctx.author.name}**, I'm not in a voice channel.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
 
         if not vc.is_playing() and not vc.is_paused():
             embed = discord.Embed(description = f"**{ctx.author.name}**, I'm currently not playing any music.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
 
         await ctx.send(embed=vc.source.embed())
 
@@ -401,18 +401,18 @@ class Music:
         vc = ctx.voice_client
         if vc is None:
             embed = discord.Embed(description = f"**{ctx.author.name}**, I'm not in a voice channel.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
         if not vc.is_playing() and not vc.is_paused():
             embed = discord.Embed(description = f"**{ctx.author.name}**, I'm currently not playing any music.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
         songs = self.get_queue(ctx.guild).songs._queue
         if not songs:
             embed = discord.Embed(description = f"**{ctx.author.name}**, there is nothing queued.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
         requesters = set(song.requester for song in songs)
         if ctx.author not in requesters:
             embed = discord.Embed(description = f"**{ctx.author.name}**, there is no song of you in the queue.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
         remaining = vc.source.remaining
         for song in songs:
             if song.requester == ctx.author:
@@ -420,7 +420,7 @@ class Music:
             remaining += song.length
 
         embed = discord.Embed(description = f"**{ctx.author.name}**, ``{time.human_time(remaining)}`` until your next song!", color = embed_color)
-        await ctx.send(embed = embed)
+        await ctx.send(embed = embed, delete_after = 15)
 
     @commands.guild_only()
     @commands.command()
@@ -429,10 +429,10 @@ class Music:
         vc = ctx.voice_client
         if vc is None:
             embed = discord.Embed(description = f"**{ctx.author.name}**, I'm not in a voice channel.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
         if not vc.is_playing() and not vc.is_paused():
             embed = discord.Embed(description = f"**{ctx.author.name}**, I'm currently not playing any music.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
         queue = self.get_queue(ctx.guild).songs._queue
 
         if len(queue) == 0:
@@ -453,15 +453,15 @@ class Music:
         vc = ctx.voice_client
         if vc is None:
             embed = discord.Embed(description = f"**{ctx.author.name}**, I'm not in a voice channel.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
         queue = self.get_queue(ctx.guild).songs._queue
 
         if len(queue) == 0:
             embed = discord.Embed(description = f"**{ctx.author.name}**, there is nothing queued.", color = embed_color_attention)
-            return await ctx.send(embed = embed)
+            return await ctx.send(embed = embed, delete_after = 15)
         random.shuffle(queue)
         embed = discord.Embed(description = f"**{ctx.author.name}** succesfully shuffled the queue.", color = embed_color_attention)
-        await ctx.send(embed = embed)
+        await ctx.send(embed = embed, delete_after = 15)
 
 def setup(bot):
     bot.add_cog(Music(bot))
