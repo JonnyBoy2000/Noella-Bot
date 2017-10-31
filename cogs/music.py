@@ -232,6 +232,10 @@ class Music:
                     await vc.disconnect()
                     embed = discord.Embed(description = f"**{ctx.author.name}** stopped the music and disconnected.", color = embed_color)
                     await ctx.send(embed = embed)
+                else:
+                    await vc.disconnect()
+                    embed = discord.Embed(description = f"**{ctx.author.name}** disconnected.", color = embed_color)
+                    await ctx.send(embed = embed)
 
             else:
                 embed = discord.Embed(description = f"**{ctx.author.name}**, I'm not connected to a voice channel.", color = embed_color_attention)
