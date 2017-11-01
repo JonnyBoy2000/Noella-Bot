@@ -36,27 +36,13 @@
 "Aim above morality. Be not simply good, be good for something.\n   ~Henry David Thoreau",
 "All of them, those in power, and those who want the power, would pamper us, \nif we agreed to overlook their crookedness by wilfully restricting our activities.\n   ~Refus Global",
 "When you live on a round planet, there's no choosing sides.\n   ~Wayne Dyer",
+"There is not one big cosmic meaning for all, there is only the meaning we each give to our life.\n   ~Anais Nin",
+"We cannot see our reflection in running water. It is only in still water that we can.\n   ~Taoist proverb",
+"Don't walk in front of me; I may not follow. Don't walk behind me; I may not lead. Just walk beside me and be my friend.\n   ~Albert Camus",
+"Freedom is what you do with what's been done to you.\n   ~Jean-Paul Sartre",
+"One who asks a question is a fool for a minute; one who does not remains a fool forever.\n   ~Chinese proverb",
+"Problems are the price of progress.\n   ~Charles F. Kettering",
 
-
-
-%
-"There is not one big cosmic meaning for all, there is only the meaning we each give to our life."
-  ~Anais Nin
-%
-"We cannot see our reflection in running water. It is only in still water that we can."
-  ~Taoist proverb
-%
-"Don't walk in front of me; I may not follow. Don't walk behind me; I may not lead. Just walk beside me and be my friend."
-  ~Albert Camus
-%
-"Freedom is what you do with what's been done to you."
-  ~Jean-Paul Sartre
-%
-"One who asks a question is a fool for a minute; one who does not remains a fool forever."
-  ~Chinese proverb
-%
-"Problems are the price of progress."
-  ~Charles F. Kettering
 %
 "Being happy doesn't mean that everything is perfect. It means you've decided to look beyond the imperfections."
   ~Unknown
