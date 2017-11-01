@@ -18,8 +18,27 @@
 "Fear makes strangers of those who would be friends.\n   ~Shirley MacLaine",
 "Logic will get you from A to B. Imagination will take you everywhere.\n   ~Albert Einstein",
 "The excitement of learning separates youth from old age. As long as you're learning, you're not old.\n   ~Rosalyn S.Yalow",
-"Silence is a source of great strength.\n   ~Lao Tzu",
+"Silence is a source of great strength.\n   ~**Lao Tzu",
 "He who deliberates fully before taking a step will spend his entire life on one leg.\n   ~Chinese Proverb",
+"Imagination is more important than knowledge. For knowledge is limited to all we now know and understand, \nwhile imagination embraces the entire world, and all there ever will be to know and understand.\n   ~Albert Einstein",
+"Give whatever you are doing and whoever you are with the gift of your attention.\n   ~Jim Rohn",
+"When you are immune to the opinions and actions of others, you won't be the victim of needless suffering.\n   ~Miguel Ruiz",
+"Tip: When deciding on defense or education spending ask yourself how many \nterrorist do you see in a day compared to how many fucking idiots\n   ~GodlessAtheist",
+"Until you make peace with who you are, you will never be content with what you have.\n   ~Doris Mortman",
+"The intuitive mind is a sacred gift and the rational mind is a faithful servant. \nWe have created a society that honors the servant and has forgotten the gift.\n   ~Albert Einstein",
+"The power of accurate observation is commonly called cynicism by those who have not got it.\n   ~George Bernard Shaw",
+"Knowledge and ego are directly related. the less knowledge, the greater the ego.\n   ~Albert Einstein",
+"Begin, be bold, and venture to be wise.\n   ~Horace",
+"If you are never scared, embarrassed, or hurt, it means you never take chances.\n   ~Julia Soul",
+"Patience is passion tamed.\n   ~Lyman Abbott",
+"The two most powerful warriors are patience and time.\n   ~Leo Tolstoy",
+"An honest answer is the sign of true friendship.\n   ~Proverb",
+"Aim above morality. Be not simply good, be good for something.\n   ~Henry David Thoreau",
+"All of them, those in power, and those who want the power, would pamper us, \nif we agreed to overlook their crookedness by wilfully restricting our activities.\n   ~Refus Global",
+"When you live on a round planet, there's no choosing sides.\n   ~Wayne Dyer",
+
+
+
 %
 "There is not one big cosmic meaning for all, there is only the meaning we each give to our life."
   ~Anais Nin
@@ -112,14 +131,7 @@ that is the myth of the atomic age - as in being able to remake ourselves."
 "Don't wait for people to be friendly. Show them how."
   ~Unknown
 %
-1. If the game is rigged so you can't win, find another game or invent your own.
-2. If you're not winning because you don't know the rules, learn the rules.
-3. If you know the rules but aren't willing to follow them, there's either something wrong with the game or you need to change something in yourself.
-4. Don't play the game in a half-baked way. Either get all the way in or all the way out.
-5. It shouldn't be necessary for others to lose in order for you to win. If others have to lose, re-evaluate the game's goals.
 
- (Breszny, 2005, pg. 84)
-%
 "We don't stop playing because we grow old; we grow old because we stop playing."
   ~George Bernard Shaw
 %
@@ -162,82 +174,7 @@ that is the myth of the atomic age - as in being able to remake ourselves."
 "Every day brings a choice: to practice stress or to practice peace."
   ~Joan Borysenko
 %
-"Imagination is more important than knowledge. For knowledge is limited to all we now know and understand,
- while imagination embraces the entire world, and all there ever will be to know and understand."
-  ~Albert Einstein
-%
-"Give whatever you are doing and whoever you are with the gift of your attention."
-  ~Jim Rohn
-%
-"When you are immune to the opinions and actions of others, you won't be the victim of needless suffering."
-  ~Miguel Ruiz
-%
-"Tip: When deciding on defense or education spending ask yourself how many
- terrorist do you see in a day compared to how many fucking idiots"
-  ~https://twitter.com/#!/GodlessAtheist
-%
-"Until you make peace with who you are, you will never be content with what you have."
-  ~Doris Mortman
-%
-"The intuitive mind is a sacred gift and the rational mind is a faithful servant.
- We have created a society that honors the servant and has forgotten the gift".
-  ~Albert Einstein
-%
-"The power of accurate observation is commonly called cynicism by those who have not got it."
-  ~George Bernard Shaw (1856 - 1950)
-%
-"Knowledge and ego are directly related. the less knowledge, the greater the ego"
-  ~Albert Einstein
-%
-"Begin, be bold, and venture to be wise."
-  ~Horace
-%
-"If you are never scared, embarrassed, or hurt, it means you never take chances."
-  ~Julia Soul
-%
-"Patience is passion tamed."
-  ~Lyman Abbott
-%
-"The two most powerful warriors are patience and time."
-  ~Leo Tolstoy
-%
-"An honest answer is the sign of true friendship."
-  ~Proverb
-%
-"Aim above morality. Be not simply good, be good for something."
-  ~Henry David Thoreau
-%
-"1. We are born and we die. No one cares, no one remembers, and it doesn't matter. This is why we laugh".
-%
-"2. Our pack, our children, our territory, the hunt, the kill, the battle. Health, full stomach, sharp weapons,
- your packmates next to you under the stars, seeing your child kill her first prey. These are important.
 
- 3. Anything else is needless complication, no matter how much fun it is."
-%
-"4. If you can't eat it, wear it, wield it, or carry it, leave it behind."
-%
-"5. Plan before hunting, discuss after hunting, hunt while hunting."
-%
-"6. Lead, follow, or hunt alone. Success-first meat of kill, greater trust. Failure-less trust. Disaster-survivors eat you."
-%
-"7. Expect trust outside the pack to be betrayed."
-%
-"8. Two are much stronger than one. Three are much stronger than two. Ten are barely stronger than nine.
- Fifty are much stronger than ten, but barely stronger than forty."
-%
-"9. An archer, a swordsman, and a scout are stronger than three swordsmen."
-%
-"10. Stay alive. Hopeless battles are hopeless. Dead is dead."
-%
-"11. Stay alive. Once you decide to kill, use all your skill, strength, and deception. Nobly dead is dead."
-%
-"12. Die biting the throat."
-%
-"All of them, those in power, and those who want the power, would pamper us, if we agreed to overlook their crookedness by wilfully restricting our activities."
-  ~Refus Global
-%
-"When you live on a round planet, there's no choosing sides."
-  ~Wayne Dyer
 %
 "What other people think of me is none of my business."
   ~Wayne Dyer
