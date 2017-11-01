@@ -6,6 +6,7 @@ import discord
 import random
 from discord.ext import commands
 from config import *
+from cogs.data.eightballdata import answers
 import openweathermapy.core as owm
 
 class Fun():
@@ -25,7 +26,7 @@ class Fun():
 			await ctx.send(embed=embed)
 
 		else:
-			result = ["Neko", "Loli", "Kitsune"]
+			result = answers
 			choice = random.choice(result)
 			embed = discord.Embed(colour = embed_color)
 			embed.set_thumbnail(url = ctx.author.avatar_url)
