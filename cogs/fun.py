@@ -76,13 +76,13 @@ class Fun():
 			member = author
 
 		if member.avatar:
-			if member.avatar_url[54:].startswith('a_'):
-				avi = 'https://cdn.discordapp.com/avatars/' + member.avatar_url[35:-10]
-			else:
-				avi = member.avatar_url
-				embed = discord.Embed(description = f"**{member.name}'s** avatar!\n[Click to open {member.name}'s avatar!]({member.avatar_url})", color = embed_color)
-				embed.set_image(url = f"{avi}")
-				await ctx.send(embed = embed)
+#			if member.avatar_url[54:].startswith('a_'):
+#				avi = 'https://cdn.discordapp.com/avatars/' + member.avatar_url[35:-10]
+#			else:
+			avi = member.avatar_url
+			embed = discord.Embed(description = f"**{member.name}'s** avatar!\n[Click to open {member.name}'s avatar!]({member.avatar_url})", color = embed_color)
+			embed.set_image(url = f"{avi}")
+			await ctx.send(embed = embed)
 		else:
 			embed = discord.Embed(description = f"**{member.name}** has no avatar!\n", color = embed_color)
 			embed.set_image(url = "https://i.imgur.com/lkeELEJ.png")
