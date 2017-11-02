@@ -7,6 +7,7 @@ import random
 from discord.ext import commands
 from config import *
 from cogs.data.eightballdata import answers
+from cogs.data.fortunedata import fortunes
 import openweathermapy.core as owm
 
 class Fun():
@@ -33,6 +34,21 @@ class Fun():
 			embed.add_field(name=f"**{ctx.author.name}** asks:", inline=False, value=f"{question}")
 			embed.add_field(name="**Holy 8ball** answers:", inline=False, value=f"{choice}")
 			await ctx.send(embed=embed)
+
+#########################################
+
+	@commands.guild_only()
+	@commands.command(no_pm = True, aliases = ['fort'])
+	async def fortune(self, ctx, *, member : discord.Member = None):
+
+		author = ctx.author
+		if not member:
+			member = author
+
+		choice = random.choice(fortunes)
+		embed = discord.Embed(colour = embed_color)
+		embed.add_field(name = f":crystal_ball:⠀|⠀{member.name}:", value = f"⠀\n{choice}", inline = False)
+		await ctx.send(embed=embed)
 
 #########################################
 
