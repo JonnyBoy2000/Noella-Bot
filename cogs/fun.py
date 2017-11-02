@@ -68,7 +68,7 @@ class Fun():
 #########################################
 
 	@commands.guild_only()
-	@commands.command(no_pm = True, aliases = ['pfp'])
+	@commands.command(aliases = ['pfp'])
 	async def avatar(self, ctx, *, member : discord.Member = None):
 		author = ctx.author
 
@@ -76,22 +76,24 @@ class Fun():
 			member = author
 
 		if member.avatar:
-#			if member.avatar_url[54:].startswith('a_'):
-#				avi = 'https://cdn.discordapp.com/avatars/' + member.avatar_url[35:-10]
-#			else:
-			avi = member.avatar_url
-			embed = discord.Embed(description = f"**{member.name}'s** avatar!\n[Click to open {member.name}'s avatar!]({member.avatar_url})", color = embed_color)
-			embed.set_image(url = f"{avi}")
-			await ctx.send(embed = embed)
+			if member.avatar_url[54:].startswith('a_'):
+				avi = 'https://cdn.discordapp.com/avatars/' + member.avatar_url[35:-10]
+				avi_description = f"**{member.name}'s** avatar!\n[Click to open avatar!]({avi})"
+			else:
+				avi = member.avatar_url_as(static_format = "png", size = 1024)
+				avi_description = f"**{member.name}'s** avatar!\n[Click to open avatar!]({avi})"
 		else:
-			embed = discord.Embed(description = f"**{member.name}** has no avatar!\n", color = embed_color)
-			embed.set_image(url = "https://i.imgur.com/lkeELEJ.png")
-			await ctx.send(embed = embed)
+			avi_description = f"**{member.name}** has no avatar!\n"
+			avi = "https://i.imgur.com/lkeELEJ.png"
+
+		embed = discord.Embed(description = f"{avi_description}", color = embed_color)
+		embed.set_image(url = f"{avi}")
+		await ctx.send(embed = embed)
 
 #########################################
 
 	@commands.guild_only()
-	@commands.command(no_pm = True, aliases = ['gicon'])
+	@commands.command(aliases = ['gicon'])
 	async def guildicon(self, ctx):
 		guild = ctx.guild
 
@@ -107,7 +109,7 @@ class Fun():
 #########################################
 
 	@commands.guild_only()
-	@commands.command(no_pm = True, aliases = ['uid'])
+	@commands.command(aliases = ['uid'])
 	async def userid(self, ctx, member : discord.Member = None):
 		author = ctx.author
 		if not member:
@@ -120,7 +122,7 @@ class Fun():
 #########################################
 
 	@commands.guild_only()
-	@commands.command(no_pm = True, aliases=['osu'])
+	@commands.command(aliases=['osu'])
 	async def osustats(self, ctx, *, osuplayer : str = None):
 
 		if osuplayer == None:
@@ -138,7 +140,7 @@ class Fun():
 #########################################
 
 	@commands.guild_only()
-	@commands.command(no_pm = True)
+	@commands.command()
 	async def virus(self, ctx, *, member : discord.Member = None):
 
 		author = ctx.author
@@ -182,7 +184,7 @@ class Fun():
 #########################################
 
 	@commands.guild_only()
-	@commands.command(no_pm = True)
+	@commands.command()
 	async def weather(self, ctx, *, city : str = None):
 		if city is None:
 			embed = discord.Embed(description = f"**{ctx.author.name}**, 'nothing' has no weather! That was an easy weather forecast! :rofl: ", color = embed_color_attention)
