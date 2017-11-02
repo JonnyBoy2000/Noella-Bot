@@ -52,5 +52,5 @@ fortunes = [
 "You can only grow if you're willing to feel awkward and uncomfortable when you try something new.\n   **-Brian Tracy**",
 "Nothing in the cry of cicadas suggests they are about to die.\n   **-Bassho**",
 "Above all, be true to yourself, and if you cannot put your heart in it, take yourself out of it.\n   **-Unknown**",
-"Strangers are friends you have yet to meet.\n   **-Unknown****",
+"Strangers are friends you have yet to meet.\n   **-Unknown**",
 ]
