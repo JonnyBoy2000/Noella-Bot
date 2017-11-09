@@ -4,6 +4,7 @@
 
 import discord
 import random
+import datetime
 from discord.ext import commands
 from config import *
 from cogs.data.eightballdata import answers
@@ -212,6 +213,23 @@ class Fun():
 			embed.set_footer(text = "Powered by OpenWeatherMap")
 			embed.set_thumbnail(url = "http://www.iconsfind.com/wp-content/uploads/2015/11/20151125_565508763073c.png")
 			await ctx.send(embed = embed)
+
+#########################################
+
+	@commands.guild_only()
+	@commands.command(aliases=["emojiinfo", "einfo"])
+	async def customemojiinfo(self, ctx, *, emoji: discord.Emoji):
+
+		embed = discord.Embed(title = emoji.name, colour = embed_color)
+		embed.description = f"[Open Emoji External]({emoji.url})"
+
+		embed.add_field(name = "Emoji in Guild", value = f"{emoji.guild.name}", inline = True)
+		embed.add_field(name = "Emoji ID", value = f"{emoji.id}", inline = True)
+		embed.add_field(name = "Managed by Twitch", value = f"{emoji.managed}", inline = True)
+		embed.add_field(name = "Emoji Created At", value = emoji.created_at.__format__('%d %b %Y at %H:%M'), inline = True)
+		embed.add_field(name = "Raw Emoji ID", value = f"\<\:{emoji.name}\:{emoji.guild.id}\>", inline = False)
+		embed.set_thumbnail(url = emoji.url)
+		await ctx.send(embed = embed)
 
 def setup(bot):
     bot.add_cog(Fun(bot))
