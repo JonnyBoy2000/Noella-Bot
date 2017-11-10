@@ -39,7 +39,8 @@ waves = [
 hides = [
 'https://i.imgur.com/JZ1PsBL.gif',
 'https://i.imgur.com/iBV881B.gif',
-'https://i.imgur.com/BZQwbid.gif'
+'https://i.imgur.com/BZQwbid.gif',
+'http://www.gurashii.com/wp-content/uploads/2017/02/kanna-chan-gif-6_128_40.gif'
 ]
 
 dancing = [
