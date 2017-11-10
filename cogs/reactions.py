@@ -13,7 +13,8 @@ class Reactions():
 
 	@commands.cooldown(1, 30, commands.BucketType.user)
 	async def on_message(self, message):
-		if "❤" in message.content or "♥" in message.content:
+		num = random.randint(1, 3)
+		if num == 1 and ("❤" in message.content or "♥" in message.content):
 			choice = random.choice(hearts)
 			try:
 				await message.channel.send(choice)
