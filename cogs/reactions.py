@@ -15,10 +15,7 @@ class Reactions():
 	async def on_message(self, message):
 		if "❤" in message.content or "♥" in message.content:
 			choice = random.choice(hearts)
-			try:
-				await message.channel.send(choice)
-			except discord.Forbidden:
-				pass
+			await message.channel.send(choice)
 		await self.bot.process_commands(message)
 
 def setup(bot):
