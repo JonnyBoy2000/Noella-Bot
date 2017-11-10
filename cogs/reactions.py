@@ -22,7 +22,7 @@ class Reactions():
 
 	async def on_message(self, message):
 		num = random.randint(1, 3)
-		if num == 1 and ("😢" in message.content or "😭" in message.content or "😞" in message.content):
+		if num == 1 and ("😢" in message.content or "😭" in message.content or "😦" in message.content):
 			choice = random.choice(sad_feels)
 			try:
 				await message.channel.send(choice)
