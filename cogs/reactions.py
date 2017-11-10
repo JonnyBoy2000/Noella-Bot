@@ -12,7 +12,7 @@ class Reactions():
 		self.bot = bot
 
 	async def on_message(self, message):
-		num = random.randint(1, 3)
+		num = random.randint(1, 2)
 		if num == 1 and ("❤" in message.content or "♥" in message.content):
 			choice = random.choice(hearts)
 			try:
@@ -20,9 +20,7 @@ class Reactions():
 			except discord.Forbidden:
 				pass
 
-	async def on_message(self, message):
-		num = random.randint(1, 3)
-		if num == 1 and ("😢" in message.content or "😭" in message.content or "😦" in message.content):
+		elif num == 1 and ("😢" in message.content or "😭" in message.content or "😦" in message.content):
 			choice = random.choice(sad_feels)
 			try:
 				await message.channel.send(choice)
