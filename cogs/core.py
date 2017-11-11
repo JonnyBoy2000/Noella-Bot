@@ -58,7 +58,7 @@ class Core:
                 embed.add_field(name = f"Information: ", value = f"Name: **{ctx.author.name}**\nID: **{ctx.author.id}**\nServer: [**{ctx.guild}**]({invite.url})", inline = False)
                 embed.add_field(name = f"Feedback/Message: ", value = f"{pmessage}", inline = False)
                 await dev.send(embed = embed)
-                embed = discord.Embed(description = f"I have PMed **{dev.name}#{dev.discriminator}** with your feedback! Thank you for your help!", color = embed_color_succes)
+                embed = discord.Embed(description = f"I have sent a message to my developer with your feedback! Thank you for your help!", color = embed_color_succes)
                 await ctx.send(embed = embed)
             except discord.Forbidden:
                 embed = discord.Embed(color = embed_color_error)
