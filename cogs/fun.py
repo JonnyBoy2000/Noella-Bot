@@ -26,7 +26,11 @@ class Fun():
 		'<:candy_1f36cblue:379296134834683905>', 
 		'<:candy_1f36cpink:379296162706096158>', 
 		'<:candy_1f36cyellow:379296171639832577>', 
-		'<:candy_1f36cgreen:379296150479699970>'
+		'<:candy_1f36cgreen:379296150479699970>',
+		'<:lollipop_1f36d:379352626556305420>',
+		'<:lollipop_1f36dblue:379352638183178240>',
+		'<:lollipop_1f36dgreen:379352650623221770>',
+		'<:lollipop_1f36dpink:379352663332093954>'
 		]
 		choice = random.choice(candys)
 
