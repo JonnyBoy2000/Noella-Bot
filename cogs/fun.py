@@ -49,6 +49,28 @@ class Fun():
 		else:
 			await ctx.send(f"{choice_candy} | **{author.name}** *has given* **{member.name}** *a piece of candy!*")
 
+#candy command (-candy [@mention])
+	@commands.guild_only()
+	@commands.command()
+	async def cookie(self, ctx, *, member : discord.Member = None):
+
+		author = ctx.author
+		noella_replies = [
+		f'*breaks that cookie in two pieces and gives* **{author.name}** *a piece!*',
+		'*looks at the that cookie and nomnom\'s it!*',
+		'*jumps up and grabs all the cookie\'s!*'
+		]
+		choice_reply = random.choice(noella_replies)
+
+		if not member:
+			await ctx.send(f":cookie: | **{author.name}** *has stolen a that cookie*")
+		elif member == author:
+			await ctx.send(f":cookie: | **{author.name}** *nomnom's that cookie!*")
+		elif member == self.bot.user:
+			await ctx.send(f":cookie: | **{member.name}** {choice_reply}")
+		else:
+			await ctx.send(f":cookie: | **{author.name}** *has given* **{member.name}** *a piece of that cookie!*")
+
 	@commands.guild_only()
 	@commands.command(no_pm = True, aliases=['8ball'])
 	async def eightball(self, ctx, *, question : str = None):
