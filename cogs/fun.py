@@ -21,12 +21,13 @@ class Fun():
 	async def candy(self, ctx, *, member : discord.Member = None):
 
 		author = ctx.author
-		candys = 
-			'<:candy_1f36c:379296181303377920>', 
-			'<:candy_1f36cblue:379296134834683905>', 
-			'<:candy_1f36cpink:379296162706096158>', 
-			'<:candy_1f36cyellow:379296171639832577>', 
-			'<:candy_1f36cgreen:379296150479699970>'
+		candys = [
+		'<:candy_1f36c:379296181303377920>', 
+		'<:candy_1f36cblue:379296134834683905>', 
+		'<:candy_1f36cpink:379296162706096158>', 
+		'<:candy_1f36cyellow:379296171639832577>', 
+		'<:candy_1f36cgreen:379296150479699970>'
+		]
 		choice = random.choice(candys)
 
 		if not member:
