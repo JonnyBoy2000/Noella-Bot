@@ -35,9 +35,11 @@ class Fun():
 		choice = random.choice(candys)
 
 		if not member:
-			await ctx.send(f"{choice} | **{author.name} has stolen a piece of candy!**")
+			await ctx.send(f"{choice} | **{author.name}** *has stolen a piece of candy!*")
+		elif member == author:
+			await ctx.send(f"{choice} | **{author.name}** *nomnom's a piece of candy!*")
 		else:
-			await ctx.send(f"{choice} | **{author.name} has given {member.name} a piece of candy!**")
+			await ctx.send(f"{choice} | **{author.name}** *has given* **{member.name}** *a piece of candy!*")
 
 	@commands.guild_only()
 	@commands.command(no_pm = True, aliases=['8ball'])
