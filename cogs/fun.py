@@ -38,7 +38,7 @@ class Fun():
 			await ctx.send(f"{choice_candy} | **{author.name}** *has stolen a piece of candy!*")
 		elif member == author:
 			await ctx.send(f"{choice_candy} | **{author.name}** *nomnom's a piece of candy!*")
-		elif member == self.bot.user
+		elif member == self.bot.user:
 			await ctx.send(f"{choice_candy} | **{member.name}** *loves candyy's!*")
 		else:
 			await ctx.send(f"{choice_candy} | **{author.name}** *has given* **{member.name}** *a piece of candy!*")
