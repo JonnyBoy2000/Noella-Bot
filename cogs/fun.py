@@ -32,14 +32,20 @@ class Fun():
 		'<:lollipop_1f36dgreen:379352650623221770>',
 		'<:lollipop_1f36dpink:379352663332093954>'
 		]
+		noella_replies [
+		f'*breaks candy in two pieces and gives* **{author.name}** *a piece!*',
+		'*looks at the candy and nomnom\'s it!*',
+		'*jumps up and grabs all candyy\'s!*'
+		]
 		choice_candy = random.choice(candys)
+		choice_reply = random.choice(noella_replies)
 
 		if not member:
 			await ctx.send(f"{choice_candy} | **{author.name}** *has stolen a piece of candy!*")
 		elif member == author:
 			await ctx.send(f"{choice_candy} | **{author.name}** *nomnom's a piece of candy!*")
 		elif member == self.bot.user:
-			await ctx.send(f"{choice_candy} | **{member.name}** *loves candyy's!*")
+			await ctx.send(f"{choice_candy} | **{member.name}** {choice_reply}")
 		else:
 			await ctx.send(f"{choice_candy} | **{author.name}** *has given* **{member.name}** *a piece of candy!*")
 
