@@ -32,14 +32,16 @@ class Fun():
 		'<:lollipop_1f36dgreen:379352650623221770>',
 		'<:lollipop_1f36dpink:379352663332093954>'
 		]
-		choice = random.choice(candys)
+		choice_candy = random.choice(candys)
 
 		if not member:
-			await ctx.send(f"{choice} | **{author.name}** *has stolen a piece of candy!*")
+			await ctx.send(f"{choice_candy} | **{author.name}** *has stolen a piece of candy!*")
 		elif member == author:
-			await ctx.send(f"{choice} | **{author.name}** *nomnom's a piece of candy!*")
+			await ctx.send(f"{choice_candy} | **{author.name}** *nomnom's a piece of candy!*")
+		elif member == self.bot.user
+			await ctx.send(f"{choice_candy} | **{member.name}** *loves candyy's!*")
 		else:
-			await ctx.send(f"{choice} | **{author.name}** *has given* **{member.name}** *a piece of candy!*")
+			await ctx.send(f"{choice_candy} | **{author.name}** *has given* **{member.name}** *a piece of candy!*")
 
 	@commands.guild_only()
 	@commands.command(no_pm = True, aliases=['8ball'])
