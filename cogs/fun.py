@@ -63,7 +63,7 @@ class Fun():
 		choice_reply = random.choice(noella_replies)
 
 		if not member:
-			await ctx.send(f":cookie: | **{author.name}** *has stolen a that cookie*")
+			await ctx.send(f":cookie: | **{author.name}** *has stolen that cookie*")
 		elif member == author:
 			await ctx.send(f":cookie: | **{author.name}** *nomnom's that cookie!*")
 		elif member == self.bot.user:
