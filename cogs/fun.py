@@ -32,7 +32,7 @@ class Fun():
 		'<:lollipop_1f36dgreen:379352650623221770>',
 		'<:lollipop_1f36dpink:379352663332093954>'
 		]
-		noella_replies [
+		noella_replies = [
 		f'*breaks candy in two pieces and gives* **{author.name}** *a piece!*',
 		'*looks at the candy and nomnom\'s it!*',
 		'*jumps up and grabs all candyy\'s!*'
