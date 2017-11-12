@@ -15,6 +15,25 @@ class Fun():
 	def __init__(self, bot):
 		self.bot = bot
 
+#candy command (-candy [@mention])
+	@commands.guild_only()
+	@commands.command()
+	async def candy(self, ctx, *, member : discord.Member = None):
+
+		author = ctx.author
+		candys = 
+			'<:candy_1f36c:379296181303377920>', 
+			'<:candy_1f36cblue:379296134834683905>', 
+			'<:candy_1f36cpink:379296162706096158>', 
+			'<:candy_1f36cyellow:379296171639832577>', 
+			'<:candy_1f36cgreen:379296150479699970>'
+		choice = random.choice(candys)
+
+		if not member:
+			await ctx.send(f"{choice} | **{author.name} has stolen a piece of candy!**")
+		else:
+			await ctx.send(f"{choice} | **{author.name} has given {member.name} a piece of candy!**")
+
 	@commands.guild_only()
 	@commands.command(no_pm = True, aliases=['8ball'])
 	async def eightball(self, ctx, *, question : str = None):
