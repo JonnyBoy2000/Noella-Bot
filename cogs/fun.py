@@ -283,7 +283,7 @@ class Fun():
 		embed.add_field(name = "Emoji ID", value = f"{emoji.id}", inline = True)
 		embed.add_field(name = "Managed by Twitch", value = f"{emoji.managed}", inline = True)
 		embed.add_field(name = "Emoji Created At", value = emoji.created_at.__format__('%d %b %Y at %H:%M'), inline = True)
-		embed.add_field(name = "Raw Emoji ID", value = f"\<\:{emoji.name}\:{emoji.guild.id}\>", inline = False)
+		embed.add_field(name = "Raw Emoji ID", value = f"\<\:{emoji.name}\:{emoji.id}\>", inline = False)
 		embed.set_thumbnail(url = emoji.url)
 		await ctx.send(embed = embed)
 
