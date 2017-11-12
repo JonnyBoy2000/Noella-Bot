@@ -49,7 +49,7 @@ class Fun():
 		else:
 			await ctx.send(f"{choice_candy} | **{author.name}** *has given* **{member.name}** *a piece of candy!*")
 
-#candy command (-candy [@mention])
+#cookie command (-cookie [@mention])
 	@commands.guild_only()
 	@commands.command()
 	async def cookie(self, ctx, *, member : discord.Member = None):
