@@ -15,6 +15,8 @@ class Fun():
 	def __init__(self, bot):
 		self.bot = bot
 
+#########################################
+
 #candy command (-candy [@mention])
 	@commands.guild_only()
 	@commands.command()
@@ -77,6 +79,8 @@ class Fun():
 			await ctx.send(f":cookie: | **{member.name}** {choice_reply}")
 		else:
 			await ctx.send(f":cookie: | **{author.name}** *has given* **{member.name}** *a piece of that cookie!*")
+
+#########################################
 
 	@commands.guild_only()
 	@commands.command(no_pm = True, aliases=['8ball'])
