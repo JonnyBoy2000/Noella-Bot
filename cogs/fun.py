@@ -30,7 +30,11 @@ class Fun():
 		'<:lollipop_1f36d:379352626556305420>',
 		'<:lollipop_1f36dblue:379352638183178240>',
 		'<:lollipop_1f36dgreen:379352650623221770>',
-		'<:lollipop_1f36dpink:379352663332093954>'
+		'<:lollipop_1f36dpink:379352663332093954>',
+		'<:dango_1f361:379440039182204938>',
+		'<:dango_1f361blue:379440053098774538>',
+		'<:dango_1f361pink:379440064549355522>',
+		'<:dango_1f361yellow:379440075731369985>'
 		]
 		noella_replies = [
 		f'*breaks candy in two pieces and gives* **{author.name}** *a piece!*',
